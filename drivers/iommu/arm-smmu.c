@@ -2664,18 +2664,21 @@ static int arm_smmu_init_domain_context(struct iommu_domain *domain,
 	}
 
 	smmu_domain->smmu = smmu;
-	if (!dynamic) {
+	if (!dynamic && IS_ENABLED(CONFIG_ARCH_MSM8953)) {
 		ret = arm_smmu_set_pt_format(smmu_domain,
 				     &smmu_domain->pgtbl_cfg);
-		if (cfg->fmt == ARM_SMMU_CTX_FMT_AARCH64)
-			dev_info(smmu->dev, "AARCH64 is%s supported for %s\n", ret ? " not" : "", dev_name(dev));
 		if (ret) {
-			ret = arm_smmu_restore_sec_cfg(smmu, cfg->cbndx);
-			if (!ret)
-				/* Restore succeeded, we can try again with AARCH32 */
+			int restore_ret;
+
+			restore_ret = arm_smmu_restore_sec_cfg(smmu, cfg->cbndx);
+			if (restore_ret)
+				ret = restore_ret;
+			else if (cfg->fmt == ARM_SMMU_CTX_FMT_AARCH64)
 				ret = -EAGAIN;
 			smmu_domain->smmu = NULL;
-			goto out_unlock;
+			__clear_bit(cfg->cbndx, smmu->context_map);
+			cfg->cbndx = INVALID_CBNDX;
+			goto out_logger;
 		}
 	}
 	smmu_domain->dev = dev;
@@ -2712,6 +2715,13 @@ static int arm_smmu_init_domain_context(struct iommu_domain *domain,
 					    smmu_domain->attributes);
 
 		arm_smmu_arch_init_context_bank(smmu_domain, dev);
+
+		if (!IS_ENABLED(CONFIG_ARCH_MSM8953)) {
+			ret = arm_smmu_set_pt_format(smmu_domain,
+						&smmu_domain->pgtbl_cfg);
+			if (ret)
+				goto out_clear_smmu;
+		}
 
 		if (smmu->version < ARM_SMMU_V2) {
 			cfg->irptndx = atomic_inc_return(&smmu->irptndx);
@@ -3546,7 +3556,8 @@ static int arm_smmu_attach_dev(struct iommu_domain *domain, struct device *dev)
 		return ret;
 
 	/* Ensure that the domain is finalised */
-	ret = arm_smmu_init_domain_context(domain, smmu, dev, true);
+	ret = arm_smmu_init_domain_context(domain, smmu, dev,
+		!of_property_read_bool(smmu->dev->of_node, "qcom,no-aarch64"));
 	if (ret < 0) {
 		if (ret != -EAGAIN)
 			goto out_power_off;
