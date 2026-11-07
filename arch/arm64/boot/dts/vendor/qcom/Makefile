@@ -511,6 +511,9 @@ dtb-$(CONFIG_ARCH_SDM429) += sdm429-mtp.dtb \
 	sda429-cdp.dtb
 endif
 
+# Xiaomi Mi A1 uses a DTB appended to Image.gz, not a DT overlay.
+dtb-$(CONFIG_MACH_XIAOMI_TISSOT) += tissot-titanium.dtb
+
 always		:= $(dtb-y)
 subdir-y	:= $(dts-dirs)
 clean-files    := *.dtb *.dtbo
