@@ -16,6 +16,12 @@
 #include <linux/msm-bus.h>
 #include <linux/pm_qos.h>
 #include <linux/dma-buf.h>
+#if IS_ENABLED(CONFIG_MACH_XIAOMI_MSM8953)
+#include <xiaomi-msm8953/mach.h>
+#endif
+#if IS_ENABLED(CONFIG_MACH_XIAOMI_VINCE)
+#include <linux/delay.h>
+#endif
 
 #include "mdss.h"
 #include "mdss_panel.h"
@@ -4799,7 +4805,7 @@ int dsi_panel_device_register(struct platform_device *ctrl_pdev,
 	else if ((xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_VINCE ||
 		xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_DAISY ||
 		xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_SAKURA ||
-		xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_MIDO) && 
+		xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_MIDO) &&
 		 ctrl_pdata->status_mode == ESD_TE_NT35596) {
 		ctrl_pdata->check_status = mdss_dsi_TE_NT35596_check;
 		init_te_irq(ctrl_pdata);

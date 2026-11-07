@@ -17,6 +17,9 @@
 #include <linux/err.h>
 #include <linux/string.h>
 #include <linux/display_state.h>
+#if IS_ENABLED(CONFIG_MACH_XIAOMI_MSM8953)
+#include <xiaomi-msm8953/mach.h>
+#endif
 
 #include "mdss_dsi.h"
 #include "mdss_dba_utils.h"
@@ -389,7 +392,7 @@ int mdss_dsi_panel_reset(struct mdss_panel_data *pdata, int enable)
     struct mdss_dsi_ctrl_pdata *ctrl_pdata = NULL;
     struct mdss_panel_info *pinfo = NULL;
     int i, rc = 0;
-    
+
     int mach = xiaomi_msm8953_mach_get();
     int is_tissot = (mach == XIAOMI_MSM8953_MACH_TISSOT);
 
@@ -513,7 +516,7 @@ int mdss_dsi_panel_reset(struct mdss_panel_data *pdata, int enable)
             gpio_free(ctrl_pdata->disp_en_gpio);
         }
 
-        if ((is_tissot) && 
+        if ((is_tissot) &&
             (panel_suspend_reset_flag == 2 || panel_suspend_reset_flag == 3)) {
             gpio_set_value((ctrl_pdata->rst_gpio), 1);
             mdelay(10);
