@@ -357,7 +357,7 @@ tSirRetStatus schSendBeaconReq( tpAniSirGlobal pMac, tANI_U8 *beaconPayload, tAN
     schLog( pMac, LOG2,
         FL("Successfully posted WDA_SEND_BEACON_REQ to HAL"));
 
-    if( (psessionEntry->limSystemRole == eLIM_AP_ROLE ) 
+    if( (psessionEntry->limSystemRole == eLIM_AP_ROLE )
         && (pMac->sch.schObject.fBeaconChanged)
         && ((psessionEntry->proxyProbeRspEn)
         || (IS_FEATURE_SUPPORTED_BY_FW(WPS_PRBRSP_TMPL)))
@@ -625,4 +625,3 @@ tANI_U32 limSendProbeRspTemplateToHal(tpAniSirGlobal pMac,tpPESession psessionEn
 
     return retCode;
 }
-

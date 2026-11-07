@@ -97,7 +97,7 @@ const sHalNv nvDefaults =
                 {1550},    // HAL_PHY_RATE_11A_DUP_36_MBPS,
                 {1550},    // HAL_PHY_RATE_11A_DUP_48_MBPS,
                 {1500},    // HAL_PHY_RATE_11A_DUP_54_MBPS,
-                
+
                 //MCS Index #0-7(20/40MHz)
                 {1700},    // HAL_PHY_RATE_MCS_1NSS_6_5_MBPS,
                 {1700},    // HAL_PHY_RATE_MCS_1NSS_13_MBPS,
@@ -10301,17 +10301,17 @@ const sHalNvV2 nvDefaultsV2 =
             0,   //xPA5G;
             0,   //paPolarityTx;
             0,   //paPolarityRx;
-                
+
             0,   //xLNA2G;
             0,   //xLNA5G;
             0,   //xCoupler2G;
             0,   //xCoupler5G;
-                
+
             0,   //xPdet2G;
             0,   //xPdet5G;
             0,   //enableDPD2G;
             1,   //enableDPD5G;
-                
+
             1,   //pdadcSelect2G;
             1,   //pdadcSelect5GLow;
             1,   //pdadcSelect5GMid;
@@ -10349,9 +10349,9 @@ const sHalNvV2 nvDefaultsV2 =
             {
                 1400,        //psSlpTimeOvrHd2G;
                 1400,        //psSlpTimeOvrHd5G;
-                
+
                 1600,        //psSlpTimeOvrHdxLNA5G;
-                0,           //nv_TxBBFSel9MHz 
+                0,           //nv_TxBBFSel9MHz
                 0,           //hwParam1
                 0,           //hwParam2
 
@@ -10477,5 +10477,3 @@ const sHalNvV2 nvDefaultsV2 =
 };
 
 #endif
-
-

@@ -114,7 +114,7 @@ limIsRSNieValidInSmeReqMessage(tpAniSirGlobal pMac, tpSirRSNie pRSNie)
             )
         {
             limLog(pMac, LOGE, FL("RSN/WPA/WAPI EID %d not [%d || %d]"),
-                   pRSNie->rsnIEdata[0], DOT11F_EID_RSN, 
+                   pRSNie->rsnIEdata[0], DOT11F_EID_RSN,
                    DOT11F_EID_WPA);
             return false;
         }
@@ -124,7 +124,7 @@ limIsRSNieValidInSmeReqMessage(tpAniSirGlobal pMac, tpSirRSNie pRSNie)
         while(len > 0)
         {
         // Check validity of RSN IE
-            if (pRSNie->rsnIEdata[startPos] == DOT11F_EID_RSN) 
+            if (pRSNie->rsnIEdata[startPos] == DOT11F_EID_RSN)
             {
                 if((pRSNie->rsnIEdata[startPos+1] > DOT11F_IE_RSN_MAX_LEN) ||
                     (pRSNie->rsnIEdata[startPos+1] < DOT11F_IE_RSN_MIN_LEN))
@@ -163,7 +163,7 @@ limIsRSNieValidInSmeReqMessage(tpAniSirGlobal pMac, tpSirRSNie pRSNie)
                 {
                     limLog(pMac, LOGE,
                            FL("WAPI IE len %d not [%d,%d]"),
-                           pRSNie->rsnIEdata[startPos+1], DOT11F_IE_WAPI_MIN_LEN, 
+                           pRSNie->rsnIEdata[startPos+1], DOT11F_IE_WAPI_MIN_LEN,
                            DOT11F_IE_WAPI_MAX_LEN);
 
                     return false;
@@ -220,18 +220,18 @@ limIsAddieValidInSmeReqMessage(tpAniSirGlobal pMac, tpSirAddie pAddie)
         left -= 2;
         if(elem_len > left)
         {
-            limLog( pMac, LOGE, 
+            limLog( pMac, LOGE,
                FL("****Invalid Add IEs eid = %d elem_len=%d left=%d*****"),
                                                elem_id,elem_len,left);
             return false;
         }
- 
+
         left -= elem_len;
         ptr += (elem_len + 2);
     }
     // there shouldn't be any left byte
- 
-    
+
+
     return true;
 } /*** end limIsAddieValidInSmeReqMessage() ***/
 
@@ -255,7 +255,7 @@ limIsAddieValidInSmeReqMessage(tpAniSirGlobal pMac, tpSirAddie pAddie)
  */
 
 tANI_U8
-limSetRSNieWPAiefromSmeStartBSSReqMessage(tpAniSirGlobal pMac, 
+limSetRSNieWPAiefromSmeStartBSSReqMessage(tpAniSirGlobal pMac,
                                           tpSirRSNie pRSNie,
                                           tpPESession pSessionEntry)
 {
@@ -295,7 +295,7 @@ limSetRSNieWPAiefromSmeStartBSSReqMessage(tpAniSirGlobal pMac,
             (pRSNie->rsnIEdata[0] != SIR_MAC_WPA_EID))
         {
             limLog(pMac, LOGE, FL("RSN/WPA EID %d not [%d || %d]"),
-                   pRSNie->rsnIEdata[0], SIR_MAC_RSN_EID, 
+                   pRSNie->rsnIEdata[0], SIR_MAC_RSN_EID,
                    SIR_MAC_WPA_EID);
             return false;
         }
@@ -308,7 +308,7 @@ limSetRSNieWPAiefromSmeStartBSSReqMessage(tpAniSirGlobal pMac,
              (pRSNie->rsnIEdata[1] < SIR_MAC_RSN_IE_MIN_LENGTH))
         {
             limLog(pMac, LOGE, FL("RSN IE len %d not [%d,%d]"),
-                   pRSNie->rsnIEdata[1], SIR_MAC_RSN_IE_MIN_LENGTH, 
+                   pRSNie->rsnIEdata[1], SIR_MAC_RSN_IE_MIN_LENGTH,
                    SIR_MAC_RSN_IE_MAX_LENGTH);
             return false;
         }
@@ -561,9 +561,9 @@ limIsSmeStartBssReqValid(tpAniSirGlobal pMac,
             break;
 
         /* Added for BT AMP support */
-        case eSIR_BTAMP_STA_MODE:              
+        case eSIR_BTAMP_STA_MODE:
             break;
-            
+
         /* Added for BT AMP support */
         case eSIR_BTAMP_AP_MODE:
             break;
@@ -571,7 +571,7 @@ limIsSmeStartBssReqValid(tpAniSirGlobal pMac,
         /* Added for SoftAP support */
         case eSIR_INFRA_AP_MODE:
             break;
-        
+
         default:
             /**
              * Should not have received start BSS req with bssType
@@ -592,7 +592,7 @@ limIsSmeStartBssReqValid(tpAniSirGlobal pMac,
         if (!pStartBssReq->ssId.length ||
             (pStartBssReq->ssId.length > SIR_MAC_MAX_SSID_LENGTH))
         {
-            // Invalid length for SSID.  
+            // Invalid length for SSID.
             // Reject START_BSS_REQ
             limLog(pMac, LOGW,
                 FL("Invalid SSID length in eWNI_SME_START_BSS_REQ"));
@@ -744,11 +744,11 @@ limIsSmeJoinReqValid(tpAniSirGlobal pMac, tpSirSmeJoinReq pJoinReq)
     }
 
     /*
-       Reject Join Req if the Self Mac Address and 
+       Reject Join Req if the Self Mac Address and
        the Ap's Mac Address is same
     */
     if ( vos_mem_compare( (tANI_U8* ) pJoinReq->selfMacAddr,
-                       (tANI_U8 *) pJoinReq->bssDescription.bssId, 
+                       (tANI_U8 *) pJoinReq->bssDescription.bssId,
                        (tANI_U8) (sizeof(tSirMacAddr))))
     {
         // Log the event
@@ -904,7 +904,7 @@ limIsSmeScanReqValid(tpAniSirGlobal pMac, tpSirSmeScanReq pScanReq)
             limLog(pMac, LOGE,
                    FL("Requested SSID length > SIR_MAC_MAX_SSID_LENGTH"));
             valid = false;
-            goto end;    
+            goto end;
         }
     }
     if ((pScanReq->bssType < 0) || (pScanReq->bssType > eSIR_AUTO_MODE))
@@ -1016,7 +1016,7 @@ limIsSmeSetContextReqValid(tpAniSirGlobal pMac, tpSirSmeSetContextReq  pSetConte
         (pSetContextReq->keyMaterial.edType != eSIR_ED_WEP104) &&
         (pSetContextReq->keyMaterial.edType != eSIR_ED_NONE) &&
 #ifdef FEATURE_WLAN_WAPI
-        (pSetContextReq->keyMaterial.edType != eSIR_ED_WPI) && 
+        (pSetContextReq->keyMaterial.edType != eSIR_ED_WPI) &&
 #endif
         !pSetContextReq->keyMaterial.numKeys)
     {
@@ -1093,10 +1093,10 @@ limIsSmeSetContextReqValid(tpAniSirGlobal pMac, tpSirSmeSetContextReq  pSetConte
              (pKey->keyLength != 13)) ||
             ((pSetContextReq->keyMaterial.edType == eSIR_ED_TKIP) &&
              (pKey->keyLength != 32)) ||
-#ifdef FEATURE_WLAN_WAPI 
+#ifdef FEATURE_WLAN_WAPI
             ((pSetContextReq->keyMaterial.edType == eSIR_ED_WPI) &&
              (pKey->keyLength != 32)) ||
-#endif 
+#endif
             ((pSetContextReq->keyMaterial.edType == eSIR_ED_CCMP) &&
              (pKey->keyLength != 16)))
         {
@@ -1186,5 +1186,3 @@ limGetBssIdFromSmeJoinReqMsg(tANI_U8 *pBuf)
 
     return (pBuf);
 } /*** end limGetBssIdFromSmeJoinReqMsg() ***/
-
-

@@ -28,16 +28,16 @@
 
 #if !defined( __VOS_UTILS_H )
 #define __VOS_UTILS_H
- 
+
 /**=========================================================================
-  
+
   \file  vos_utils.h
-  
+
   \brief virtual Operating System Services (vOSS) utility APIs
-               
+
    Various utility functions
-  
-  
+
+
   ========================================================================*/
 
 /* $Header$ */
@@ -50,7 +50,7 @@
 #include <vos_event.h>
 //#include <Wincrypt.h>
 
-/*-------------------------------------------------------------------------- 
+/*--------------------------------------------------------------------------
   Preprocessor definitions and constants
   ------------------------------------------------------------------------*/
 #define VOS_DIGEST_SHA1_SIZE    20
@@ -67,12 +67,12 @@
 
 
 
-/*-------------------------------------------------------------------------- 
+/*--------------------------------------------------------------------------
   Type declarations
   ------------------------------------------------------------------------*/
 
 
-/*------------------------------------------------------------------------- 
+/*-------------------------------------------------------------------------
   Function declarations and documenation
   ------------------------------------------------------------------------*/
 
@@ -95,7 +95,7 @@ VOS_STATUS vos_crypto_deinit( v_U32_t hCryptProv );
  * @param pbBuf - the caller allocated location where the bytes should be copied
  * @param numBytes the number of bytes that should be generated and
  * copied
- * 
+ *
  * @return VOS_STATUS_SUCCSS if the operation succeeds
 */
 VOS_STATUS vos_rand_get_bytes( v_U32_t handle, v_U8_t *pbBuf, v_U32_t numBytes );

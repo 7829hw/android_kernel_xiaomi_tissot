@@ -26,14 +26,14 @@
  */
 
 /**=========================================================================
-  
+
   \file  wlan_qct_pal_msg.c
-  
+
   \brief Implementation message APIs PAL exports. wpt = (Wlan Pal Type) wpal = (Wlan PAL)
-               
+
    Definitions for platform with legacy UMAC support.
-  
-  
+
+
   ========================================================================*/
 
 #include "wlan_qct_pal_msg.h"
@@ -45,7 +45,7 @@
 
 /*---------------------------------------------------------------------------
      wpalPostCtrlMsg - Post a message to control context so it can be processed in that context.
-    Param: 
+    Param:
         pPalContext - A PAL context
         pMsg - a pointer to called allocated opaque object;
 ---------------------------------------------------------------------------*/
@@ -96,7 +96,7 @@ wpt_status wpalPostCtrlMsg(void *pPalContext, wpt_msg *pMsg)
 
 /*---------------------------------------------------------------------------
      wpalPostTxMsg - Post a message to TX context so it can be processed in that context.
-    Param: 
+    Param:
         pPalContext - A PAL context PAL
         pMsg - a pointer to called allocated opaque object;
 ---------------------------------------------------------------------------*/
@@ -133,7 +133,7 @@ wpt_status wpalPostTxMsg(void *pPalContext, wpt_msg *pMsg)
 
 /*---------------------------------------------------------------------------
      wpalPostRxMsg - Post a message to RX context so it can be processed in that context.
-    Param: 
+    Param:
         pPalContext - A PAL context
         pMsg - a pointer to called allocated opaque object;
 ---------------------------------------------------------------------------*/
@@ -166,4 +166,3 @@ wpt_status wpalPostRxMsg(void *pPalContext, wpt_msg *pMsg)
 
    return status;
 }
-

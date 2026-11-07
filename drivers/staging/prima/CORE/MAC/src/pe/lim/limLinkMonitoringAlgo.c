@@ -269,7 +269,7 @@ limDeleteStaContext(tpAniSirGlobal pMac, tpSirMsgQ limMsg)
                  }
 #endif
              }
-             break;        
+             break;
 
         case HAL_DEL_STA_REASON_CODE_UNKNOWN_A2:
              PELOGE(limLog(pMac, LOGE, FL(" Deleting Unknown station "));)
@@ -393,7 +393,7 @@ limTearDownLinkWithAp(tpAniSirGlobal pMac, tANI_U8 sessionId, tSirMacReasonCodes
 
     pStaDs = dphGetHashEntry(pMac, DPH_STA_HASH_INDEX_PEER, &psessionEntry->dph.dphHashTable);
 
-    
+
     if (pStaDs != NULL)
     {
         tLimMlmDeauthInd  mlmDeauthInd;
@@ -437,7 +437,7 @@ limTearDownLinkWithAp(tpAniSirGlobal pMac, tANI_U8 sessionId, tSirMacReasonCodes
         limPostSmeMessage(pMac, LIM_MLM_DEAUTH_IND, (tANI_U32 *) &mlmDeauthInd);
 
         limSendSmeDeauthInd(pMac, pStaDs, psessionEntry);
-    }    
+    }
 } /*** limTearDownLinkWithAp() ***/
 
 
@@ -465,9 +465,9 @@ void limHandleHeartBeatFailure(tpAniSirGlobal pMac,tpPESession psessionEntry)
 
 #ifdef FEATURE_WLAN_DIAG_SUPPORT_LIM //FEATURE_WLAN_DIAG_SUPPORT
     vos_log_beacon_update_pkt_type *log_ptr = NULL;
-#endif //FEATURE_WLAN_DIAG_SUPPORT 
+#endif //FEATURE_WLAN_DIAG_SUPPORT
 
-    /* If gLimHeartBeatTimer fires between the interval of sending WDA_ENTER_BMPS_REQUEST 
+    /* If gLimHeartBeatTimer fires between the interval of sending WDA_ENTER_BMPS_REQUEST
      * to the HAL and receiving WDA_ENTER_BMPS_RSP from the HAL, then LIM (PE) tries to Process the
      * SIR_LIM_HEAR_BEAT_TIMEOUT message but The PE state is ePMM_STATE_BMPS_SLEEP so PE dont
      * want to handle heartbeat timeout in the BMPS, because Firmware handles it in BMPS.

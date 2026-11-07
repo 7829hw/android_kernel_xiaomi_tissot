@@ -64,7 +64,7 @@ typedef struct hdd_list_s
    v_SIZE_t count;
    v_SIZE_t max_size;
    int ratelimit_count;
-   spinlock_t lock; 
+   spinlock_t lock;
 } hdd_list_t;
 
 typedef struct
@@ -75,7 +75,7 @@ typedef struct
 } skb_list_node_t;
 
 //FIXME Need a helper function to cleanup skbs in a queue. Required for cleanup/shutdown
-  
+
 /**-----------------------------------------------------------------------------
   Function declarations and documenation
  ----------------------------------------------------------------------------*/

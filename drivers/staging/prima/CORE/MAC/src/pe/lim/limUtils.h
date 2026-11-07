@@ -131,8 +131,8 @@ void limPrintMsgInfo(tpAniSirGlobal pMac, tANI_U16 logLevel, tSirMsgQ *msg);
 char* limBssTypeStr(tSirBssType bssType);
 
 #if defined FEATURE_WLAN_ESE || defined WLAN_FEATURE_VOWIFI
-extern tSirRetStatus limSendSetMaxTxPowerReq ( tpAniSirGlobal pMac, 
-                                  tPowerdBm txPower, 
+extern tSirRetStatus limSendSetMaxTxPowerReq ( tpAniSirGlobal pMac,
+                                  tPowerdBm txPower,
                                   tpPESession pSessionEntry );
 extern tANI_U8 limGetMaxTxPower(tPowerdBm regMax, tPowerdBm apTxPower, tANI_U8 iniTxPower);
 #endif
@@ -162,7 +162,7 @@ void    limReleasePeerIdx(tpAniSirGlobal, tANI_U16, tpPESession);
 
 void limDecideApProtection(tpAniSirGlobal pMac, tSirMacAddr peerMacAddr,  tpUpdateBeaconParams pBeaconParams,tpPESession);
 void
-limDecideApProtectionOnDelete(tpAniSirGlobal pMac, 
+limDecideApProtectionOnDelete(tpAniSirGlobal pMac,
                               tpDphHashNode pStaDs, tpUpdateBeaconParams pBeaconParams, tpPESession psessionEntry);
 
 extern tSirRetStatus limEnable11aProtection(tpAniSirGlobal pMac, tANI_U8 enable, tANI_U8 overlap, tpUpdateBeaconParams pBeaconParams,tpPESession);
@@ -238,7 +238,7 @@ tSirRetStatus limRestorePreChannelSwitchState(tpAniSirGlobal pMac, tpPESession p
 tSirRetStatus limRestorePreQuietState(tpAniSirGlobal pMac, tpPESession psessionEntry);
 
 void limPrepareFor11hChannelSwitch(tpAniSirGlobal pMac, tpPESession psessionEntry);
-void limSwitchChannelCback(tpAniSirGlobal pMac, eHalStatus status, 
+void limSwitchChannelCback(tpAniSirGlobal pMac, eHalStatus status,
                            tANI_U32 *data, tpPESession psessionEntry);
 
 static inline tSirRFBand limGetRFBand(tANI_U8 channel)
@@ -275,7 +275,7 @@ limIsSystemInSetMimopsState(tpAniSirGlobal pMac)
         return true;
     return false;
 }
-        
+
 static inline tANI_U8
  isEnteringMimoPS(tSirMacHTMIMOPowerSaveState curState, tSirMacHTMIMOPowerSaveState newState)
  {
@@ -374,7 +374,7 @@ tSirRetStatus limPostMsgDelBAInd( tpAniSirGlobal pMac,
     tpPESession psessionEntry);
 
 tSirRetStatus limPostSMStateUpdate(tpAniSirGlobal pMac,
-    tANI_U16 StaIdx, 
+    tANI_U16 StaIdx,
     tSirMacHTMIMOPowerSaveState MIMOPSState);
 
 void limDeleteStaContext(tpAniSirGlobal pMac, tpSirMsgQ limMsg);
@@ -446,8 +446,8 @@ typedef enum
     WLAN_PE_DIAG_SCAN_RSP_EVENT,
     WLAN_PE_DIAG_JOIN_REQ_EVENT,
     WLAN_PE_DIAG_JOIN_RSP_EVENT,
-    WLAN_PE_DIAG_SETCONTEXT_REQ_EVENT,  
-    WLAN_PE_DIAG_SETCONTEXT_RSP_EVENT, 
+    WLAN_PE_DIAG_SETCONTEXT_REQ_EVENT,
+    WLAN_PE_DIAG_SETCONTEXT_RSP_EVENT,
     WLAN_PE_DIAG_REASSOC_REQ_EVENT,
     WLAN_PE_DIAG_REASSOC_RSP_EVENT,
     WLAN_PE_DIAG_AUTH_REQ_EVENT,
@@ -525,17 +525,17 @@ void limDiagEventReport(tpAniSirGlobal pMac, tANI_U16 eventType, tpPESession pSe
 
 void peSetResumeChannel(tpAniSirGlobal pMac, tANI_U16 channel, ePhyChanBondState cbState);
 /*--------------------------------------------------------------------------
-  
+
   \brief peGetResumeChannel() - Returns the  channel number for scanning, from a valid session.
 
   This function returns the channel to resume to during link resume. channel id of 0 means HAL will
   resume to previous channel before link suspend
-    
+
   \param pMac                   - pointer to global adapter context
   \return                            - channel to scan from valid session else zero.
-  
+
   \sa
-  
+
   --------------------------------------------------------------------------*/
 void peGetResumeChannel(tpAniSirGlobal pMac, tANI_U8* resumeChannel, ePhyChanBondState* resumePhyCbState);
 

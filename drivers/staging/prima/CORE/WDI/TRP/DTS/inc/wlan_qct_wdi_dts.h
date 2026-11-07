@@ -31,14 +31,14 @@
 #include "wlan_qct_wdi.h"
 
 /**=========================================================================
- *     
+ *
  *       \file  wlan_qct_wdi_dts.h
- *          
- *       \brief define Datas Trnasport Service API 
- *                               
+ *
+ *       \brief define Datas Trnasport Service API
+ *
  * WLAN Device Abstraction layer interface for Transport drivers (SDIO/DXE)
  * DESCRIPTION
- * This file contains the API exposed by the 
+ * This file contains the API exposed by the
  * wlan device abstarction layer module for abstracting DXE/SDIO.
  *
  *
@@ -52,18 +52,18 @@
  *
  * On transmit:
  *         DAL will invoke WDTS_TxPacket API
- * 
+ *
  * On transmit complete:
  *         DXE will serialize into TX thread
  *         In TX thread it will invoke
  *
  * On receive:
  *        DXE will serialize into RX thread
- *        In TX thread it will invoke WDTS_RXPacket API 
+ *        In TX thread it will invoke WDTS_RXPacket API
  *
  * On DXE ring full:
  *        DXE will serialize into TX thread
- *        In TX thread it will invoke WDTS_OOResourceNotification API 
+ *        In TX thread it will invoke WDTS_OOResourceNotification API
  */
 
 typedef enum
@@ -106,7 +106,7 @@ typedef void  (*WDTS_SetPSCbType)(wpt_status  status, unsigned int dxePhyAddr);
 typedef void (*WDTS_MbReceiveMsgType)(void *pContext);
 typedef void (*WDTS_RxLogDoneType)(void *pContext);
 
-/* DTS Set power state ACK callback. 
+/* DTS Set power state ACK callback.
  * This callback function should be invoked by the DTS to notify WDI that set
  * power state request is complete.
  * Parameters:
@@ -133,7 +133,7 @@ typedef struct {
   wpt_status (*register_client)(void *pContext, WDTS_ClientCallbacks, void *clientData);
   wpt_status (*xmit) (void *pContext, wpt_packet *packet, WDTS_ChannelType channel);
   wpt_status (*txComplete) (void *pContext, wpt_uint32 ucTxResReq);
-  wpt_status (*setPowerState) (void *pContext, WDTS_PowerStateType   powerState, 
+  wpt_status (*setPowerState) (void *pContext, WDTS_PowerStateType   powerState,
                                WDTS_SetPSCbType cBack);
   void (*channelDebug)(wpt_boolean displaySnapshot,
                        wpt_uint8   debugFlags);
@@ -180,25 +180,25 @@ void WDTS_ActivateTrafficStats(void);
  */
 void WDTS_ClearTrafficStats(void);
 
-/* DTS open  function. 
+/* DTS open  function.
  * On open the transport device should initialize itself.
  * Parameters:
- *  pContext:Cookie that should be passed back to the caller along 
+ *  pContext:Cookie that should be passed back to the caller along
  *  with the callback.
  *
  * Return Value: SUCCESS  Completed successfully.
  *     FAILURE_XXX  Request was rejected due XXX Reason.
- 
+
  */
 wpt_status WDTS_openTransport( void *pContext);
 
 
 
 
-/* DTS start  function. 
+/* DTS start  function.
  * On start the transport device should start running.
  * Parameters:
- * pContext:Cookie that should be passed back to the caller along 
+ * pContext:Cookie that should be passed back to the caller along
  * with the callback.
  *
  * Return Value: SUCCESS  Completed successfully.
@@ -210,7 +210,7 @@ wpt_status WDTS_startTransport( void *pContext);
 
 
 
-/* DTS Tx packet function. 
+/* DTS Tx packet function.
  * This function should be invoked by the DAL Dataservice to schedule transmit frame through DXE/SDIO.
  * Parameters:
  * pContext:Cookie that should be passed back to the caller along with the callback.
@@ -221,7 +221,7 @@ wpt_status WDTS_startTransport( void *pContext);
  */
 wpt_status WDTS_TxPacket(void *pContext, wpt_packet *pFrame);
 
-/* DTS Tx Complete function. 
+/* DTS Tx Complete function.
  * This function should be invoked by the DAL Dataservice to notify tx completion to DXE/SDIO.
  * Parameters:
  * pContext:Cookie that should be passed back to the caller along with the callback.
@@ -232,7 +232,7 @@ wpt_status WDTS_TxPacket(void *pContext, wpt_packet *pFrame);
  */
 wpt_status WDTS_CompleteTx(void *pContext, wpt_uint32 ucTxResReq);
 
-/* DTS Set power state function. 
+/* DTS Set power state function.
  * This function should be invoked by the DAL to notify the WLAN device power state.
  * Parameters:
  * pContext:Cookie that should be passed back to the caller along with the callback.
@@ -270,7 +270,7 @@ void WDTS_ChannelDebug(wpt_boolean displaySnapshot, wpt_uint8 debugFlags);
  */
 void WDTS_ChannelKickDxe(void);
 
-/* DTS Stop function. 
+/* DTS Stop function.
  * Stop Transport driver, ie DXE, SDIO
  * Parameters:
  * pContext:Cookie that should be passed back to the caller along with the callback.
@@ -280,7 +280,7 @@ void WDTS_ChannelKickDxe(void);
  */
 wpt_status WDTS_Stop(void *pContext);
 
-/* DTS Close function. 
+/* DTS Close function.
  * Close Transport driver, ie DXE, SDIO
  * Parameters:
  * pContext:Cookie that should be passed back to the caller along with the callback.

@@ -29,11 +29,11 @@
 #define WLAN_QCT_DXE_I_H
 
 /**=========================================================================
-  
+
   @file  wlan_qct_dxe_i.h
-  
-  @brief 
-               
+
+  @brief
+
    This file contains the external API exposed by the wlan data transfer abstraction layer module.
 ========================================================================*/
 
@@ -571,13 +571,13 @@ typedef struct
    {
       WLANDXE_LongDesc             dxe_long_desc;
       WLANDXE_ShortDesc            dxe_short_desc;
-   }dxedesc; 
+   }dxedesc;
 } WLANDXE_DescType;
 
 typedef struct
 {
    void                            *nextCtrlBlk;
-   wpt_packet                      *xfrFrame;  
+   wpt_packet                      *xfrFrame;
    WLANDXE_DescType                *linkedDesc;
    wpt_uint32                       linkedDescPhyAddr;
    wpt_uint32                       ctrlBlkOrder;
@@ -640,7 +640,7 @@ typedef struct
 {
    wpt_uint32                      refWQ_swapped;
    wpt_boolean                     chEnabled;
-   wpt_boolean                     chConfigured;    
+   wpt_boolean                     chConfigured;
    wpt_uint32                      channel;
    wpt_uint32                      chk_size_mask;
    wpt_uint32                      bmuThdSel_mask;
@@ -760,10 +760,10 @@ typedef struct
 }dxeTraceRecord, *pdxeTraceRecord;
 
 /*==========================================================================
-  @  Function Name 
+  @  Function Name
       dxeCommonDefaultConfig
 
-  @  Description 
+  @  Description
 
   @  Parameters
       WLANDXE_CtrlBlkType     *dxeCtrlBlk,
@@ -779,10 +779,10 @@ extern void dxeCommonDefaultConfig
 );
 
 /*==========================================================================
-  @  Function Name 
+  @  Function Name
       dxeChannelDefaultConfig
 
-  @  Description 
+  @  Description
       Get defualt configuration values from pre defined structure
       All the channels must have it's own configurations
 

@@ -233,7 +233,7 @@
 
 #endif
 
-//VHT Action Field 
+//VHT Action Field
 #ifdef WLAN_FEATURE_11AC
 #define SIR_MAC_VHT_OPMODE_NOTIFICATION        2
 #endif
@@ -458,7 +458,7 @@
 // When station sends Radio Management Cap.
 // State should be normal=1
 // Mbssid Mask should be 0
-#define RM_STATE_NORMAL             1 
+#define RM_STATE_NORMAL             1
 #endif
 
 #define SIR_MAC_OUI_VERSION_1         1
@@ -656,7 +656,7 @@
 #define SIR_MAC_SET_SHORT_SLOT_TIME(x)   (((tANI_U16) x) | 0x0400)
 #define SIR_MAC_SET_APSD(x)              (((tANI_U16) x) | 0x0800)
 #if defined WLAN_FEATURE_VOWIFI
-#define SIR_MAC_SET_RRM(x)               (((tANI_U16) x) | 0x1000) 
+#define SIR_MAC_SET_RRM(x)               (((tANI_U16) x) | 0x1000)
 #endif
 #define SIR_MAC_SET_GROUP_ACK(x)         (((tANI_U16) x) | 0x4000)
 
@@ -698,7 +698,7 @@ typedef enum eSirMacStatusCodes
     eSIR_MAC_AUTH_FRAME_OUT_OF_SEQ_STATUS         = 14, //Received an Authentication frame with authentication transaction sequence number
                                                         //out of expected sequence
     eSIR_MAC_CHALLENGE_FAILURE_STATUS             = 15, //Authentication rejected because of challenge failure
-    eSIR_MAC_AUTH_RSP_TIMEOUT_STATUS              = 16, //Authentication rejected due to timeout waiting for next frame in sequence 
+    eSIR_MAC_AUTH_RSP_TIMEOUT_STATUS              = 16, //Authentication rejected due to timeout waiting for next frame in sequence
     eSIR_MAC_MAX_ASSOC_STA_REACHED_STATUS         = 17, //Association denied because AP is unable to handle additional associated stations
     eSIR_MAC_BASIC_RATES_NOT_SUPPORTED_STATUS     = 18, //Association denied due to requesting station not supporting all of the data rates in the
                                                         //BSSBasicRateSet parameter
@@ -1931,12 +1931,12 @@ typedef __ani_attr_pre_packed struct sHtCaps {
 } __ani_attr_packed tHtCaps;
 
 /* During 11h channel switch, the AP can indicate if the
- * STA needs to stop the transmission or continue until the 
+ * STA needs to stop the transmission or continue until the
  * channel-switch.
  * eSIR_CHANSW_MODE_NORMAL - STA can continue transmission
  * eSIR_CHANSW_MODE_SILENT - STA should stop transmission
  */
-typedef enum eSirMacChanSwMode 
+typedef enum eSirMacChanSwMode
 {
     eSIR_CHANSW_MODE_NORMAL = 0,
     eSIR_CHANSW_MODE_SILENT = 1
@@ -2030,7 +2030,7 @@ typedef __ani_attr_pre_packed struct _BARFrmStruct {
 #define SIZE_OF_BASIC_MCS_SET                              16
 #define VALID_MCS_SIZE                                     77 //0-76
 #define MCS_RX_HIGHEST_SUPPORTED_RATE_BYTE_OFFSET          10
-// This is not clear, Count 8 based from NV supported MCS count    
+// This is not clear, Count 8 based from NV supported MCS count
 #define VALID_MAX_MCS_INDEX                                8
 
 #if 0
@@ -2545,7 +2545,7 @@ typedef struct sSirMacNeighborReportReq
 {
    tANI_U8 dialogToken;
    tANI_U8 ssid_present;
-   tSirMacSSid ssid;  
+   tSirMacSSid ssid;
 } tSirMacNeighborReportReq, *tpSirMacNeighborReportReq;
 
 typedef struct sSirMacLinkReport
@@ -2573,7 +2573,7 @@ typedef struct sSirMacBeaconReport
    tANI_U8 antennaId;
    tANI_U32 parentTSF;
    tANI_U8 numIes;
-   tANI_U8 Ies[BEACON_REPORT_MAX_IES];  
+   tANI_U8 Ies[BEACON_REPORT_MAX_IES];
 
 } tSirMacBeaconReport, *tpSirMacBeaconReport;
 
@@ -2583,11 +2583,11 @@ typedef struct sSirMacRadioMeasureReport
    tANI_U8     token;
    tANI_U8     refused;
    tANI_U8     incapable;
-   tANI_U8     type;  
-   union 
+   tANI_U8     type;
+   union
    {
      tSirMacBeaconReport beaconReport;
-   }report;  
+   }report;
 
 }tSirMacRadioMeasureReport, *tpSirMacRadioMeasureReport;
 

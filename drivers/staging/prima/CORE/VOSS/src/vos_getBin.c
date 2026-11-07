@@ -194,4 +194,3 @@ v_BOOL_t vos_max_concurrent_connections_reached (void)
 
     return VOS_FALSE;
 }
-

@@ -38,4 +38,3 @@ void csr_roam_preauth_rsp_mbb_processor(tHalHandle hal,
 void csr_preauth_reassoc_mbb_timer_callback(void *context);
 
 void csr_stop_preauth_reassoc_mbb_timer(tpAniSirGlobal mac);
-

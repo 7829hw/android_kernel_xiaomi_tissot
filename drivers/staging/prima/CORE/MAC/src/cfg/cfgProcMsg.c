@@ -2819,7 +2819,3 @@ processCfgDownloadReq(tpAniSirGlobal pMac)
     PELOG1(cfgLog(pMac, LOG1, "<CFG> Completed successfully");)
 
 } /*** end ProcessDownloadReq() ***/
-
-
-
-

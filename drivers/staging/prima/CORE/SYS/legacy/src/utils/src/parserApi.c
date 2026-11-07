@@ -77,7 +77,7 @@ static const tANI_U8 sirRSNOui[][ DOT11F_RSN_OUI_SIZE ] = {
 
 
 ////////////////////////////////////////////////////////////////////////
-void dot11fLog(tpAniSirGlobal pMac, int loglevel, const char *pString,...) 
+void dot11fLog(tpAniSirGlobal pMac, int loglevel, const char *pString,...)
 {
 #ifdef WLAN_DEBUG
     if( (tANI_U32)loglevel > pMac->utils.gLogDbgLevel[LOG_INDEX_FOR_MODULE( SIR_DBG_MODULE_ID )] )
@@ -212,7 +212,7 @@ int FindIELocation( tpAniSirGlobal pMac,
     // The if/then/else statements that follow are here to figure out
     // whether we have the WPA IE, and where it is if we *do* have it.
 
-    //Save the first IE length 
+    //Save the first IE length
     ieLen = pRsnIe->rsnIEdata[ 1 ] + 2;
     idx = 0;
     bytesLeft = pRsnIe->length;
@@ -225,7 +225,7 @@ int FindIELocation( tpAniSirGlobal pMac,
             return (idx);
         }
         else if ( EID != pRsnIe->rsnIEdata[ idx ] &&
-             // & if no more IE, 
+             // & if no more IE,
              bytesLeft <= (tANI_U16)( ieLen ) )
         {
             dot11fLog( pMac, LOG3, FL("No IE (%d) in FindIELocation."), EID );
@@ -270,7 +270,7 @@ PopulateDot11fCapabilities(tpAniSirGlobal         pMac,
 tSirRetStatus
 PopulateDot11fCapabilities2(tpAniSirGlobal         pMac,
                             tDot11fFfCapabilities *pDot11f,
-                            tpDphHashNode          pSta, 
+                            tpDphHashNode          pSta,
                             tpPESession            psessionEntry)
 {
     tANI_U16           cfg;
@@ -339,7 +339,7 @@ PopulateDot11fsecChanOffset(tpAniSirGlobal pMac,
                                tpPESession psessionEntry)
 {
     //Has to be updated on the cb state basis
-    pDot11f->secondaryChannelOffset = 
+    pDot11f->secondaryChannelOffset =
              psessionEntry->gLimChannelSwitch.secondarySubBand;
 
     pDot11f->present = 1;
@@ -435,7 +435,7 @@ PopulateDot11fDSParams(tpAniSirGlobal     pMac,
 
 void
 PopulateDot11fEDCAParamSet(tpAniSirGlobal         pMac,
-                           tDot11fIEEDCAParamSet *pDot11f, 
+                           tDot11fIEEDCAParamSet *pDot11f,
                            tpPESession psessionEntry)
 {
 
@@ -512,10 +512,10 @@ PopulateDot11fERPInfo(tpAniSirGlobal    pMac,
         }
 
 
-        if((psessionEntry->gLimNoShortParams.numNonShortPreambleSta) 
-                 || !psessionEntry->beaconParams.fShortPreamble){ 
+        if((psessionEntry->gLimNoShortParams.numNonShortPreambleSta)
+                 || !psessionEntry->beaconParams.fShortPreamble){
                 pDot11f->barker_preamble = 1;
-         
+
         }
         // if protection always flag is set, advertise protection enabled
         // regardless of legacy stations presence
@@ -532,7 +532,7 @@ PopulateDot11fERPInfo(tpAniSirGlobal    pMac,
 
 tSirRetStatus
 PopulateDot11fExtSuppRates(tpAniSirGlobal pMac, tANI_U8 nChannelNum,
-                           tDot11fIEExtSuppRates *pDot11f, 
+                           tDot11fIEExtSuppRates *pDot11f,
                            tpPESession psessionEntry)
 {
     tSirRetStatus nSirStatus;
@@ -779,7 +779,7 @@ void limLogVHTExtBssLoad(tpAniSirGlobal pMac,
 }
 
 
-void limLogOperatingMode( tpAniSirGlobal pMac, 
+void limLogOperatingMode( tpAniSirGlobal pMac,
                                tDot11fIEOperatingMode *pDot11f)
 {
 #ifdef DUMP_MGMT_CNTNTS
@@ -1126,11 +1126,11 @@ PopulateDot11fOperatingMode(tpAniSirGlobal      pMac,
                            tpPESession   psessionEntry)
 {
     pDot11f->present = 1;
-    
+
     pDot11f->chanWidth = psessionEntry->gLimOperatingMode.chanWidth;
     pDot11f->rxNSS = psessionEntry->gLimOperatingMode.rxNSS;
     pDot11f->rxNSSType = psessionEntry->gLimOperatingMode.rxNSSType;
-    
+
     return eSIR_SUCCESS;
 }
 
@@ -1339,7 +1339,7 @@ PopulateDot11fPowerCaps(tpAniSirGlobal      pMac,
         pCaps->maxTxPower = psessionEntry->pLimJoinReq->powerCap.maxTxPower;
 
     }
-    
+
     pCaps->present    = 1;
 } // End PopulateDot11fPowerCaps.
 
@@ -1376,9 +1376,9 @@ PopulateDot11fQOSCapsStation(tpAniSirGlobal    pMac,
 {
     tANI_U32  val = 0;
 
-    if(wlan_cfgGetInt(pMac, WNI_CFG_MAX_SP_LENGTH, &val) != eSIR_SUCCESS) 
+    if(wlan_cfgGetInt(pMac, WNI_CFG_MAX_SP_LENGTH, &val) != eSIR_SUCCESS)
         PELOGE(limLog(pMac, LOGE, FL("could not retrieve Max SP Length "));)
-   
+
     pDot11f->more_data_ack = 0;
     pDot11f->max_sp_length = (tANI_U8)val;
     pDot11f->qack    = 0;
@@ -1389,7 +1389,7 @@ PopulateDot11fQOSCapsStation(tpAniSirGlobal    pMac,
         pDot11f->acbk_uapsd = LIM_UAPSD_GET(ACBK, pMac->lim.gUapsdPerAcBitmask);
         pDot11f->acvi_uapsd = LIM_UAPSD_GET(ACVI, pMac->lim.gUapsdPerAcBitmask);
         pDot11f->acvo_uapsd = LIM_UAPSD_GET(ACVO, pMac->lim.gUapsdPerAcBitmask);
-    }   
+    }
     pDot11f->present = 1;
 } // End PopulatedDot11fQOSCaps.
 
@@ -1843,9 +1843,9 @@ void PopulateDot11fReAssocTspec(tpAniSirGlobal pMac, tDot11fReAssocRequest *pRea
         }
     }
 }
-#endif 
+#endif
 
-void PopulateDot11fWMMInfoAp(tpAniSirGlobal pMac, tDot11fIEWMMInfoAp *pInfo, 
+void PopulateDot11fWMMInfoAp(tpAniSirGlobal pMac, tDot11fIEWMMInfoAp *pInfo,
                              tpPESession psessionEntry)
 {
     pInfo->version = SIR_MAC_OUI_VERSION_1;
@@ -1881,7 +1881,7 @@ void PopulateDot11fWMMInfoStation(tpAniSirGlobal pMac, tDot11fIEWMMInfoStation *
     pInfo->acbk_uapsd = LIM_UAPSD_GET(ACBK, pMac->lim.gUapsdPerAcBitmask);
     pInfo->acbe_uapsd = LIM_UAPSD_GET(ACBE, pMac->lim.gUapsdPerAcBitmask);
 
-    if(wlan_cfgGetInt(pMac, WNI_CFG_MAX_SP_LENGTH, &val) != eSIR_SUCCESS) 
+    if(wlan_cfgGetInt(pMac, WNI_CFG_MAX_SP_LENGTH, &val) != eSIR_SUCCESS)
         PELOGE(limLog(pMac, LOGE, FL("could not retrieve Max SP Length "));)
     pInfo->max_sp_length = (tANI_U8)val;
     pInfo->present = 1;
@@ -1896,7 +1896,7 @@ void PopulateDot11fWMMParams(tpAniSirGlobal      pMac,
     if(psessionEntry->limSystemRole == eLIM_AP_ROLE)
        pParams->qosInfo =
            (psessionEntry->apUapsdEnable << 7) | ((tANI_U8)(0x0f & psessionEntry->gLimEdcaParamSetCount));
-    else 
+    else
        pParams->qosInfo =
            (pMac->lim.gUapsdEnable << 7) | ((tANI_U8)(0x0f & psessionEntry->gLimEdcaParamSetCount));
 
@@ -2558,12 +2558,12 @@ sirConvertAssocReqFrame2Struct(tpAniSirGlobal pMac,
     }
 
     // WSC IE
-    if (ar->WscIEOpaque.present) 
+    if (ar->WscIEOpaque.present)
     {
         pAssocReq->addIEPresent = 1;
         ConvertWscOpaque(pMac, &pAssocReq->addIE, &ar->WscIEOpaque);
     }
-    
+
 
     if(ar->P2PIEOpaque.present)
     {
@@ -2781,7 +2781,7 @@ sirConvertAssocRespFrame2Struct(tpAniSirGlobal pMac,
         pAssocRsp->num_RICData = ar.num_RICDataDesc;
         pAssocRsp->ricPresent = TRUE;
     }
-#endif    
+#endif
 
 #ifdef FEATURE_WLAN_ESE
     if (ar.num_WMMTSPEC) {
@@ -2792,13 +2792,13 @@ sirConvertAssocRespFrame2Struct(tpAniSirGlobal pMac,
         }
         pAssocRsp->tspecPresent = TRUE;
     }
-   
+
     if(ar.ESETrafStrmMet.present)
     {
         pAssocRsp->tsmPresent = 1;
         vos_mem_copy(&pAssocRsp->tsmIE.tsid,
                 &ar.ESETrafStrmMet.tsid,sizeof(tSirMacESETSMIE));
-    }    
+    }
 #endif
 
 #ifdef WLAN_FEATURE_11AC
@@ -2973,12 +2973,12 @@ sirConvertReassocReqFrame2Struct(tpAniSirGlobal pMac,
     // there is in 'sirConvertAssocReqFrame2Struct'?
 
     // WSC IE
-    if (ar.WscIEOpaque.present) 
+    if (ar.WscIEOpaque.present)
     {
         pAssocReq->addIEPresent = 1;
         ConvertWscOpaque(pMac, &pAssocReq->addIE, &ar.WscIEOpaque);
     }
-    
+
     if(ar.P2PIEOpaque.present)
     {
         pAssocReq->addIEPresent = 1;
@@ -3495,7 +3495,7 @@ sirParseBeaconIE(tpAniSirGlobal        pMac,
     {
         pBeaconStruct->channelNumber = pBies->HTInfo.primaryChannel;
     }
-    
+
     if ( pBies->RSN.present )
     {
         pBeaconStruct->rsnPresent = 1;
@@ -3589,7 +3589,7 @@ sirConvertBeaconFrame2Struct(tpAniSirGlobal       pMac,
     pHdr     = WDA_GET_RX_MAC_HEADER( pFrame );
     mappedRXCh = WDA_GET_RX_CH( pFrame );
     rfBand = WDA_GET_RX_RFBAND( pFrame );
-    
+
     // Zero-init our [out] parameter,
     vos_mem_set( ( tANI_U8* )pBeaconStruct, sizeof(tSirProbeRespBeacon), 0 );
 
@@ -3645,7 +3645,7 @@ sirConvertBeaconFrame2Struct(tpAniSirGlobal       pMac,
     pBeaconStruct->capabilityInfo.dsssOfdm      = pBeacon->Capabilities.dsssOfdm;
     pBeaconStruct->capabilityInfo.delayedBA     = pBeacon->Capabilities.delayedBA;
     pBeaconStruct->capabilityInfo.immediateBA    = pBeacon->Capabilities.immediateBA;
- 
+
     if ( ! pBeacon->SSID.present )
     {
         PELOGW(limLog(pMac, LOGW, FL("Mandatory IE SSID not present!"));)
@@ -3868,7 +3868,7 @@ sirConvertBeaconFrame2Struct(tpAniSirGlobal       pMac,
         pBeaconStruct->WiderBWChanSwitchAnnPresent = 1;
         vos_mem_copy( &pBeaconStruct->WiderBWChanSwitchAnn, &pBeacon->WiderBWChanSwitchAnn,
                       sizeof( tDot11fIEWiderBWChanSwitchAnn));
-    }      
+    }
 #endif
     if(pBeacon->OBSSScanParameters.present)
     {
@@ -4846,12 +4846,12 @@ tSirRetStatus DePopulateDot11fWscRegistrarInfo(tpAniSirGlobal pMac,
 }
 tSirRetStatus PopulateDot11fProbeResWPSIEs(tpAniSirGlobal pMac, tDot11fIEWscProbeRes *pDot11f, tpPESession psessionEntry)
 {
- 
+
    tSirWPSProbeRspIE *pSirWPSProbeRspIE;
 
    pSirWPSProbeRspIE = &psessionEntry->APWPSIEs.SirWPSProbeRspIE;
-   
-    
+
+
     if(pSirWPSProbeRspIE->FieldPresent & SIR_WPS_PROBRSP_VER_PRESENT)
     {
         pDot11f->present = 1;
@@ -4867,13 +4867,13 @@ tSirRetStatus PopulateDot11fProbeResWPSIEs(tpAniSirGlobal pMac, tDot11fIEWscProb
 
     if(pSirWPSProbeRspIE->FieldPresent & SIR_WPS_PROBRSP_STATE_PRESENT)
     {
-        
+
         pDot11f->WPSState.present = 1;
         pDot11f->WPSState.state = (tANI_U8)pSirWPSProbeRspIE->wpsState;
     }
     else
         pDot11f->WPSState.present = 0;
-        
+
     if(pSirWPSProbeRspIE->FieldPresent & SIR_WPS_PROBRSP_APSETUPLOCK_PRESENT)
     {
         pDot11f->APSetupLocked.present = 1;
@@ -4881,7 +4881,7 @@ tSirRetStatus PopulateDot11fProbeResWPSIEs(tpAniSirGlobal pMac, tDot11fIEWscProb
     }
     else
         pDot11f->APSetupLocked.present = 0;
-        
+
     if(pSirWPSProbeRspIE->FieldPresent & SIR_WPS_PROBRSP_SELECTEDREGISTRA_PRESENT)
     {
         pDot11f->SelectedRegistrar.present = 1;
@@ -4889,7 +4889,7 @@ tSirRetStatus PopulateDot11fProbeResWPSIEs(tpAniSirGlobal pMac, tDot11fIEWscProb
     }
     else
          pDot11f->SelectedRegistrar.present = 0;
-    
+
     if(pSirWPSProbeRspIE->FieldPresent & SIR_WPS_PROBRSP_DEVICEPASSWORDID_PRESENT)
     {
         pDot11f->DevicePasswordID.present = 1;
@@ -4897,7 +4897,7 @@ tSirRetStatus PopulateDot11fProbeResWPSIEs(tpAniSirGlobal pMac, tDot11fIEWscProb
     }
     else
         pDot11f->DevicePasswordID.present = 0;
-        
+
     if(pSirWPSProbeRspIE->FieldPresent & SIR_WPS_PROBRSP_SELECTEDREGISTRACFGMETHOD_PRESENT)
     {
         pDot11f->SelectedRegistrarConfigMethods.present = 1;
@@ -4905,7 +4905,7 @@ tSirRetStatus PopulateDot11fProbeResWPSIEs(tpAniSirGlobal pMac, tDot11fIEWscProb
     }
     else
         pDot11f->SelectedRegistrarConfigMethods.present = 0;
-        
+
     if(pSirWPSProbeRspIE->FieldPresent & SIR_WPS_PROBRSP_RESPONSETYPE_PRESENT)
     {
         pDot11f->ResponseType.present = 1;
@@ -4913,7 +4913,7 @@ tSirRetStatus PopulateDot11fProbeResWPSIEs(tpAniSirGlobal pMac, tDot11fIEWscProb
     }
     else
         pDot11f->ResponseType.present = 0;
-        
+
     if(pSirWPSProbeRspIE->FieldPresent & SIR_WPS_PROBRSP_UUIDE_PRESENT)
     {
         pDot11f->UUID_E.present = 1;
@@ -4921,17 +4921,17 @@ tSirRetStatus PopulateDot11fProbeResWPSIEs(tpAniSirGlobal pMac, tDot11fIEWscProb
     }
     else
         pDot11f->UUID_E.present = 0;
-    
+
     if(pSirWPSProbeRspIE->FieldPresent & SIR_WPS_PROBRSP_MANUFACTURE_PRESENT)
     {
         pDot11f->Manufacturer.present = 1;
         pDot11f->Manufacturer.num_name = pSirWPSProbeRspIE->Manufacture.num_name;
         vos_mem_copy(pDot11f->Manufacturer.name, pSirWPSProbeRspIE->Manufacture.name,
                      pSirWPSProbeRspIE->Manufacture.num_name);
-    } 
+    }
     else
         pDot11f->Manufacturer.present = 0;
-        
+
     if(pSirWPSProbeRspIE->FieldPresent & SIR_WPS_PROBRSP_MODELNUMBER_PRESENT)
     {
         pDot11f->ModelName.present = 1;
@@ -4941,7 +4941,7 @@ tSirRetStatus PopulateDot11fProbeResWPSIEs(tpAniSirGlobal pMac, tDot11fIEWscProb
     }
     else
       pDot11f->ModelName.present = 0;
-    
+
     if(pSirWPSProbeRspIE->FieldPresent & SIR_WPS_PROBRSP_MODELNUMBER_PRESENT)
     {
         pDot11f->ModelNumber.present = 1;
@@ -4951,7 +4951,7 @@ tSirRetStatus PopulateDot11fProbeResWPSIEs(tpAniSirGlobal pMac, tDot11fIEWscProb
     }
     else
         pDot11f->ModelNumber.present = 0;
-    
+
     if(pSirWPSProbeRspIE->FieldPresent & SIR_WPS_PROBRSP_SERIALNUMBER_PRESENT)
     {
         pDot11f->SerialNumber.present = 1;
@@ -4961,7 +4961,7 @@ tSirRetStatus PopulateDot11fProbeResWPSIEs(tpAniSirGlobal pMac, tDot11fIEWscProb
     }
     else
         pDot11f->SerialNumber.present = 0;
-    
+
     if(pSirWPSProbeRspIE->FieldPresent & SIR_WPS_PROBRSP_PRIMARYDEVICETYPE_PRESENT)
     {
         pDot11f->PrimaryDeviceType.present = 1;
@@ -4972,7 +4972,7 @@ tSirRetStatus PopulateDot11fProbeResWPSIEs(tpAniSirGlobal pMac, tDot11fIEWscProb
     }
     else
         pDot11f->PrimaryDeviceType.present = 0;
-    
+
     if(pSirWPSProbeRspIE->FieldPresent & SIR_WPS_PROBRSP_DEVICENAME_PRESENT)
     {
         pDot11f->DeviceName.present = 1;
@@ -4982,7 +4982,7 @@ tSirRetStatus PopulateDot11fProbeResWPSIEs(tpAniSirGlobal pMac, tDot11fIEWscProb
     }
     else
         pDot11f->DeviceName.present = 0;
-    
+
     if(pSirWPSProbeRspIE->FieldPresent & SIR_WPS_PROBRSP_CONFIGMETHODS_PRESENT)
     {
         pDot11f->ConfigMethods.present = 1;
@@ -4990,16 +4990,16 @@ tSirRetStatus PopulateDot11fProbeResWPSIEs(tpAniSirGlobal pMac, tDot11fIEWscProb
     }
     else
         pDot11f->ConfigMethods.present = 0;
-    
-    
+
+
     if(pSirWPSProbeRspIE->FieldPresent & SIR_WPS_PROBRSP_RF_BANDS_PRESENT)
     {
         pDot11f->RFBands.present = 1;
         pDot11f->RFBands.bands = pSirWPSProbeRspIE->RFBand;
     }
     else
-       pDot11f->RFBands.present = 0;      
-       
+       pDot11f->RFBands.present = 0;
+
     return eSIR_SUCCESS;
 }
 tSirRetStatus PopulateDot11fAssocResWPSIEs(tpAniSirGlobal pMac, tDot11fIEWscAssocRes *pDot11f, tpPESession psessionEntry)
@@ -5007,7 +5007,7 @@ tSirRetStatus PopulateDot11fAssocResWPSIEs(tpAniSirGlobal pMac, tDot11fIEWscAsso
    tSirWPSProbeRspIE *pSirWPSProbeRspIE;
 
    pSirWPSProbeRspIE = &psessionEntry->APWPSIEs.SirWPSProbeRspIE;
-   
+
     if(pSirWPSProbeRspIE->FieldPresent & SIR_WPS_PROBRSP_VER_PRESENT)
     {
         pDot11f->present = 1;
@@ -5020,26 +5020,26 @@ tSirRetStatus PopulateDot11fAssocResWPSIEs(tpAniSirGlobal pMac, tDot11fIEWscAsso
         pDot11f->present = 0;
         pDot11f->Version.present = 0;
     }
-    
+
     if(pSirWPSProbeRspIE->FieldPresent & SIR_WPS_PROBRSP_RESPONSETYPE_PRESENT)
     {
         pDot11f->ResponseType.present = 1;
         pDot11f->ResponseType.resType = pSirWPSProbeRspIE->ResponseType;
     }
     else
-        pDot11f->ResponseType.present = 0;    
+        pDot11f->ResponseType.present = 0;
 
     return eSIR_SUCCESS;
 }
 
 tSirRetStatus PopulateDot11fBeaconWPSIEs(tpAniSirGlobal pMac, tDot11fIEWscBeacon *pDot11f, tpPESession psessionEntry)
 {
- 
+
    tSirWPSBeaconIE *pSirWPSBeaconIE;
 
    pSirWPSBeaconIE = &psessionEntry->APWPSIEs.SirWPSBeaconIE;
-   
-    
+
+
     if(pSirWPSBeaconIE->FieldPresent & SIR_WPS_PROBRSP_VER_PRESENT)
     {
         pDot11f->present = 1;
@@ -5052,16 +5052,16 @@ tSirRetStatus PopulateDot11fBeaconWPSIEs(tpAniSirGlobal pMac, tDot11fIEWscBeacon
         pDot11f->present = 0;
         pDot11f->Version.present = 0;
     }
-    
+
     if(pSirWPSBeaconIE->FieldPresent & SIR_WPS_BEACON_STATE_PRESENT)
     {
-        
+
         pDot11f->WPSState.present = 1;
         pDot11f->WPSState.state = (tANI_U8)pSirWPSBeaconIE->wpsState;
     }
     else
         pDot11f->WPSState.present = 0;
-        
+
     if(pSirWPSBeaconIE->FieldPresent & SIR_WPS_BEACON_APSETUPLOCK_PRESENT)
     {
         pDot11f->APSetupLocked.present = 1;
@@ -5069,7 +5069,7 @@ tSirRetStatus PopulateDot11fBeaconWPSIEs(tpAniSirGlobal pMac, tDot11fIEWscBeacon
     }
     else
         pDot11f->APSetupLocked.present = 0;
-        
+
     if(pSirWPSBeaconIE->FieldPresent & SIR_WPS_BEACON_SELECTEDREGISTRA_PRESENT)
     {
         pDot11f->SelectedRegistrar.present = 1;
@@ -5077,7 +5077,7 @@ tSirRetStatus PopulateDot11fBeaconWPSIEs(tpAniSirGlobal pMac, tDot11fIEWscBeacon
     }
     else
          pDot11f->SelectedRegistrar.present = 0;
-    
+
     if(pSirWPSBeaconIE->FieldPresent & SIR_WPS_BEACON_DEVICEPASSWORDID_PRESENT)
     {
         pDot11f->DevicePasswordID.present = 1;
@@ -5085,7 +5085,7 @@ tSirRetStatus PopulateDot11fBeaconWPSIEs(tpAniSirGlobal pMac, tDot11fIEWscBeacon
     }
     else
         pDot11f->DevicePasswordID.present = 0;
-        
+
     if(pSirWPSBeaconIE->FieldPresent & SIR_WPS_BEACON_SELECTEDREGISTRACFGMETHOD_PRESENT)
     {
         pDot11f->SelectedRegistrarConfigMethods.present = 1;
@@ -5093,7 +5093,7 @@ tSirRetStatus PopulateDot11fBeaconWPSIEs(tpAniSirGlobal pMac, tDot11fIEWscBeacon
     }
     else
         pDot11f->SelectedRegistrarConfigMethods.present = 0;
-        
+
     if(pSirWPSBeaconIE->FieldPresent & SIR_WPS_BEACON_UUIDE_PRESENT)
     {
         pDot11f->UUID_E.present = 1;
@@ -5101,16 +5101,16 @@ tSirRetStatus PopulateDot11fBeaconWPSIEs(tpAniSirGlobal pMac, tDot11fIEWscBeacon
     }
     else
         pDot11f->UUID_E.present = 0;
-    
-       
+
+
     if(pSirWPSBeaconIE->FieldPresent & SIR_WPS_BEACON_RF_BANDS_PRESENT)
     {
         pDot11f->RFBands.present = 1;
         pDot11f->RFBands.bands = pSirWPSBeaconIE->RFBand;
     }
     else
-       pDot11f->RFBands.present = 0;      
-       
+       pDot11f->RFBands.present = 0;
+
     return eSIR_SUCCESS;
 }
 tSirRetStatus PopulateDot11fWscInProbeRes(tpAniSirGlobal pMac,
@@ -5327,18 +5327,18 @@ tSirRetStatus DePopulateDot11fWscRegistrarInfoInProbeRes(tpAniSirGlobal pMac,
     return eSIR_SUCCESS;
 }
 
-tSirRetStatus PopulateDot11fAssocResWscIE(tpAniSirGlobal pMac, 
-                                          tDot11fIEWscAssocRes *pDot11f, 
+tSirRetStatus PopulateDot11fAssocResWscIE(tpAniSirGlobal pMac,
+                                          tDot11fIEWscAssocRes *pDot11f,
                                           tpSirAssocReq pRcvdAssocReq)
 {
     tDot11fIEWscAssocReq parsedWscAssocReq = { 0, };
     tANI_U8         *wscIe;
-    
+
 
     wscIe = limGetWscIEPtr(pMac, pRcvdAssocReq->addIE.addIEdata, pRcvdAssocReq->addIE.length);
     if(wscIe != NULL)
     {
-        // retreive WSC IE from given AssocReq 
+        // retreive WSC IE from given AssocReq
         dot11fUnpackIeWscAssocReq( pMac,
                                     wscIe + 2 + 4,  // EID, length, OUI
                                     wscIe[ 1 ] - 4, // length without OUI
@@ -5350,7 +5350,7 @@ tSirRetStatus PopulateDot11fAssocResWscIE(tpAniSirGlobal pMac,
         pDot11f->Version.minor = 0x0;
 
         pDot11f->ResponseType.present = 1;
-        
+
         if ((parsedWscAssocReq.RequestType.reqType == REQ_TYPE_REGISTRAR) ||
             (parsedWscAssocReq.RequestType.reqType == REQ_TYPE_WLAN_MANAGER_REGISTRAR))
         {
@@ -5364,7 +5364,7 @@ tSirRetStatus PopulateDot11fAssocResWscIE(tpAniSirGlobal pMac,
         // TODO: currently it takes from peers only
         if(parsedWscAssocReq.VendorExtension.present &&
            parsedWscAssocReq.VendorExtension.Version2.present)
-        {   
+        {
             pDot11f->VendorExtension.present = 1;
             pDot11f->VendorExtension.vendorId[0] = 0x00;
             pDot11f->VendorExtension.vendorId[1] = 0x37;
@@ -5377,8 +5377,8 @@ tSirRetStatus PopulateDot11fAssocResWscIE(tpAniSirGlobal pMac,
     return eSIR_SUCCESS;
 }
 
-tSirRetStatus PopulateDot11AssocResP2PIE(tpAniSirGlobal pMac, 
-                                       tDot11fIEP2PAssocRes *pDot11f, 
+tSirRetStatus PopulateDot11AssocResP2PIE(tpAniSirGlobal pMac,
+                                       tDot11fIEP2PAssocRes *pDot11f,
                                        tpSirAssocReq pRcvdAssocReq)
 {
     tANI_U8         *p2pIe;
@@ -5435,7 +5435,7 @@ tSirRetStatus PopulateDot11fBeaconReport( tpAniSirGlobal pMac, tDot11fIEMeasurem
 }
 
 tSirRetStatus PopulateDot11fRRMIe( tpAniSirGlobal pMac, tDot11fIERRMEnabledCap *pDot11f, tpPESession    psessionEntry )
-{  
+{
    tpRRMCaps pRrmCaps;
 
    pRrmCaps = rrmGetCapabilities( pMac, psessionEntry );
@@ -5484,7 +5484,7 @@ void PopulateMDIE( tpAniSirGlobal        pMac,
    // Plugfest fix
    pDot11f->overDSCap =   (mdie[2] & 0x01);
    pDot11f->resourceReqCap = ((mdie[2] >> 1) & 0x01);
-   
+
 }
 
 void PopulateFTInfo( tpAniSirGlobal      pMac,
@@ -5497,7 +5497,7 @@ void PopulateFTInfo( tpAniSirGlobal      pMac,
 }
 #endif
 
-void PopulateDot11fAssocRspRates ( tpAniSirGlobal pMac, tDot11fIESuppRates *pSupp, 
+void PopulateDot11fAssocRspRates ( tpAniSirGlobal pMac, tDot11fIESuppRates *pSupp,
       tDot11fIEExtSuppRates *pExt, tANI_U16 *_11bRates, tANI_U16 *_11aRates )
 {
   tANI_U8 num_supp = 0, num_ext = 0;
@@ -5506,14 +5506,14 @@ void PopulateDot11fAssocRspRates ( tpAniSirGlobal pMac, tDot11fIESuppRates *pSup
   for( i = 0 ; (i < SIR_NUM_11B_RATES && _11bRates[i]) ; i++, num_supp++ )
   {
       pSupp->rates[num_supp] = (tANI_U8)_11bRates[i];
-  }  
+  }
   for( j = 0 ; (j < SIR_NUM_11A_RATES && _11aRates[j]) ; j++ )
   {
      if( num_supp < 8 )
          pSupp->rates[num_supp++] = (tANI_U8)_11aRates[j];
      else
-         pExt->rates[num_ext++] =  (tANI_U8)_11aRates[j]; 
-  }  
+         pExt->rates[num_ext++] =  (tANI_U8)_11aRates[j];
+  }
 
   if( num_supp )
   {

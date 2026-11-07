@@ -29,15 +29,15 @@
 #define __BAPRSN_TXRX_H
 
 /**=============================================================================
-  
+
   bapRsnTxRx.h
-  
+
   \brief
-  
+
   Description...
-    
-  
-  
+
+
+
   ==============================================================================*/
 
 #include "vos_types.h"
@@ -51,7 +51,7 @@ typedef int (*pnfRxFrameHandler)( v_PVOID_t pvosGCtx, vos_pkt_t *pPacket );
 
 /*
     \brief bapRsnSendEapolFrame
-    To push an eapol frame to TL. 
+    To push an eapol frame to TL.
 
     \param pAniPkt - a ready eapol frame that is prepared in tAniPacket format
 */
@@ -81,7 +81,3 @@ VOS_STATUS bapRsnRegisterRxCallback( v_PVOID_t pvosGCtx );
 VOS_STATUS bapRsnRxCallback(v_PVOID_t pv, vos_pkt_t *pPacket);
 
 #endif //__BAPRSN_TXRX_H
-
-
-
-

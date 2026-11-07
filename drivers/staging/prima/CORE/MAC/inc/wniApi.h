@@ -325,11 +325,11 @@ enum eWniMsgTypes
     eWNI_SME_EXCLUDE_UNENCRYPTED,
     eWNI_SME_RSSI_IND, //RSSI indication from TL to be serialized on MC thread
 #ifdef FEATURE_WLAN_TDLS
-    eWNI_SME_TDLS_SEND_MGMT_REQ,    
-    eWNI_SME_TDLS_SEND_MGMT_RSP,    
-    eWNI_SME_TDLS_ADD_STA_REQ,    
-    eWNI_SME_TDLS_ADD_STA_RSP,    
-    eWNI_SME_TDLS_DEL_STA_REQ,    
+    eWNI_SME_TDLS_SEND_MGMT_REQ,
+    eWNI_SME_TDLS_SEND_MGMT_RSP,
+    eWNI_SME_TDLS_ADD_STA_REQ,
+    eWNI_SME_TDLS_ADD_STA_RSP,
+    eWNI_SME_TDLS_DEL_STA_REQ,
     eWNI_SME_TDLS_DEL_STA_RSP,
     eWNI_SME_TDLS_DEL_STA_IND,
     eWNI_SME_TDLS_DEL_ALL_PEER_IND,
@@ -340,7 +340,7 @@ enum eWniMsgTypes
     eWNI_SME_TDLS_CHANNEL_SWITCH_REQ,
     eWNI_SME_TDLS_CHANNEL_SWITCH_RSP,
 #endif
-    //NOTE: If you are planning to add more mesages, please make sure that 
+    //NOTE: If you are planning to add more mesages, please make sure that
     //SIR_LIM_ITC_MSG_TYPES_BEGIN is moved appropriately. It is set as
     //SIR_LIM_MSG_TYPES_BEGIN+0xB0 = 12B0 (which means max of 176 messages and
     //eWNI_SME_TDLS_DEL_STA_RSP = 175.
@@ -729,4 +729,3 @@ typedef struct sAniCfgTxRateCtrs
 #define DYNAMIC_CFG_TYPE_WPS_STATE            (1)
 
 #endif /* __WNI_API_H */
-

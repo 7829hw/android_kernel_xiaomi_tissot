@@ -45,7 +45,7 @@
 #include <i_vos_packet.h>
 #include <vos_timer.h>
 #include <vos_trace.h>
-#include <wlan_hdd_main.h>   
+#include <wlan_hdd_main.h>
 #include <linux/wcnss_wlan.h>
 
 /*--------------------------------------------------------------------------
@@ -125,7 +125,7 @@ static VOS_STATUS vos_pkti_list_destroy( struct list_head *pList )
 
    if (unlikely(NULL == pList))
    {
-      // something is fishy -- don't even bother trying 
+      // something is fishy -- don't even bother trying
       // clean up this list since it is apparently hosed
       VOS_TRACE(VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_FATAL,
                 "VPKT [%d]: NULL pList", __LINE__);
@@ -281,15 +281,15 @@ static char *vos_pkti_packet_type_str(VOS_PKT_TYPE pktType)
    case VOS_PKT_TYPE_TX_802_11_MGMT:
       return "TX_802_11_MGMT";
       break;
-   
+
    case VOS_PKT_TYPE_TX_802_11_DATA:
       return  "TX_802_11_DATA";
       break;
-       
+
    case VOS_PKT_TYPE_TX_802_3_DATA:
       return "TX_802_3_DATA";
       break;
-   
+
    case VOS_PKT_TYPE_RX_RAW:
       return "RX_RAW";
       break;
@@ -297,7 +297,7 @@ static char *vos_pkti_packet_type_str(VOS_PKT_TYPE pktType)
    default:
       return "UNKNOWN";
       break;
-   } 
+   }
 }
 #endif // defined( WLAN_DEBUG )
 
@@ -408,7 +408,7 @@ VOS_STATUS vos_packet_open( v_VOID_t *pVosContext,
 
          WPAL_PACKET_SET_METAINFO_POINTER(&(pPkt->palPacket),
                   (void*)&pVosPacketContext->rxMetaInfo[idx]);
-         WPAL_PACKET_SET_TYPE(&(pPkt->palPacket), 
+         WPAL_PACKET_SET_TYPE(&(pPkt->palPacket),
                               eWLAN_PAL_PKT_TYPE_RX_RAW);
 
          if (VOS_STATUS_SUCCESS != vosStatus)
@@ -439,7 +439,7 @@ VOS_STATUS vos_packet_open( v_VOID_t *pVosContext,
          vosStatus = vos_pkti_packet_init(pPkt, VOS_PKT_TYPE_TX_802_3_DATA);
          WPAL_PACKET_SET_METAINFO_POINTER(&(pPkt->palPacket),
                (void*)&pVosPacketContext->txDataMetaInfo[idx]);
-         WPAL_PACKET_SET_TYPE(&(pPkt->palPacket), 
+         WPAL_PACKET_SET_TYPE(&(pPkt->palPacket),
                               eWLAN_PAL_PKT_TYPE_TX_802_3_DATA);
          if (VOS_STATUS_SUCCESS != vosStatus)
          {
@@ -471,7 +471,7 @@ VOS_STATUS vos_packet_open( v_VOID_t *pVosContext,
 
          WPAL_PACKET_SET_METAINFO_POINTER(&(pPkt->palPacket),
                (void*)&pVosPacketContext->txMgmtMetaInfo[idx]);
-         WPAL_PACKET_SET_TYPE(&(pPkt->palPacket), 
+         WPAL_PACKET_SET_TYPE(&(pPkt->palPacket),
                               eWLAN_PAL_PKT_TYPE_TX_802_11_MGMT);
 
          if (VOS_STATUS_SUCCESS != vosStatus)
@@ -1052,7 +1052,7 @@ VOS_STATUS vos_pkt_set_os_packet( vos_pkt_t *pPacket,
 
    // attach
    pPacket->pSkb = (struct sk_buff *) pOSPacket;
-   
+
    return VOS_STATUS_SUCCESS;
 }
 
@@ -1319,7 +1319,7 @@ VOS_STATUS vos_pkt_return_packet( vos_pkt_t *pPacket )
          return VOS_STATUS_E_INVAL;
       }
 
-      //If an skb is attached then reset the pointers      
+      //If an skb is attached then reset the pointers
       if (pPacket->pSkb)
       {
          pPacket->pSkb->len = 0;
@@ -1354,7 +1354,7 @@ VOS_STATUS vos_pkt_return_packet( vos_pkt_t *pPacket )
          break;
 
       case VOS_PKT_TYPE_TX_802_11_MGMT:
-                
+
          pPktFreeList = &gpVosPacketContext->txMgmtFreeList;
          pLowResourceInfo = &gpVosPacketContext->txMgmtLowResourceInfo;
          mlock = &gpVosPacketContext->txMgmtFreeListLock;
@@ -1381,7 +1381,7 @@ VOS_STATUS vos_pkt_return_packet( vos_pkt_t *pPacket )
       // is there a low resource condition pending for this packet type?
       if (pLowResourceInfo && pLowResourceInfo->callback)
       {
-         // pLowResourceInfo->callback is modified from threads (different CPU's). 
+         // pLowResourceInfo->callback is modified from threads (different CPU's).
          // So a mutex is enough to protect is against a race condition.
          // mutex is SMP safe
          mutex_lock(mlock);
@@ -1417,7 +1417,7 @@ VOS_STATUS vos_pkt_return_packet( vos_pkt_t *pPacket )
              lowResource = VOS_TRUE;
          }
       }
-      
+
 
       if(!lowResource)
       {
@@ -1445,7 +1445,7 @@ VOS_STATUS vos_pkt_return_packet( vos_pkt_t *pPacket )
    // see if we need to replenish the Rx Raw pool
    if (VOS_PKT_TYPE_RX_RAW == packetType)
    {
-      vos_pkti_replenish_raw_pool();   
+      vos_pkti_replenish_raw_pool();
    }
    return VOS_STATUS_SUCCESS;
 }
@@ -1714,10 +1714,10 @@ VOS_STATUS vos_pkt_extract_data( vos_pkt_t *pPacket,
    // get number of bytes requested
    len = *pOutputBufferSize;
 
-   // if 0 is input in the *pOutputBufferSize, then the user wants us to 
-   // extract *all* the data in the buffer.  Otherwise, the user has 
-   // specified the output buffer size in *pOutputBufferSize.  In the 
-   // case where the output buffer size is specified, let's validate that 
+   // if 0 is input in the *pOutputBufferSize, then the user wants us to
+   // extract *all* the data in the buffer.  Otherwise, the user has
+   // specified the output buffer size in *pOutputBufferSize.  In the
+   // case where the output buffer size is specified, let's validate that
    // it is big enough.
    //
    // \note:  i'm not crazy about this.  we should enforce the output
@@ -2230,7 +2230,7 @@ VOS_STATUS vos_pkt_reserve_head( vos_pkt_t *pPacket,
                 "VPKT [%d]: Insufficient headroom, "
                 "head[%pK], data[%pK], req[%d]",
                 __LINE__, skb->head, skb->data, dataSize);
-    
+
       if ((newskb = skb_realloc_headroom(skb, dataSize)) == NULL) {
          VOS_TRACE(VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_FATAL,
                    "VPKT [%d]: Failed to realloc headroom", __LINE__);
@@ -2264,9 +2264,9 @@ VOS_STATUS vos_pkt_reserve_head( vos_pkt_t *pPacket,
 
   Upon successful return, the length of the voss Packet is increased by
   dataSize.
- 
+
   Same as above APi but no memset to 0 at the end.
- 
+
   < put a before / after picture here>
 
   \param pPacket - the voss Packet to modify.
@@ -2312,7 +2312,7 @@ VOS_STATUS vos_pkt_reserve_head_fast( vos_pkt_t *pPacket,
                 "VPKT [%d]: Insufficient headroom, "
                 "head[%pK], data[%pK], req[%d]",
                 __LINE__, skb->head, skb->data, dataSize);
-    
+
       if ((newskb = skb_realloc_headroom(skb, dataSize)) == NULL) {
          VOS_TRACE(VOS_MODULE_ID_VOSS, VOS_TRACE_LEVEL_FATAL,
                    "VPKT [%d]: Failed to realloc headroom", __LINE__);
@@ -2857,8 +2857,8 @@ VOS_STATUS vos_pkt_flatten_rx_pkt( vos_pkt_t **ppPacket )
 }
 
 /**--------------------------------------------------------------------------
-  
-  \brief vos_pkt_set_rx_length() - Set the length of a received packet 
+
+  \brief vos_pkt_set_rx_length() - Set the length of a received packet
 
   This API set the length of the data inside the packet after a DMA has occurred
   on rx, it will also set the tail pointer to the end of the data.
@@ -2906,20 +2906,20 @@ VOS_STATUS vos_pkt_set_rx_length( vos_pkt_t *pPacket,
    }
 
    // adjust pointers (there isn't a native Linux API for this)
-   // ?? - is this sufficient? 
+   // ?? - is this sufficient?
    skb_set_tail_pointer(skb, pktLen);
    skb->len   = pktLen;
 
-   return VOS_STATUS_SUCCESS; 
+   return VOS_STATUS_SUCCESS;
 
 }
 /**--------------------------------------------------------------------------
-  
+
   \brief vos_pkt_get_available_buffer_pool() - Get avaliable VOS packet size
    VOSS Packet pool is limitted resource
    VOSS Client need to know how many packet pool is still avaliable to control
    the flow
-   
+
   \param  pktType - Packet type want to know free buffer count
                     VOS_PKT_TYPE_TX_802_11_MGMT, management free buffer count,
                     VOS_PKT_TYPE_TX_802_11_DATA
@@ -2927,13 +2927,13 @@ VOS_STATUS vos_pkt_set_rx_length( vos_pkt_t *pPacket,
                     VOS_PKT_TYPE_RX_RAW, RX free buffer count
 
           vosFreeBuffer - free frame buffer size
-  
+
   \return VOS_STATUS_E_INVAL - invalid input parameter
 
           VOS_STATUS_SUCCESS - Get size success
-    
+
   \sa
-  
+
   ----------------------------------------------------------------------------*/
 VOS_STATUS vos_pkt_get_available_buffer_pool (VOS_PKT_TYPE  pktType,
                                               v_SIZE_t     *vosFreeBuffer)
@@ -2959,7 +2959,7 @@ VOS_STATUS vos_pkt_get_available_buffer_pool (VOS_PKT_TYPE  pktType,
    case VOS_PKT_TYPE_TX_802_3_DATA:
       if (VOS_STA_SAP_MODE == hdd_get_conparam())
       {
-         *vosFreeBuffer = gpVosPacketContext->uctxDataFreeListCount;  
+         *vosFreeBuffer = gpVosPacketContext->uctxDataFreeListCount;
           return VOS_STATUS_SUCCESS;
       }
       else

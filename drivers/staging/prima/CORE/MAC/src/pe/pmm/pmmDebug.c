@@ -26,14 +26,14 @@
  */
 
 /**=========================================================================
-  
+
   \file  pmmDebug.c
-  
+
   \brief implementation for log Debug related APIs
 
   \author Sunit Bhatia
-  
-  
+
+
   ========================================================================*/
 
 #include "vos_trace.h"

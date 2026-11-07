@@ -8242,7 +8242,7 @@ eHalStatus sme_RegisterMgmtFrame(tHalHandle hHal, tANI_U8 sessionId,
         }
 
         len = sizeof(tSirRegisterMgmtFrame) + matchLen;
-        
+
         pMsg = vos_mem_malloc(len);
         if ( NULL == pMsg )
            status = eHAL_STATUS_FAILURE;
@@ -8304,7 +8304,7 @@ eHalStatus sme_DeregisterMgmtFrame(tHalHandle hHal, tANI_U8 sessionId,
         }
 
         len = sizeof(tSirRegisterMgmtFrame) + matchLen;
-        
+
         pMsg = vos_mem_malloc(len);
         if ( NULL == pMsg )
            status = eHAL_STATUS_FAILURE;
@@ -9694,7 +9694,7 @@ eHalStatus sme_8023MulticastList (tHalHandle hHal, tANI_U8 sessionId, tpSirRcvFl
 
     vos_mem_copy(pRequestBuf->selfMacAddr, pSession->selfMacAddr,
                  sizeof(tSirMacAddr));
-    vos_mem_copy(pRequestBuf->bssId, pSession->connectedProfile.bssid, 
+    vos_mem_copy(pRequestBuf->bssId, pSession->connectedProfile.bssid,
                  sizeof(tSirMacAddr));
 
     msg.type = WDA_8023_MULTICAST_LIST_REQ;
@@ -9744,7 +9744,7 @@ eHalStatus sme_ReceiveFilterSetFilter(tHalHandle hHal, tpSirRcvPktFilterCfgType 
         vos_mem_free(pRequestBuf);
         return eHAL_STATUS_FAILURE;
     }
-    
+
     vos_mem_copy(pRcvPktFilterCfg->selfMacAddr, pSession->selfMacAddr,
                  sizeof(tSirMacAddr));
     vos_mem_copy(pRcvPktFilterCfg->bssId, pSession->connectedProfile.bssid,
@@ -10249,7 +10249,7 @@ eHalStatus sme_HideSSID(tHalHandle hHal, v_U8_t sessionId, v_U8_t ssidHidden)
             VOS_ASSERT(0);
 
         /* Create the message and send to lim */
-        len = sizeof(tSirUpdateParams); 
+        len = sizeof(tSirUpdateParams);
         pMsg = vos_mem_malloc(len);
         if ( NULL == pMsg )
            status = eHAL_STATUS_FAILURE;

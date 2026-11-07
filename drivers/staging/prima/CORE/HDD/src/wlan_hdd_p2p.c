@@ -1956,7 +1956,7 @@ int hdd_setP2pNoa( struct net_device *dev, tANI_U8 *command )
                 "%s: P2P_PS_ATTR:oppPS %d ctWindow %d duration %d "
                 "interval %d count %d single noa duration %d "
                 "PsSelection %x", __func__, NoA.opp_ps,
-                NoA.ctWindow, NoA.duration, NoA.interval, 
+                NoA.ctWindow, NoA.duration, NoA.interval,
                 NoA.count, NoA.single_noa_duration,
                 NoA.psSelection);
 
@@ -2054,7 +2054,7 @@ int hdd_setP2pOpps( struct net_device *dev, tANI_U8 *command )
                             "%s: P2P_PS_ATTR:oppPS %d ctWindow %d duration %d "
                             "interval %d count %d single noa duration %d "
                             "PsSelection %x", __func__, NoA.opp_ps,
-                            NoA.ctWindow, NoA.duration, NoA.interval, 
+                            NoA.ctWindow, NoA.duration, NoA.interval,
                             NoA.count, NoA.single_noa_duration,
                             NoA.psSelection);
 
@@ -2083,7 +2083,7 @@ int hdd_setP2pOpps( struct net_device *dev, tANI_U8 *command )
                         "%s: P2P_PS_ATTR:oppPS %d ctWindow %d duration %d "
                         "interval %d count %d single noa duration %d "
                         "PsSelection %x", __func__, NoA.opp_ps,
-                        NoA.ctWindow, NoA.duration, NoA.interval, 
+                        NoA.ctWindow, NoA.duration, NoA.interval,
                         NoA.count, NoA.single_noa_duration,
                         NoA.psSelection);
 

@@ -175,14 +175,14 @@ enum eSirHostMsgTypes
     SIR_HAL_SHUTDOWN_REQ,
     SIR_HAL_SHUTDOWN_CNF,
     SIR_HAL_RESET_REQ,
-    SIR_HAL_RADIO_ON_OFF_IND,    
+    SIR_HAL_RADIO_ON_OFF_IND,
     SIR_HAL_RESET_CNF,
     SIR_WRITE_TO_TD,
     SIR_HAL_HDD_ADDBA_REQ, // MAC -> HDD
-    SIR_HAL_HDD_ADDBA_RSP, // HDD -> HAL        
+    SIR_HAL_HDD_ADDBA_RSP, // HDD -> HAL
     SIR_HAL_DELETEBA_IND, // MAC -> HDD
     SIR_HAL_BA_FAIL_IND, // HDD -> MAC
-    SIR_TL_HAL_FLUSH_AC_REQ, 
+    SIR_TL_HAL_FLUSH_AC_REQ,
     SIR_HAL_TL_FLUSH_AC_RSP
 };
 
@@ -370,12 +370,12 @@ typedef enum eSirResultCodes
 #ifdef WLAN_FEATURE_PACKET_FILTERING
     eSIR_SME_PC_FILTER_MATCH_COUNT_REQ_FAILED,
 #endif // WLAN_FEATURE_PACKET_FILTERING
-    
+
 #ifdef WLAN_FEATURE_GTK_OFFLOAD
     eSIR_SME_GTK_OFFLOAD_GETINFO_REQ_FAILED,
 #endif // WLAN_FEATURE_GTK_OFFLOAD
     eSIR_SME_DEAUTH_STATUS,
-    eSIR_DONOT_USE_RESULT_CODE = SIR_MAX_ENUM_SIZE    
+    eSIR_DONOT_USE_RESULT_CODE = SIR_MAX_ENUM_SIZE
 } tSirResultCodes;
 
 /* each station added has a rate mode which specifies the sta attributes */
@@ -542,10 +542,10 @@ typedef struct sSirSmeRsp
 typedef struct sSirSmeStartReq
 {
     tANI_U16   messageType;      // eWNI_SME_START_REQ
-    tANI_U16   length;    
+    tANI_U16   length;
     tANI_U8      sessionId;      //Added for BT-AMP Support
     tANI_U16     transcationId;  //Added for BT-AMP Support
-    tSirMacAddr  bssId;          //Added For BT-AMP Support   
+    tSirMacAddr  bssId;          //Added For BT-AMP Support
     tANI_U32   roamingAtPolaris;
     tANI_U32   sendNewBssInd;
 } tSirSmeStartReq, *tpSirSmeStartReq;
@@ -565,7 +565,7 @@ typedef struct sSirSmeStartRsp
     tANI_U16             messageType; // eWNI_SME_START_RSP
     tANI_U16             length;
     tSirResultCodes statusCode;
-    tANI_U16             transactionId;     
+    tANI_U16             transactionId;
 } tSirSmeStartRsp, *tpSirSmeStartRsp;
 
 
@@ -672,7 +672,7 @@ typedef struct sSirSmeStartBssReq
     tSirMacSSid             ssId;
     tANI_U8                 channelId;
     ePhyChanBondState       cbMode;
-    
+
     tANI_U8                 privacy;
     tANI_U8                 apUapsdEnable;
     tANI_U8                 ssidHidden;
@@ -772,7 +772,7 @@ typedef struct sSirSmeStartBssRsp
     tSirResultCodes     statusCode;
     tSirBssType         bssType;//Add new type for WDS mode
     tANI_U16            beaconInterval;//Beacon Interval for both type
-    tANI_U32            staId;//Staion ID for Self  
+    tANI_U32            staId;//Staion ID for Self
     tSirBssDescription  bssDescription;//Peer BSS description
 } tSirSmeStartBssRsp, *tpSirSmeStartBssRsp;
 
@@ -837,7 +837,7 @@ typedef enum eSirLinkTrafficCheck
 #define SIR_BG_SCAN_RETURN_CACHED_RESULTS              0x0
 #define SIR_BG_SCAN_PURGE_RESUTLS                      0x80
 #define SIR_BG_SCAN_RETURN_FRESH_RESULTS               0x01
-#define SIR_SCAN_MAX_NUM_SSID                          0x09 
+#define SIR_SCAN_MAX_NUM_SSID                          0x09
 #define SIR_BG_SCAN_RETURN_LFR_CACHED_RESULTS          0x02
 #define SIR_BG_SCAN_PURGE_LFR_RESULTS                  0x40
 
@@ -864,7 +864,7 @@ typedef struct sSirSmeScanReq
     /**
      * maxChannelTime.
      * 0x0 - Invalid. In case of active scan.
-     * In case of passive scan, MAX( maxChannelTime, WNI_CFG_PASSIVE_MAXIMUM_CHANNEL_TIME) is used. 
+     * In case of passive scan, MAX( maxChannelTime, WNI_CFG_PASSIVE_MAXIMUM_CHANNEL_TIME) is used.
      *
      */
     tANI_U32        maxChannelTime;
@@ -907,7 +907,7 @@ typedef struct sSirSmeScanReq
 
     /*  backgroundScanMode can take following values:
      *  0x0 - agressive scan
-     *  0x1 - normal scan where HAL will check for link traffic 
+     *  0x1 - normal scan where HAL will check for link traffic
      *        prior to proceeding with the scan
      */
     tSirBackgroundScanMode   backgroundScanMode;
@@ -925,11 +925,11 @@ typedef struct sSirSmeScanReq
      */
     bool                 nl_scan;
     bool                 scan_randomize;
-    
+
     //channelList has to be the last member of this structure. Check tSirChannelList for the reason.
     /* This MUST be the last field of the structure */
-    
- 
+
+
     tANI_BOOLEAN         p2pSearch;
     tANI_U16             uIEFieldLen;
     tANI_U16             uIEFieldOffset;
@@ -939,7 +939,7 @@ typedef struct sSirSmeScanReq
     /*-----------------------------
       tSirSmeScanReq....
       -----------------------------
-      uIEFiledLen 
+      uIEFiledLen
       -----------------------------
       uIEFiledOffset               ----+
       -----------------------------    |
@@ -950,7 +950,7 @@ typedef struct sSirSmeScanReq
       This can be zero, if             |
       numChannel is zero.              |
       ----------------------------- <--+
-      ... variable size uIEFiled 
+      ... variable size uIEFiled
       up to uIEFieldLen (can be 0)
       -----------------------------*/
 } tSirSmeScanReq, *tpSirSmeScanReq;
@@ -993,7 +993,7 @@ typedef struct sSirOemDataRsp
     tANI_U16             length;
     tANI_U8              oemDataRsp[OEM_DATA_RSP_SIZE];
 } tSirOemDataRsp, *tpSirOemDataRsp;
-    
+
 #endif //FEATURE_OEM_DATA_SUPPORT
 
 /// Definition for response message to previously issued scan request
@@ -1001,9 +1001,9 @@ typedef struct sSirSmeScanRsp
 {
     tANI_U16           messageType; // eWNI_SME_SCAN_RSP
     tANI_U16           length;
-    tANI_U8            sessionId;     
+    tANI_U8            sessionId;
     tSirResultCodes    statusCode;
-    tANI_U16           transcationId; 
+    tANI_U16           transcationId;
     tSirBssDescription bssDescription[1];
 } tSirSmeScanRsp, *tpSirSmeScanRsp;
 
@@ -1064,9 +1064,9 @@ typedef struct sJoinReassocInfo
 
 /// Definition for join request
 /// ---> MAC
-/// WARNING! If you add a field in JOIN REQ. 
-///         Make sure to add it in REASSOC REQ 
-/// The Serdes function is the same and its 
+/// WARNING! If you add a field in JOIN REQ.
+///         Make sure to add it in REASSOC REQ
+/// The Serdes function is the same and its
 /// shared with REASSOC. So if we add a field
 //  here and dont add it in REASSOC REQ. It will BREAK!!! REASSOC.
 typedef struct sSirSmeJoinReq
@@ -1074,11 +1074,11 @@ typedef struct sSirSmeJoinReq
     tANI_U16            messageType;            // eWNI_SME_JOIN_REQ
     tANI_U16            length;
     tANI_U8             sessionId;
-    tANI_U16            transactionId;  
+    tANI_U16            transactionId;
     tSirMacSSid         ssId;
     tSirMacAddr         selfMacAddr;            // self Mac address
     tSirBssType         bsstype;                // add new type for BT -AMP STA and AP Modules
-    tANI_U8             dot11mode;              // to support BT-AMP     
+    tANI_U8             dot11mode;              // to support BT-AMP
     tVOS_CON_MODE       staPersona;             //Persona
     bool                sae_pmk_cached;
     tANI_BOOLEAN        bOSENAssociation;       //HS2.0
@@ -1099,15 +1099,15 @@ typedef struct sSirSmeJoinReq
     tSirRSNie           rsnIE;                  // RSN IE to be sent in
                                                 // (Re) Association Request
 #ifdef FEATURE_WLAN_ESE
-    tSirCCKMie          cckmIE;             // CCMK IE to be included as handler for join and reassoc is 
+    tSirCCKMie          cckmIE;             // CCMK IE to be included as handler for join and reassoc is
                                             // the same. The join will never carry cckm, but will be set to
-                                            // 0. 
+                                            // 0.
 #endif
 
     tSirAddie           addIEScan;              // Additional IE to be sent in
                                                 // (unicast) Probe Request at the time of join
 
-    tSirAddie           addIEAssoc;             // Additional IE to be sent in 
+    tSirAddie           addIEAssoc;             // Additional IE to be sent in
                                                 // (Re) Association Request
 
     tAniEdType          UCEncryptionType;
@@ -1126,7 +1126,7 @@ typedef struct sSirSmeJoinReq
     tAniBool            isESEconnection;
     tESETspecInfo       eseTspecInfo;
 #endif
-    
+
 #if defined WLAN_FEATURE_VOWIFI_11R || defined FEATURE_WLAN_ESE || defined(FEATURE_WLAN_LFR)
     tAniBool            isFastTransitionEnabled;
 #endif
@@ -1181,7 +1181,7 @@ typedef struct sSirSmeJoinRsp
 #endif
     tANI_U32        staId;//Station ID for peer
 
-    /*The DPU signatures will be sent eventually to TL to help it determine the 
+    /*The DPU signatures will be sent eventually to TL to help it determine the
       association to which a packet belongs to*/
     /*Unicast DPU signature*/
     tANI_U8            ucastSig;
@@ -1205,7 +1205,7 @@ typedef struct sSirSmeJoinRsp
 typedef struct sSirSmeAuthInd
 {
     tANI_U16           messageType; // eWNI_SME_AUTH_IND
-    tANI_U16           length;         
+    tANI_U16           length;
     tANI_U8            sessionId;
     tSirMacAddr        bssId;             // Self BSSID
     tSirMacAddr        peerMacAddr;
@@ -1305,7 +1305,7 @@ typedef struct sSirSmeReassocInd
     tSirRSNie           rsnIE;  // RSN IE received from peer
 
     tSirAddie           addIE;  // Additional IE received from peer
-    
+
     // powerCap & supportedChannels are present only when
     // spectrumMgtIndicator flag is set
     tAniBool                spectrumMgtIndicator;
@@ -1471,7 +1471,7 @@ typedef struct sAniSecurityStat
 typedef struct sAniTxRxCounters
 {
     tANI_U32 txFrames; // Incremented for every packet tx
-    tANI_U32 rxFrames;    
+    tANI_U32 rxFrames;
     tANI_U32 nRcvBytes;
     tANI_U32 nXmitBytes;
 }tAniTxRxCounters, *tpAniTxRxCounters;
@@ -1499,7 +1499,7 @@ typedef struct sAniSecStats
     tAni64BitCounters wpiReplays;
     tAni64BitCounters wpiMicError;
 #endif
-}tAniSecStats, *tpAniSecStats;    
+}tAniSecStats, *tpAniSecStats;
 
 #define SIR_MAX_RX_CHAINS 3
 
@@ -1558,13 +1558,13 @@ typedef struct sAniStaStatStruct
     //Multicast frames and bytes.
     tAniTxRxStats mcStats;
 
-    tANI_U32      currentTxRate; 
+    tANI_U32      currentTxRate;
     tANI_U32      currentRxRate; //Rate in 100Kbps
 
     tANI_U32      maxTxRate;
     tANI_U32      maxRxRate;
 
-    tANI_S8       rssi[SIR_MAX_RX_CHAINS]; 
+    tANI_S8       rssi[SIR_MAX_RX_CHAINS];
 
 
     tAniSecStats   securityStats;
@@ -1599,7 +1599,7 @@ typedef struct sAniGlobalStatStruct
 
   tAniTxRxStats     mcStats;
   tAniTxRxStats     bcStats;
-    
+
 }tAniGlobalStatStruct,*tpAniGlobalStatStruct;
 
 typedef enum sPacketType
@@ -1684,7 +1684,7 @@ typedef struct sSirSmeDisassocInd
     tANI_U8             sessionId;  // Session Identifier
     tANI_U16            transactionId;   // Transaction Identifier with PE
     tSirResultCodes     statusCode;
-    tSirMacAddr         bssId;            
+    tSirMacAddr         bssId;
     tSirMacAddr         peerMacAddr;
     tAniStaStatStruct  perStaStats; // STA stats
     tANI_U16            staId;
@@ -1699,7 +1699,7 @@ typedef struct sSirSmeDisassocCnf
     tANI_U16            messageType; // eWNI_SME_DISASSOC_CNF
     tANI_U16            length;
     tSirResultCodes     statusCode;
-    tSirMacAddr         bssId;            
+    tSirMacAddr         bssId;
     tSirMacAddr         peerMacAddr;
     tANI_U16            assocId;
 } tSirSmeDisassocCnf, *tpSirSmeDisassocCnf;
@@ -2203,8 +2203,8 @@ typedef enum
 }ePEStatsMask;
 
 /*
- * tpAniGetPEStatsReq is tied to 
- * for SME ==> PE eWNI_SME_GET_STATISTICS_REQ msgId  and 
+ * tpAniGetPEStatsReq is tied to
+ * for SME ==> PE eWNI_SME_GET_STATISTICS_REQ msgId  and
  * for PE ==> HAL SIR_HAL_GET_STATISTICS_REQ msgId
  */
 typedef struct sAniGetPEStatsReq
@@ -2217,8 +2217,8 @@ typedef struct sAniGetPEStatsReq
 } tAniGetPEStatsReq, *tpAniGetPEStatsReq;
 
 /*
- * tpAniGetPEStatsRsp is tied to 
- * for PE ==> SME eWNI_SME_GET_STATISTICS_RSP msgId  and 
+ * tpAniGetPEStatsRsp is tied to
+ * for PE ==> SME eWNI_SME_GET_STATISTICS_RSP msgId  and
  * for HAL ==> PE SIR_HAL_GET_STATISTICS_RSP msgId
  */
 typedef struct sAniGetPEStatsRsp
@@ -2232,10 +2232,10 @@ typedef struct sAniGetPEStatsRsp
     tANI_U32                statsMask;  // categories of stats requested. look at ePEStatsMask
 /**********************************************************************************************
     //void                  *pStatsBuf;
-    The Stats buffer starts here and can be an aggregate of more than one statistics 
-    structure depending on statsMask.The void pointer "pStatsBuf" is commented out 
-    intentionally and the src code that uses this structure should take that into account. 
-**********************************************************************************************/                                        
+    The Stats buffer starts here and can be an aggregate of more than one statistics
+    structure depending on statsMask.The void pointer "pStatsBuf" is commented out
+    intentionally and the src code that uses this structure should take that into account.
+**********************************************************************************************/
 } tAniGetPEStatsRsp, *tpAniGetPEStatsRsp;
 
 typedef struct sAniGetRssiReq
@@ -2244,11 +2244,11 @@ typedef struct sAniGetRssiReq
     tANI_U16                msgType;    // message type is same as the request type
     tANI_U16                msgLen;  // length of the entire request
     tANI_U8                 sessionId;
-    tANI_U8                 staId;  
+    tANI_U8                 staId;
     void                    *rssiCallback;
     void                    *pDevContext; //device context
     void                    *pVosContext; //voss context
-    
+
 } tAniGetRssiReq, *tpAniGetRssiReq;
 
 typedef struct sAniGetSnrReq
@@ -2394,29 +2394,29 @@ typedef struct sAniTXFailMonitorInd
 typedef struct sAniSummaryStatsInfo
 {
     tANI_U32 retry_cnt[4];         //Total number of packets(per AC) that were successfully transmitted with retries
-    tANI_U32 multiple_retry_cnt[4];//The number of MSDU packets and MMPDU frames per AC that the 802.11 
+    tANI_U32 multiple_retry_cnt[4];//The number of MSDU packets and MMPDU frames per AC that the 802.11
     // station successfully transmitted after more than one retransmission attempt
 
-    tANI_U32 tx_frm_cnt[4];        //Total number of packets(per AC) that were successfully transmitted 
-                                   //(with and without retries, including multi-cast, broadcast)     
+    tANI_U32 tx_frm_cnt[4];        //Total number of packets(per AC) that were successfully transmitted
+                                   //(with and without retries, including multi-cast, broadcast)
     //tANI_U32 tx_fail_cnt;
     //tANI_U32 num_rx_frm_crc_err;   //Total number of received frames with CRC Error
     //tANI_U32 num_rx_frm_crc_ok;    //Total number of successfully received frames with out CRC Error
-    tANI_U32 rx_frm_cnt;           //Total number of packets that were successfully received 
-                                   //(after appropriate filter rules including multi-cast, broadcast)    
+    tANI_U32 rx_frm_cnt;           //Total number of packets that were successfully received
+                                   //(after appropriate filter rules including multi-cast, broadcast)
     tANI_U32 frm_dup_cnt;          //Total number of duplicate frames received successfully
     tANI_U32 fail_cnt[4];          //Total number packets(per AC) failed to transmit
     tANI_U32 rts_fail_cnt;         //Total number of RTS/CTS sequence failures for transmission of a packet
     tANI_U32 ack_fail_cnt;         //Total number packets failed transmit because of no ACK from the remote entity
-    tANI_U32 rts_succ_cnt;         //Total number of RTS/CTS sequence success for transmission of a packet 
-    tANI_U32 rx_discard_cnt;       //The sum of the receive error count and dropped-receive-buffer error count. 
+    tANI_U32 rts_succ_cnt;         //Total number of RTS/CTS sequence success for transmission of a packet
+    tANI_U32 rx_discard_cnt;       //The sum of the receive error count and dropped-receive-buffer error count.
                                    //HAL will provide this as a sum of (FCS error) + (Fail get BD/PDU in HW)
     tANI_U32 rx_error_cnt;         //The receive error count. HAL will provide the RxP FCS error global counter.
-    tANI_U32 tx_byte_cnt;          //The sum of the transmit-directed byte count, transmit-multicast byte count 
-                                   //and transmit-broadcast byte count. HAL will sum TPE UC/MC/BCAST global counters 
+    tANI_U32 tx_byte_cnt;          //The sum of the transmit-directed byte count, transmit-multicast byte count
+                                   //and transmit-broadcast byte count. HAL will sum TPE UC/MC/BCAST global counters
                                    //to provide this.
-#if 0                                   
-    //providing the following stats, in case of wrap around for tx_byte_cnt                                   
+#if 0
+    //providing the following stats, in case of wrap around for tx_byte_cnt
     tANI_U32 tx_unicast_lower_byte_cnt;
     tANI_U32 tx_unicast_upper_byte_cnt;
     tANI_U32 tx_multicast_lower_byte_cnt;
@@ -2441,24 +2441,24 @@ typedef enum eTxRateInfo
 
 typedef struct sAniGlobalClassAStatsInfo
 {
-    tANI_U32 rx_frag_cnt;             //The number of MPDU frames received by the 802.11 station for MSDU packets 
+    tANI_U32 rx_frag_cnt;             //The number of MPDU frames received by the 802.11 station for MSDU packets
                                      //or MMPDU frames
-    tANI_U32 promiscuous_rx_frag_cnt; //The number of MPDU frames received by the 802.11 station for MSDU packets 
+    tANI_U32 promiscuous_rx_frag_cnt; //The number of MPDU frames received by the 802.11 station for MSDU packets
                                      //or MMPDU frames when a promiscuous packet filter was enabled
     //tANI_U32 rx_fcs_err;              //The number of MPDU frames that the 802.11 station received with FCS errors
-    tANI_U32 rx_input_sensitivity;    //The receiver input sensitivity referenced to a FER of 8% at an MPDU length 
-                                     //of 1024 bytes at the antenna connector. Each element of the array shall correspond 
+    tANI_U32 rx_input_sensitivity;    //The receiver input sensitivity referenced to a FER of 8% at an MPDU length
+                                     //of 1024 bytes at the antenna connector. Each element of the array shall correspond
                                      //to a supported rate and the order shall be the same as the supporteRates parameter.
-    tANI_U32 max_pwr;                 //The maximum transmit power in dBm upto one decimal. 
-                                      //for eg: if it is 10.5dBm, the value would be 105 
+    tANI_U32 max_pwr;                 //The maximum transmit power in dBm upto one decimal.
+                                      //for eg: if it is 10.5dBm, the value would be 105
     //tANI_U32 default_pwr;             //The nominal transmit level used after normal power on sequence
-    tANI_U32 sync_fail_cnt;           //Number of times the receiver failed to synchronize with the incoming signal 
-                                     //after detecting the sync in the preamble of the transmitted PLCP protocol data unit. 
-    tANI_U32 tx_rate;                //Legacy transmit rate, in units of 
-                                     //500 kbit/sec, for the most 
-                                     //recently transmitted frame 
+    tANI_U32 sync_fail_cnt;           //Number of times the receiver failed to synchronize with the incoming signal
+                                     //after detecting the sync in the preamble of the transmitted PLCP protocol data unit.
+    tANI_U32 tx_rate;                //Legacy transmit rate, in units of
+                                     //500 kbit/sec, for the most
+                                     //recently transmitted frame
     tANI_U32  mcs_index;             //mcs index for HT20 and HT40 rates
-    tANI_U32  tx_rate_flags;         //to differentiate between HT20 and 
+    tANI_U32  tx_rate_flags;         //to differentiate between HT20 and
                                      //HT40 rates;  short and long guard interval
 
 }tAniGlobalClassAStatsInfo, *tpAniGlobalClassAStatsInfo;
@@ -2466,29 +2466,29 @@ typedef struct sAniGlobalClassAStatsInfo
 
 typedef struct sAniGlobalSecurityStats
 {
-    tANI_U32 rx_wep_unencrypted_frm_cnt; //The number of unencrypted received MPDU frames that the MAC layer discarded when 
-                                        //the IEEE 802.11 dot11ExcludeUnencrypted management information base (MIB) object 
+    tANI_U32 rx_wep_unencrypted_frm_cnt; //The number of unencrypted received MPDU frames that the MAC layer discarded when
+                                        //the IEEE 802.11 dot11ExcludeUnencrypted management information base (MIB) object
                                         //is enabled
-    tANI_U32 rx_mic_fail_cnt;            //The number of received MSDU packets that that the 802.11 station discarded 
+    tANI_U32 rx_mic_fail_cnt;            //The number of received MSDU packets that that the 802.11 station discarded
                                         //because of MIC failures
-    tANI_U32 tkip_icv_err;               //The number of encrypted MPDU frames that the 802.11 station failed to decrypt 
+    tANI_U32 tkip_icv_err;               //The number of encrypted MPDU frames that the 802.11 station failed to decrypt
                                         //because of a TKIP ICV error
-    tANI_U32 aes_ccmp_format_err;        //The number of received MPDU frames that the 802.11 discarded because of an 
+    tANI_U32 aes_ccmp_format_err;        //The number of received MPDU frames that the 802.11 discarded because of an
                                         //invalid AES-CCMP format
-    tANI_U32 aes_ccmp_replay_cnt;        //The number of received MPDU frames that the 802.11 station discarded because of 
+    tANI_U32 aes_ccmp_replay_cnt;        //The number of received MPDU frames that the 802.11 station discarded because of
                                         //the AES-CCMP replay protection procedure
-    tANI_U32 aes_ccmp_decrpt_err;        //The number of received MPDU frames that the 802.11 station discarded because of 
+    tANI_U32 aes_ccmp_decrpt_err;        //The number of received MPDU frames that the 802.11 station discarded because of
                                         //errors detected by the AES-CCMP decryption algorithm
-    tANI_U32 wep_undecryptable_cnt;      //The number of encrypted MPDU frames received for which a WEP decryption key was 
+    tANI_U32 wep_undecryptable_cnt;      //The number of encrypted MPDU frames received for which a WEP decryption key was
                                         //not available on the 802.11 station
-    tANI_U32 wep_icv_err;                //The number of encrypted MPDU frames that the 802.11 station failed to decrypt 
+    tANI_U32 wep_icv_err;                //The number of encrypted MPDU frames that the 802.11 station failed to decrypt
                                         //because of a WEP ICV error
-    tANI_U32 rx_decrypt_succ_cnt;        //The number of received encrypted packets that the 802.11 station successfully 
+    tANI_U32 rx_decrypt_succ_cnt;        //The number of received encrypted packets that the 802.11 station successfully
                                         //decrypted
     tANI_U32 rx_decrypt_fail_cnt;        //The number of encrypted packets that the 802.11 station failed to decrypt
 
 }tAniGlobalSecurityStats, *tpAniGlobalSecurityStats;
-   
+
 typedef struct sAniGlobalClassBStatsInfo
 {
     tAniGlobalSecurityStats ucStats;
@@ -2497,27 +2497,27 @@ typedef struct sAniGlobalClassBStatsInfo
 
 typedef struct sAniGlobalClassCStatsInfo
 {
-    tANI_U32 rx_amsdu_cnt;           //This counter shall be incremented for a received A-MSDU frame with the stations 
-                                    //MAC address in the address 1 field or an A-MSDU frame with a group address in the 
+    tANI_U32 rx_amsdu_cnt;           //This counter shall be incremented for a received A-MSDU frame with the stations
+                                    //MAC address in the address 1 field or an A-MSDU frame with a group address in the
                                     //address 1 field
     tANI_U32 rx_ampdu_cnt;           //This counter shall be incremented when the MAC receives an AMPDU from the PHY
-    tANI_U32 tx_20_frm_cnt;          //This counter shall be incremented when a Frame is transmitted only on the 
+    tANI_U32 tx_20_frm_cnt;          //This counter shall be incremented when a Frame is transmitted only on the
                                     //primary channel
     tANI_U32 rx_20_frm_cnt;          //This counter shall be incremented when a Frame is received only on the primary channel
-    tANI_U32 rx_mpdu_in_ampdu_cnt;   //This counter shall be incremented by the number of MPDUs received in the A-MPDU 
+    tANI_U32 rx_mpdu_in_ampdu_cnt;   //This counter shall be incremented by the number of MPDUs received in the A-MPDU
                                     //when an A-MPDU is received
-    tANI_U32 ampdu_delimiter_crc_err;//This counter shall be incremented when an MPDU delimiter has a CRC error when this 
-                                    //is the first CRC error in the received AMPDU or when the previous delimiter has been 
+    tANI_U32 ampdu_delimiter_crc_err;//This counter shall be incremented when an MPDU delimiter has a CRC error when this
+                                    //is the first CRC error in the received AMPDU or when the previous delimiter has been
                                     //decoded correctly
 
 }tAniGlobalClassCStatsInfo, *tpAniGlobalClassCStatsInfo;
 
 typedef struct sAniPerStaStatsInfo
 {
-    tANI_U32 tx_frag_cnt[4];       //The number of MPDU frames that the 802.11 station transmitted and acknowledged 
+    tANI_U32 tx_frag_cnt[4];       //The number of MPDU frames that the 802.11 station transmitted and acknowledged
                                   //through a received 802.11 ACK frame
-    tANI_U32 tx_ampdu_cnt;         //This counter shall be incremented when an A-MPDU is transmitted 
-    tANI_U32 tx_mpdu_in_ampdu_cnt; //This counter shall increment by the number of MPDUs in the AMPDU when an A-MPDU 
+    tANI_U32 tx_ampdu_cnt;         //This counter shall be incremented when an A-MPDU is transmitted
+    tANI_U32 tx_mpdu_in_ampdu_cnt; //This counter shall increment by the number of MPDUs in the AMPDU when an A-MPDU
                                   //is transmitted
 
 }tAniPerStaStatsInfo, *tpAniPerStaStatsInfo;
@@ -2582,7 +2582,7 @@ typedef struct sSirRSSINotification
     tANI_U32             bRssiThres1NegCross : 1;
     tANI_U32             bRssiThres1PosCross : 1;
 #endif
-    
+
 }tSirRSSINotification, *tpSirRSSINotification;
 
 
@@ -2759,8 +2759,8 @@ typedef struct sSirAddtsRsp
 {
     tANI_U16                messageType; // eWNI_SME_ADDTS_RSP
     tANI_U16                length;
-    tANI_U8                 sessionId;  // sme sessionId  Added for BT-AMP support 
-    tANI_U16                transactionId; //sme transaction Id Added for BT-AMP Support 
+    tANI_U8                 sessionId;  // sme sessionId  Added for BT-AMP support
+    tANI_U16                transactionId; //sme transaction Id Added for BT-AMP Support
     tANI_U32                rc;          // return code
     tSirAddtsRspInfo        rsp;
 } tSirAddtsRsp, *tpSirAddtsRsp;
@@ -2782,8 +2782,8 @@ typedef struct sSirDeltsRsp
 {
     tANI_U16                messageType; // eWNI_SME_DELTS_RSP
     tANI_U16                length;
-    tANI_U8                 sessionId;  // sme sessionId  Added for BT-AMP support 
-    tANI_U16                transactionId; //sme transaction Id Added for BT-AMP Support 
+    tANI_U8                 sessionId;  // sme sessionId  Added for BT-AMP support
+    tANI_U16                transactionId; //sme transaction Id Added for BT-AMP Support
     tANI_U32                rc;
     tANI_U16                aid;  // use 0 if macAddr is being specified
     tANI_U8                 macAddr[6]; // only on AP to specify the STA
@@ -2863,10 +2863,10 @@ typedef struct sSirGetTxPowerRsp
 
 typedef tANI_U32 tSirMacNoise[3];
 
-typedef struct sSirGetNoiseRsp 
+typedef struct sSirGetNoiseRsp
 {
     tANI_U16            messageType;
-    tANI_U16            length; 
+    tANI_U16            length;
     tSirMacNoise        noise;
 } tSirGetNoiseRsp, *tpSirGetNoiseRsp;
 
@@ -2885,9 +2885,9 @@ typedef struct sSirQosMapSet
 typedef struct sSirPowerSaveCfg
 {
     tANI_U16    listenInterval;
-   
-    /* Number of consecutive missed beacons before 
-     * hardware generates an interrupt to wake up 
+
+    /* Number of consecutive missed beacons before
+     * hardware generates an interrupt to wake up
      * the host. In units of listen interval.
      */
     tANI_U32 HeartBeatCount;
@@ -2898,35 +2898,35 @@ typedef struct sSirPowerSaveCfg
      */
     tANI_U32    nthBeaconFilter;
 
-    /* Maximum number of PS-Poll send before 
+    /* Maximum number of PS-Poll send before
      * firmware sends data null with PM set to 0.
      */
-    tANI_U32    maxPsPoll;                                                 
+    tANI_U32    maxPsPoll;
 
-    /* If the average RSSI value falls below the 
-     * minRssiThreshold, then FW will send an 
-     * interrupt to wake up the host. 
+    /* If the average RSSI value falls below the
+     * minRssiThreshold, then FW will send an
+     * interrupt to wake up the host.
      */
-    tANI_U32    minRssiThreshold;                                       
+    tANI_U32    minRssiThreshold;
 
-    /* Number of beacons for which firmware will 
+    /* Number of beacons for which firmware will
      * collect the RSSI values and compute the average.
      */
-    tANI_U8     numBeaconPerRssiAverage;                        
+    tANI_U8     numBeaconPerRssiAverage;
 
     /* FW collects the RSSI stats for this period
-     * in BMPS mode.  
+     * in BMPS mode.
      */
     tANI_U8     rssiFilterPeriod;
 
     // Enabling/disabling broadcast frame filter feature
-    tANI_U8     broadcastFrameFilter;    
+    tANI_U8     broadcastFrameFilter;
 
     // Enabling/disabling the ignore DTIM feature
     tANI_U8     ignoreDtim;
 
     /* The following configuration parameters are kept
-     * in order to be backward compatible for Gen5. 
+     * in order to be backward compatible for Gen5.
      * These will NOT be used for Gen6 Libra chip
      */
     tBeaconForwarding beaconFwd;
@@ -2935,12 +2935,12 @@ typedef struct sSirPowerSaveCfg
     tANI_U8 fPSPoll;
 
     // Enabling/disabling Beacon Early Termination feature
-    tANI_U8     fEnableBeaconEarlyTermination;    
-    tANI_U8     bcnEarlyTermWakeInterval;    
+    tANI_U8     fEnableBeaconEarlyTermination;
+    tANI_U8     bcnEarlyTermWakeInterval;
 
 }tSirPowerSaveCfg, *tpSirPowerSaveCfg;
 
-/* Reason code for requesting Full Power. This reason code is used by 
+/* Reason code for requesting Full Power. This reason code is used by
    any module requesting full power from PMC and also by PE when it
    sends the eWNI_PMC_EXIT_BMPS_IND to PMC*/
 typedef enum eRequestFullPowerReason
@@ -2958,7 +2958,7 @@ typedef enum eRequestFullPowerReason
 #ifdef FEATURE_WLAN_TDLS
    eSME_FULL_PWR_NEEDED_BY_TDLS_PEER_SETUP, /* TDLS peer setup*/
 #endif
-   eSME_REASON_OTHER               /* No specific reason. General reason code */ 
+   eSME_REASON_OTHER               /* No specific reason. General reason code */
 } tRequestFullPowerReason, tExitBmpsReason;
 
 
@@ -2993,7 +2993,7 @@ typedef struct sSmeDelBAPeerInd
     // Message Type
     tANI_U16 mesgType;
 
-    tSirMacAddr bssId;//BSSID 
+    tSirMacAddr bssId;//BSSID
 
     // Message Length
     tANI_U16 mesgLen;
@@ -3019,7 +3019,7 @@ typedef struct sSmeIbssPeerInd
     tSirMacAddr peerAddr;
     tANI_U16    staId;
 
-    /*The DPU signatures will be sent eventually to TL to help it determine the 
+    /*The DPU signatures will be sent eventually to TL to help it determine the
       association to which a packet belongs to*/
     /*Unicast DPU signature*/
     tANI_U8            ucastSig;
@@ -3064,7 +3064,7 @@ typedef struct sLimScanChnInfo
 typedef struct sSirSmeGetAssocSTAsReq
 {
     tANI_U16    messageType;    // eWNI_SME_GET_ASSOC_STAS_REQ
-    tANI_U16    length;    
+    tANI_U16    length;
     tSirMacAddr bssId;          // BSSID
     tANI_U16    modId;
     void        *pUsrContext;
@@ -3075,8 +3075,8 @@ typedef struct sSirSmeGetAssocSTAsReq
 typedef struct sSmeMaxAssocInd
 {
     tANI_U16    mesgType;    // eWNI_SME_MAX_ASSOC_EXCEEDED
-    tANI_U16    mesgLen;    
-    tANI_U8     sessionId;    
+    tANI_U16    mesgLen;
+    tANI_U8     sessionId;
     tSirMacAddr peerMac;     // the new peer that got rejected due to softap max assoc limit reached
 } tSmeMaxAssocInd, *tpSmeMaxAssocInd;
 
@@ -3245,7 +3245,7 @@ typedef __ani_attr_pre_packed struct sSirBoardCapabilities
 #define SIR_WOWL_BCAST_PATTERN_MAX_SIZE 128
 #define SIR_WOWL_BCAST_MAX_NUM_PATTERNS 16
 
-// SME -> PE -> HAL - This is to add WOWL BCAST wake-up pattern. 
+// SME -> PE -> HAL - This is to add WOWL BCAST wake-up pattern.
 // SME/HDD maintains the list of the BCAST wake-up patterns.
 // This is a pass through message for PE
 typedef struct sSirWowlAddBcastPtrn
@@ -3253,7 +3253,7 @@ typedef struct sSirWowlAddBcastPtrn
     tANI_U8  ucPatternId;           // Pattern ID
     // Pattern byte offset from beginning of the 802.11 packet to start of the
     // wake-up pattern
-    tANI_U8  ucPatternByteOffset;   
+    tANI_U8  ucPatternByteOffset;
     tANI_U8  ucPatternSize;         // Non-Zero Pattern size
     tANI_U8  ucPattern[SIR_WOWL_BCAST_PATTERN_MAX_SIZE]; // Pattern
     tANI_U8  ucPatternMaskSize;     // Non-zero pattern mask size
@@ -3265,7 +3265,7 @@ typedef struct sSirWowlAddBcastPtrn
 } tSirWowlAddBcastPtrn, *tpSirWowlAddBcastPtrn;
 
 
-// SME -> PE -> HAL - This is to delete WOWL BCAST wake-up pattern. 
+// SME -> PE -> HAL - This is to delete WOWL BCAST wake-up pattern.
 // SME/HDD maintains the list of the BCAST wake-up patterns.
 // This is a pass through message for PE
 typedef struct sSirWowlDelBcastPtrn
@@ -3276,17 +3276,17 @@ typedef struct sSirWowlDelBcastPtrn
 }tSirWowlDelBcastPtrn, *tpSirWowlDelBcastPtrn;
 
 
-// SME->PE: Enter WOWLAN parameters 
+// SME->PE: Enter WOWLAN parameters
 typedef struct sSirSmeWowlEnterParams
 {
     /* Enables/disables magic packet filtering */
-    tANI_U8   ucMagicPktEnable; 
+    tANI_U8   ucMagicPktEnable;
 
     /* Magic pattern */
     tSirMacAddr magicPtrn;
 
     /* Enables/disables packet pattern filtering */
-    tANI_U8   ucPatternFilteringEnable; 
+    tANI_U8   ucPatternFilteringEnable;
 
 #ifdef WLAN_WAKEUP_EVENTS
     /* This configuration directs the WoW packet filtering to look for EAP-ID
@@ -3316,60 +3316,60 @@ typedef struct sSirSmeWowlEnterParams
 } tSirSmeWowlEnterParams, *tpSirSmeWowlEnterParams;
 
 
-// PE<->HAL: Enter WOWLAN parameters 
+// PE<->HAL: Enter WOWLAN parameters
 typedef struct sSirHalWowlEnterParams
 {
     /* Enables/disables magic packet filtering */
-    tANI_U8   ucMagicPktEnable; 
+    tANI_U8   ucMagicPktEnable;
 
     /* Magic pattern */
     tSirMacAddr magicPtrn;
 
-    /* Enables/disables packet pattern filtering in firmware. 
-       Enabling this flag enables broadcast pattern matching 
-       in Firmware. If unicast pattern matching is also desired,  
-       ucUcastPatternFilteringEnable flag must be set tot true 
-       as well 
+    /* Enables/disables packet pattern filtering in firmware.
+       Enabling this flag enables broadcast pattern matching
+       in Firmware. If unicast pattern matching is also desired,
+       ucUcastPatternFilteringEnable flag must be set tot true
+       as well
     */
     tANI_U8   ucPatternFilteringEnable;
 
-    /* Enables/disables unicast packet pattern filtering. 
-       This flag specifies whether we want to do pattern match 
-       on unicast packets as well and not just broadcast packets. 
-       This flag has no effect if the ucPatternFilteringEnable 
+    /* Enables/disables unicast packet pattern filtering.
+       This flag specifies whether we want to do pattern match
+       on unicast packets as well and not just broadcast packets.
+       This flag has no effect if the ucPatternFilteringEnable
        (main controlling flag) is set to false
     */
-    tANI_U8   ucUcastPatternFilteringEnable;                     
+    tANI_U8   ucUcastPatternFilteringEnable;
 
-    /* This configuration is valid only when magicPktEnable=1. 
-     * It requests hardware to wake up when it receives the 
+    /* This configuration is valid only when magicPktEnable=1.
+     * It requests hardware to wake up when it receives the
      * Channel Switch Action Frame.
      */
     tANI_U8   ucWowChnlSwitchRcv;
 
-    /* This configuration is valid only when magicPktEnable=1. 
-     * It requests hardware to wake up when it receives the 
-     * Deauthentication Frame. 
+    /* This configuration is valid only when magicPktEnable=1.
+     * It requests hardware to wake up when it receives the
+     * Deauthentication Frame.
      */
     tANI_U8   ucWowDeauthRcv;
 
-    /* This configuration is valid only when magicPktEnable=1. 
-     * It requests hardware to wake up when it receives the 
-     * Disassociation Frame. 
+    /* This configuration is valid only when magicPktEnable=1.
+     * It requests hardware to wake up when it receives the
+     * Disassociation Frame.
      */
     tANI_U8   ucWowDisassocRcv;
 
-    /* This configuration is valid only when magicPktEnable=1. 
+    /* This configuration is valid only when magicPktEnable=1.
      * It requests hardware to wake up when it has missed
      * consecutive beacons. This is a hardware register
-     * configuration (NOT a firmware configuration). 
+     * configuration (NOT a firmware configuration).
      */
     tANI_U8   ucWowMaxMissedBeacons;
 
-    /* This configuration is valid only when magicPktEnable=1. 
+    /* This configuration is valid only when magicPktEnable=1.
      * This is a timeout value in units of microsec. It requests
      * hardware to unconditionally wake up after it has stayed
-     * in WoWLAN mode for some time. Set 0 to disable this feature.      
+     * in WoWLAN mode for some time. Set 0 to disable this feature.
      */
     tANI_U8   ucWowMaxSleepUsec;
 
@@ -3398,8 +3398,8 @@ typedef struct sSirHalWowlEnterParams
 #endif // WLAN_WAKEUP_EVENTS
 
     /* Status code to be filled by HAL when it sends
-     * SIR_HAL_WOWL_ENTER_RSP to PE. 
-     */  
+     * SIR_HAL_WOWL_ENTER_RSP to PE.
+     */
     eHalStatus  status;
 
    /*BSSID to find the current session
@@ -3407,12 +3407,12 @@ typedef struct sSirHalWowlEnterParams
     tANI_U8  bssIdx;
 } tSirHalWowlEnterParams, *tpSirHalWowlEnterParams;
 
-// PE<->HAL: Exit WOWLAN parameters 
+// PE<->HAL: Exit WOWLAN parameters
 typedef struct sSirHalWowlExitParams
 {
     /* Status code to be filled by HAL when it sends
-     * SIR_HAL_WOWL_EXIT_RSP to PE. 
-     */  
+     * SIR_HAL_WOWL_EXIT_RSP to PE.
+     */
     eHalStatus  status;
 
    /*BSSIDX to find the current session
@@ -3456,7 +3456,7 @@ typedef struct sSirText {
 typedef struct sSirWPSProbeRspIE {
    v_U32_t  FieldPresent;
    v_U32_t  Version;           // Version. 0x10 = version 1.0, 0x11 = etc.
-   v_U32_t  wpsState;          // 1 = unconfigured, 2 = configured.    
+   v_U32_t  wpsState;          // 1 = unconfigured, 2 = configured.
    v_BOOL_t APSetupLocked;     // Must be included if value is TRUE
    v_BOOL_t SelectedRegistra;  //BOOL:  indicates if the user has recently activated a Registrar to add an Enrollee.
    v_U16_t  DevicePasswordID;  // Device Password ID
@@ -3487,7 +3487,7 @@ typedef struct sSirWPSProbeRspIE {
 typedef struct sSirWPSBeaconIE {
    v_U32_t  FieldPresent;
    v_U32_t  Version;           // Version. 0x10 = version 1.0, 0x11 = etc.
-   v_U32_t  wpsState;          // 1 = unconfigured, 2 = configured.    
+   v_U32_t  wpsState;          // 1 = unconfigured, 2 = configured.
    v_BOOL_t APSetupLocked;     // Must be included if value is TRUE
    v_BOOL_t SelectedRegistra;  //BOOL:  indicates if the user has recently activated a Registrar to add an Enrollee.
    v_U16_t  DevicePasswordID;  // Device Password ID
@@ -3523,7 +3523,7 @@ typedef struct sSirUpdateAPWPSIEsReq
 
 typedef struct sSirUpdateParams
 {
-    tANI_U16       messageType;     
+    tANI_U16       messageType;
     tANI_U16       length;
     tANI_U8        sessionId;      // Session ID
     tANI_U8        ssidHidden;     // Hide SSID
@@ -3532,7 +3532,7 @@ typedef struct sSirUpdateParams
 //Beacon Interval
 typedef struct sSirChangeBIParams
 {
-    tANI_U16       messageType;     
+    tANI_U16       messageType;
     tANI_U16       length;
     tANI_U16       beaconInterval; // Beacon Interval
     tSirMacAddr    bssId;
@@ -3612,10 +3612,10 @@ typedef struct sSirSmeProbeReqInd
 typedef struct sSirUpdateAPWPARSNIEsReq
 {
     tANI_U16       messageType;      // eWNI_SME_SET_APWPARSNIEs_REQ
-    tANI_U16       length;    
+    tANI_U16       length;
     tANI_U16       transactionId; //Transaction ID for cmd
     tSirMacAddr    bssId;      // BSSID
-    tANI_U8        sessionId;  //Session ID    
+    tANI_U8        sessionId;  //Session ID
     tSirRSNie      APWPARSNIEs;
 } tSirUpdateAPWPARSNIEsReq, *tpSirUpdateAPWPARSNIEsReq;
 
@@ -3654,7 +3654,7 @@ typedef struct sSirUpdateAPWPARSNIEsReq
 #define LFR_LOOKUP_THR_DEFAULT                -78
 #endif //WLAN_FEATURE_ROAM_SCAN_OFFLOAD
 
-// SME -> HAL - This is the host offload request. 
+// SME -> HAL - This is the host offload request.
 #define SIR_IPV4_ARP_REPLY_OFFLOAD                  0
 #define SIR_IPV6_NEIGHBOR_DISCOVERY_OFFLOAD         1
 #define SIR_IPV6_NS_OFFLOAD                         2
@@ -3707,7 +3707,7 @@ typedef struct sSirKeepAliveReq
 {
     v_U8_t          packetType;
     v_U32_t         timePeriod;
-    tSirIpv4Addr    hostIpv4Addr; 
+    tSirIpv4Addr    hostIpv4Addr;
     tSirIpv4Addr    destIpv4Addr;
     tSirMacAddr     destMacAddr;
     tSirMacAddr     bssId;
@@ -3751,9 +3751,9 @@ typedef enum DFSChanScanType
     DFS_CHNL_SCAN_ENABLED_ACTIVE
 }eDFSChanScanType;
 
-/* Coex Indication defines - 
-   should match WLAN_COEX_IND_DATA_SIZE 
-   should match WLAN_COEX_IND_TYPE_DISABLE_HB_MONITOR 
+/* Coex Indication defines -
+   should match WLAN_COEX_IND_DATA_SIZE
+   should match WLAN_COEX_IND_TYPE_DISABLE_HB_MONITOR
    should match WLAN_COEX_IND_TYPE_ENABLE_HB_MONITOR */
 #define SIR_COEX_IND_DATA_SIZE (4)
 #define SIR_COEX_IND_TYPE_DISABLE_HB_MONITOR (0)
@@ -4015,14 +4015,14 @@ typedef struct sSirFatalEventLogsReqParam
 // PNO Messages
 //
 
-// Set PNO 
+// Set PNO
 #define SIR_PNO_MAX_NETW_CHANNELS  26
 #define SIR_PNO_MAX_NETW_CHANNELS_EX  60
 #define SIR_PNO_MAX_SUPP_NETWORKS  16
 #define SIR_PNO_MAX_SCAN_TIMERS    10
 
 /*size based of dot11 declaration without extra IEs as we will not carry those for PNO*/
-#define SIR_PNO_MAX_PB_REQ_SIZE    450 
+#define SIR_PNO_MAX_PB_REQ_SIZE    450
 
 #define SIR_PNO_24G_DEFAULT_CH     1
 #define SIR_PNO_5G_DEFAULT_CH      36
@@ -4032,30 +4032,30 @@ typedef enum
    SIR_PNO_MODE_IMMEDIATE,
    SIR_PNO_MODE_ON_SUSPEND,
    SIR_PNO_MODE_ON_RESUME,
-   SIR_PNO_MODE_MAX 
+   SIR_PNO_MODE_MAX
 } eSirPNOMode;
-
-typedef struct 
-{
-  tSirMacSSid ssId;
-  tANI_U32    authentication; 
-  tANI_U32    encryption; 
-  tANI_U32    bcastNetwType; 
-  tANI_U8     ucChannelCount;
-  tANI_U8     aChannels[SIR_PNO_MAX_NETW_CHANNELS_EX];
-  tANI_U8     rssiThreshold;
-} tSirNetworkType; 
-
-typedef struct 
-{
-  tANI_U32    uTimerValue; 
-  tANI_U32    uTimerRepeat; 
-}tSirScanTimer; 
 
 typedef struct
 {
-  tANI_U8        ucScanTimersCount; 
-  tSirScanTimer  aTimerValues[SIR_PNO_MAX_SCAN_TIMERS]; 
+  tSirMacSSid ssId;
+  tANI_U32    authentication;
+  tANI_U32    encryption;
+  tANI_U32    bcastNetwType;
+  tANI_U8     ucChannelCount;
+  tANI_U8     aChannels[SIR_PNO_MAX_NETW_CHANNELS_EX];
+  tANI_U8     rssiThreshold;
+} tSirNetworkType;
+
+typedef struct
+{
+  tANI_U32    uTimerValue;
+  tANI_U32    uTimerRepeat;
+}tSirScanTimer;
+
+typedef struct
+{
+  tANI_U8        ucScanTimersCount;
+  tSirScanTimer  aTimerValues[SIR_PNO_MAX_SCAN_TIMERS];
 } tSirScanTimersType;
 
 /*Pref Net Req status */
@@ -4068,14 +4068,14 @@ typedef struct sSirPNOScanReq
   PNOReqStatusCb      statusCallback;
   void                *callbackContext;
   eSirPNOMode         modePNO;
-  tANI_U8             ucNetworksCount; 
+  tANI_U8             ucNetworksCount;
   tSirNetworkType     *aNetworks;
   tSirScanTimersType  scanTimers;
-  
+
   /*added by SME*/
-  tANI_U16  us24GProbeTemplateLen; 
+  tANI_U16  us24GProbeTemplateLen;
   tANI_U8   *p24GProbeTemplate;
-  tANI_U16  us5GProbeTemplateLen; 
+  tANI_U16  us5GProbeTemplateLen;
   tANI_U8   *p5GProbeTemplate;
 } tSirPNOScanReq, *tpSirPNOScanReq;
 
@@ -4232,20 +4232,20 @@ typedef struct sSirPERRoamTriggerScanReq
 typedef enum
 {
    eSIR_IGNORE_DTIM        = 1,
-   eSIR_LISTEN_INTERVAL    = 2, 
-   eSIR_MCAST_BCAST_FILTER = 3, 
-   eSIR_ENABLE_BET         = 4, 
-   eSIR_BET_INTERVAL       = 5 
+   eSIR_LISTEN_INTERVAL    = 2,
+   eSIR_MCAST_BCAST_FILTER = 3,
+   eSIR_ENABLE_BET         = 4,
+   eSIR_BET_INTERVAL       = 5
 }tPowerParamType;
 
 //Power Parameters Value s
-typedef struct 
+typedef struct
 {
   /*  Ignore DTIM */
   tANI_U32 uIgnoreDTIM;
 
   /* DTIM Period */
-  tANI_U32 uDTIMPeriod; 
+  tANI_U32 uDTIMPeriod;
 
   /* Listen Interval */
   tANI_U32 uListenInterval;
@@ -4257,7 +4257,7 @@ typedef struct
   tANI_U32 uEnableBET;
 
   /* Beacon Early Termination Interval */
-  tANI_U32 uBETInterval; 
+  tANI_U32 uBETInterval;
 
   /* MAX LI for modulated DTIM */
   tANI_U32 uMaxLIModulatedDTIM;
@@ -4280,8 +4280,8 @@ typedef struct sSirTxPerTrackingParam
 #define    SIR_MAC_ADDR_LEN                  6
 #define    SIR_MAX_FILTER_TEST_DATA_LEN       8
 #define    SIR_MAX_NUM_MULTICAST_ADDRESS    240
-#define    SIR_MAX_NUM_FILTERS               20 
-#define    SIR_MAX_NUM_TESTS_PER_FILTER      10 
+#define    SIR_MAX_NUM_FILTERS               20
+#define    SIR_MAX_NUM_TESTS_PER_FILTER      10
 
 //
 // Receive Filter Parameters
@@ -4294,7 +4294,7 @@ typedef enum
   SIR_RCV_FILTER_TYPE_MAX_ENUM_SIZE
 }eSirReceivePacketFilterType;
 
-typedef enum 
+typedef enum
 {
   SIR_FILTER_HDR_TYPE_INVALID,
   SIR_FILTER_HDR_TYPE_MAC,
@@ -4305,7 +4305,7 @@ typedef enum
   SIR_FILTER_HDR_TYPE_MAX
 }eSirRcvPktFltProtocolType;
 
-typedef enum 
+typedef enum
 {
   SIR_FILTER_CMP_TYPE_INVALID,
   SIR_FILTER_CMP_TYPE_EQUAL,
@@ -4320,20 +4320,20 @@ typedef struct sSirRcvPktFilterFieldParams
   eSirRcvPktFltProtocolType        protocolLayer;
   eSirRcvPktFltCmpFlagType         cmpFlag;
   /* Length of the data to compare */
-  tANI_U16                         dataLength; 
+  tANI_U16                         dataLength;
   /* from start of the respective frame header */
-  tANI_U8                          dataOffset; 
+  tANI_U8                          dataOffset;
   /* Reserved field */
-  tANI_U8                          reserved; 
+  tANI_U8                          reserved;
   /* Data to compare */
   tANI_U8                          compareData[SIR_MAX_FILTER_TEST_DATA_LEN];
   /* Mask to be applied on the received packet data before compare */
-  tANI_U8                          dataMask[SIR_MAX_FILTER_TEST_DATA_LEN];   
+  tANI_U8                          dataMask[SIR_MAX_FILTER_TEST_DATA_LEN];
 }tSirRcvPktFilterFieldParams, *tpSirRcvPktFilterFieldParams;
 
 typedef struct sSirRcvPktFilterCfg
 {
-  tANI_U8                         filterId; 
+  tANI_U8                         filterId;
   eSirReceivePacketFilterType     filterType;
   tANI_U32                        numFieldParams;
   tANI_U32                        coalesceTime;
@@ -4355,7 +4355,7 @@ typedef struct sSirRcvFltPktMatchRsp
 {
   tANI_U16        mesgType;
   tANI_U16        mesgLen;
-    
+
   /* Success or Failure */
   tANI_U32                 status;
   tSirRcvFltPktMatchCnt    filterMatchCnt[SIR_MAX_NUM_FILTERS];
@@ -4405,7 +4405,7 @@ typedef struct sAniBtAmpLogLinkReq
     tANI_U16                msgLen;  // length of the entire request
     tANI_U8                 sessionId; //sme Session Id
     void                   *btampHandle; //AMP context
-    
+
 } tAniBtAmpLogLinkReq, *tpAniBtAmpLogLinkReq;
 
 #ifdef WLAN_FEATURE_GTK_OFFLOAD
@@ -4415,7 +4415,7 @@ typedef struct sAniBtAmpLogLinkReq
 typedef struct
 {
   tANI_U32     ulFlags;             /* optional flags */
-  tANI_U8      aKCK[16];            /* Key confirmation key */ 
+  tANI_U8      aKCK[16];            /* Key confirmation key */
   tANI_U8      aKEK[16];            /* key encryption key */
   tANI_U64     ullKeyReplayCounter; /* replay counter */
   tSirMacAddr  bssId;
@@ -4440,10 +4440,10 @@ typedef struct
 
 #ifdef WLAN_WAKEUP_EVENTS
 /*---------------------------------------------------------------------------
-  tSirWakeReasonInd    
+  tSirWakeReasonInd
 ---------------------------------------------------------------------------*/
 typedef struct
-{  
+{
     tANI_U16      mesgType;
     tANI_U16      mesgLen;
     tANI_U32      ulReason;        /* see tWakeReasonType */
@@ -4453,12 +4453,12 @@ typedef struct
                               will be less than the actual length */
     tANI_U32      ulActualDataLen; /* actual length of data */
     tANI_U8       aDataStart[1];  /* variable length start of data (length == storedDataLen)
-                             see specific wake type */ 
+                             see specific wake type */
 } tSirWakeReasonInd, *tpSirWakeReasonInd;
 #endif // WLAN_WAKEUP_EVENTS
 
 /*---------------------------------------------------------------------------
-  sAniSetTmLevelReq    
+  sAniSetTmLevelReq
 ---------------------------------------------------------------------------*/
 typedef struct sAniSetTmLevelReq
 {

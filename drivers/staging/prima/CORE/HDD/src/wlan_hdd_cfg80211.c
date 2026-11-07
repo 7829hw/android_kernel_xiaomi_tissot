@@ -23264,4 +23264,3 @@ static struct cfg80211_ops wlan_hdd_cfg80211_ops =
       .external_auth = wlan_hdd_cfg80211_external_auth,
 #endif
 };
-

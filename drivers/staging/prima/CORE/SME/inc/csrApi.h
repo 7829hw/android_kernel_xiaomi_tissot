@@ -1829,4 +1829,3 @@ eCsrBand csrGetCurrentBand (tHalHandle hHal);
  */
 ePhyChanBondState csrConvertCBIniValueToPhyCBState(v_U32_t cb_ini_val);
 #endif
-

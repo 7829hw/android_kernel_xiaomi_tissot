@@ -33,12 +33,12 @@
 
 
 /**=========================================================================
-  
+
   \file  smeInternal.h
-  
+
   \brief prototype for SME internal structures and APIs used for SME and MAC
-  
-  
+
+
   ========================================================================*/
 
 /* $Header$ */
@@ -54,20 +54,20 @@
 #include "csrLinkList.h"
 #include "vos_diag_core_event.h"
 
-/*-------------------------------------------------------------------------- 
+/*--------------------------------------------------------------------------
   Type declarations
   ------------------------------------------------------------------------*/
 
 // Mask can be only have one bit set
-typedef enum eSmeCommandType 
+typedef enum eSmeCommandType
 {
-    eSmeNoCommand = 0, 
+    eSmeNoCommand = 0,
     eSmeDropCommand,
     //CSR
     eSmeCsrCommandMask = 0x10000,   //this is not a command, it is to identify this is a CSR command
     eSmeCommandScan,
-    eSmeCommandRoam, 
-    eSmeCommandWmStatusChange, 
+    eSmeCommandRoam,
+    eSmeCommandWmStatusChange,
     eSmeCommandSetKey,
     eSmeCommandRemoveKey,
     eSmeCommandAddStaSession,
@@ -81,10 +81,10 @@ typedef enum eSmeCommandType
     eSmeCommandOlpcMode,
 #ifdef FEATURE_WLAN_TDLS
     //eSmeTdlsCommandMask = 0x80000,  //To identify TDLS commands <TODO>
-    //These can be considered as csr commands. 
-    eSmeCommandTdlsSendMgmt, 
-    eSmeCommandTdlsAddPeer, 
-    eSmeCommandTdlsDelPeer, 
+    //These can be considered as csr commands.
+    eSmeCommandTdlsSendMgmt,
+    eSmeCommandTdlsAddPeer,
+    eSmeCommandTdlsDelPeer,
     eSmeCommandTdlsLinkEstablish,
     eSmeCommandTdlsChannelSwitch, // tdlsoffchan
 #endif
@@ -157,7 +157,7 @@ typedef struct tagSmeStruct
     tDblLinkList smeCmdActiveList;
     tDblLinkList smeCmdPendingList;
     tDblLinkList smeCmdFreeList;   //preallocated roam cmd list
-    void (*pTxPerHitCallback) (void *pCallbackContext); /* callback for Tx PER hit to HDD */ 
+    void (*pTxPerHitCallback) (void *pCallbackContext); /* callback for Tx PER hit to HDD */
     void *pTxPerHitCbContext;
     tVOS_CON_MODE currDeviceMode;
 #ifdef FEATURE_WLAN_LPHB

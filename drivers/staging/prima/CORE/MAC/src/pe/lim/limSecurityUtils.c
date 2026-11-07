@@ -92,7 +92,7 @@ limIsAuthAlgoSupported(tpAniSirGlobal pMac, tAniAuthType authType, tpPESession p
            if((psessionEntry->authType == eSIR_OPEN_SYSTEM) || (psessionEntry->authType == eSIR_AUTO_SWITCH))
               return true;
            else
-              return false; 
+              return false;
         }
 
         if (wlan_cfgGetInt(pMac, WNI_CFG_OPEN_SYSTEM_AUTH_ENABLE,
@@ -119,7 +119,7 @@ limIsAuthAlgoSupported(tpAniSirGlobal pMac, tAniAuthType authType, tpPESession p
                 algoEnable = true;
             else
                 algoEnable = false;
-            
+
         }
         else
 
@@ -517,10 +517,10 @@ limRestoreFromAuthState(tpAniSirGlobal pMac, tSirResultCodes resultCode, tANI_U1
     mlmAuthCnf.authType   = pMac->lim.gpLimMlmAuthReq->authType;
     mlmAuthCnf.resultCode = resultCode;
     mlmAuthCnf.protStatusCode = protStatusCode;
-    
+
     /* Update PE session ID*/
     mlmAuthCnf.sessionId = sessionEntry->peSessionId;
-    
+
     MTRACE(macTrace(pMac, TRACE_CODE_MLM_STATE, sessionEntry->peSessionId, sessionEntry->limMlmState));
     /* Set the authAckStatus status flag as sucess as
      * host have received the auth rsp and no longer auth
@@ -960,7 +960,7 @@ tANI_U32 val = 0;
   {
       limLog( pMac, LOG1,
           FL( "numKeys = %d is more than SIR_MAC_MAX_NUM_OF_DEFAULT_KEYS" ), pMlmSetKeysReq->numKeys);
-      
+
       // Respond to SME with error code
       mlmSetKeysCnf.resultCode = eSIR_SME_INVALID_PARAMETERS;
       goto end;
@@ -997,12 +997,12 @@ tANI_U32 val = 0;
   /* Update PE session Id*/
   pSetBssKeyParams->sessionId = psessionEntry ->peSessionId;
 
-  if(pMlmSetKeysReq->key[0].keyId && 
-     ((pMlmSetKeysReq->edType == eSIR_ED_WEP40) || 
+  if(pMlmSetKeysReq->key[0].keyId &&
+     ((pMlmSetKeysReq->edType == eSIR_ED_WEP40) ||
       (pMlmSetKeysReq->edType == eSIR_ED_WEP104))
     )
   {
-    /* IF the key id is non-zero and encryption type is WEP, Send all the 4 
+    /* IF the key id is non-zero and encryption type is WEP, Send all the 4
      * keys to HAL with filling the key at right index in pSetBssKeyParams->key. */
     pSetBssKeyParams->numKeys = SIR_MAC_MAX_NUM_OF_DEFAULT_KEYS;
     vos_mem_copy( (tANI_U8 *) &pSetBssKeyParams->key[pMlmSetKeysReq->key[0].keyId],
@@ -1097,7 +1097,7 @@ tANI_U32 val = 0;
   pSetStaKeyParams->staIdx = staIdx;
   pSetStaKeyParams->encType = pMlmSetKeysReq->edType;
 
-  
+
   if(eSIR_SUCCESS != wlan_cfgGetInt(pMac, WNI_CFG_SINGLE_TID_RC, &val))
   {
      limLog( pMac, LOGP, FL( "Unable to read WNI_CFG_SINGLE_TID_RC" ));
@@ -1117,11 +1117,11 @@ tANI_U32 val = 0;
    */
 
   pSetStaKeyParams->defWEPIdx = defWEPIdx;
-    
+
   /** Store the Previous MlmState*/
   sessionEntry->limPrevMlmState = sessionEntry->limMlmState;
   SET_LIM_PROCESS_DEFD_MESGS(pMac, false);
-    
+
   if(sessionEntry->limSystemRole == eLIM_STA_IN_IBSS_ROLE && !pMlmSetKeysReq->key[0].unicast) {
       sessionEntry->limMlmState = eLIM_MLM_WT_SET_STA_BCASTKEY_STATE;
       msgQ.type = WDA_SET_STA_BCASTKEY_REQ;
@@ -1144,7 +1144,7 @@ tANI_U32 val = 0;
           tANI_U32 i;
 
           for(i=0; i < SIR_MAC_MAX_NUM_OF_DEFAULT_KEYS ;i++)
-          { 
+          {
               vos_mem_copy( (tANI_U8 *) &pSetStaKeyParams->key[i],
                             (tANI_U8 *) &pMlmSetKeysReq->key[i], sizeof( tSirKeys ));
           }
@@ -1152,7 +1152,7 @@ tANI_U32 val = 0;
           sessionEntry->limMlmState = eLIM_MLM_WT_SET_STA_KEY_STATE;
           MTRACE(macTrace(pMac, TRACE_CODE_MLM_STATE, sessionEntry->peSessionId, sessionEntry->limMlmState));
       }else {
-          /*This case the keys are coming from upper layer so need to fill the 
+          /*This case the keys are coming from upper layer so need to fill the
           * key at the default wep key index and send to the HAL */
           if (defWEPIdx >= SIR_MAC_MAX_NUM_OF_DEFAULT_KEYS)
           {
@@ -1170,8 +1170,8 @@ tANI_U32 val = 0;
       break;
   case eSIR_ED_TKIP:
   case eSIR_ED_CCMP:
-#ifdef FEATURE_WLAN_WAPI 
-  case eSIR_ED_WPI: 
+#ifdef FEATURE_WLAN_WAPI
+  case eSIR_ED_WPI:
 #endif
       {
           vos_mem_copy( (tANI_U8 *) &pSetStaKeyParams->key,
@@ -1182,7 +1182,7 @@ tANI_U32 val = 0;
       break;
   }
 
-  
+
   //
   // FIXME_GEN4
   // A global counter (dialog token) is required to keep track of
@@ -1282,7 +1282,7 @@ tSirRetStatus      retCode;
     mlmRemoveKeysCnf.resultCode = eSIR_SME_HAL_SEND_MESSAGE_FAIL;
   }
   else
-    return; 
+    return;
 
 end:
   limPostSmeRemoveKeyCnf( pMac,
@@ -1395,5 +1395,3 @@ end:
       &mlmRemoveKeyCnf );
 
 }
-
-

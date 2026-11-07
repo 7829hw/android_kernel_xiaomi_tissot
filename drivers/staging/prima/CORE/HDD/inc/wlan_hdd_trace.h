@@ -117,5 +117,3 @@ extern void hddTraceInit(void);
 void hdd_register_debug_callback(void);
 
 #endif
-
-

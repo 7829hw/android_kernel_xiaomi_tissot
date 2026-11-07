@@ -2607,4 +2607,3 @@ int wlansap_set_channel_change(v_PVOID_t vos_ctx,
 
    return 0;
 }
-

@@ -234,4 +234,3 @@ typedef PACKED_PRE struct PACKED_POST
 extern const sHalNvV2 nvDefaultsV2;
 
 #endif
-

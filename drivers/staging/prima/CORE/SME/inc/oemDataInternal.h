@@ -27,16 +27,16 @@
 
 #ifdef FEATURE_OEM_DATA_SUPPORT
 
-/** ------------------------------------------------------------------------- * 
-    ------------------------------------------------------------------------- *  
+/** ------------------------------------------------------------------------- *
+    ------------------------------------------------------------------------- *
 
-  
+
     \file oemDataInternal.h
-  
+
     Exports and types for the Common OEM DATA REQ/RSP Module interfaces.
-  
+
     Copyright (C) 2010 Qualcomm Inc.
-  
+
    ========================================================================== */
 
 
@@ -53,7 +53,7 @@
 typedef struct tagOemDataStruct
 {
     tANI_U32                         nextOemReqId; //a global req id
-    tANI_BOOLEAN                     oemDataReqActive; //indicates that currently a request has been posted and 
+    tANI_BOOLEAN                     oemDataReqActive; //indicates that currently a request has been posted and
                                                         //waiting for the response
     oemData_OemDataReqCompleteCallback   callback; //callback function pointer for returning the response
     void*                            pContext; //context of the original caller

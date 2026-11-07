@@ -197,7 +197,7 @@ limCollectBssDescription(tpAniSirGlobal pMac,
             FL("Beacon Interval is ZERO, making it to default 100 "
             MAC_ADDRESS_STR), MAC_ADDR_ARRAY(pHdr->bssId));
         pBssDescr->beaconInterval= 100;
-    }	
+    }
     /*
     * There is a narrow window after Channel Switch msg is sent to HAL and before the AGC is shut
     * down and beacons/Probe Rsps can trickle in and we may report the incorrect channel in 5Ghz
@@ -243,7 +243,7 @@ limCollectBssDescription(tpAniSirGlobal pMac,
     sirDumpBuf( pMac, SIR_LIM_MODULE_ID, LOG4, (tANI_U8*)pRxPacketInfo, 36 );)
 
     pBssDescr->rssi = (tANI_S8)WDA_GET_RX_RSSI_DB(pRxPacketInfo);
-    
+
     //SINR no longer reported by HW
     pBssDescr->sinr = 0;
 
@@ -253,7 +253,7 @@ limCollectBssDescription(tpAniSirGlobal pMac,
     if( fScanning )
     {
        rrmGetStartTSF( pMac, pBssDescr->startTSF );
-       pBssDescr->parentTSF = WDA_GET_RX_TIMESTAMP(pRxPacketInfo); 
+       pBssDescr->parentTSF = WDA_GET_RX_TIMESTAMP(pRxPacketInfo);
     }
 #endif
 
@@ -263,9 +263,9 @@ limCollectBssDescription(tpAniSirGlobal pMac,
     pBssDescr->mdie[1] = 0;
     pBssDescr->mdie[2] = 0;
     pBssDescr->mdiePresent = FALSE;
-    // If mdie is present in the probe resp we 
+    // If mdie is present in the probe resp we
     // fill it in the bss description
-    if( pBPR->mdiePresent) 
+    if( pBPR->mdiePresent)
     {
         pBssDescr->mdiePresent = TRUE;
         pBssDescr->mdie[0] = pBPR->mdie[0];
@@ -276,8 +276,8 @@ limCollectBssDescription(tpAniSirGlobal pMac,
 
 #if defined(FEATURE_WLAN_ESE) || defined(WLAN_FEATURE_ROAM_SCAN_OFFLOAD)
     pBssDescr->QBSSLoad_present = FALSE;
-    pBssDescr->QBSSLoad_avail = 0; 
-    if( pBPR->QBSSLoad.present) 
+    pBssDescr->QBSSLoad_avail = 0;
+    if( pBPR->QBSSLoad.present)
     {
         pBssDescr->QBSSLoad_present = TRUE;
         pBssDescr->QBSSLoad_avail = pBPR->QBSSLoad.avail;
@@ -317,7 +317,7 @@ limCollectBssDescription(tpAniSirGlobal pMac,
  * NA
  *
  * @param  pMac - Pointer to Global MAC structure
- * @param  ssId - SSID Received in beacons/Probe responses that is compared against the 
+ * @param  ssId - SSID Received in beacons/Probe responses that is compared against the
                             requeusted SSID in scan list
  * ---------------------------------------------
  *
@@ -395,7 +395,7 @@ limCheckAndAddBssDescription(tpAniSirGlobal pMac,
     }
 
     //Checking if scanning for a particular BSSID
-    if ((fScanning) && (pMac->lim.gpLimMlmScanReq)) 
+    if ((fScanning) && (pMac->lim.gpLimMlmScanReq))
     {
         fFound = vos_mem_compare(pHdr->addr3, &pMac->lim.gpLimMlmScanReq->bssId, 6);
         if (!fFound)
@@ -416,7 +416,7 @@ limCheckAndAddBssDescription(tpAniSirGlobal pMac,
      * Beacon frame.
      * pMac->lim.gLimMlmScanReq->ssId.length == 0
      * indicates Broadcast SSID.
-     * When gLimReturnAfterFirstMatch is set, it means the scan has to match 
+     * When gLimReturnAfterFirstMatch is set, it means the scan has to match
      * a SSID (if it is also set). Ignore the other BSS in that case.
      */
 
@@ -472,7 +472,7 @@ limCheckAndAddBssDescription(tpAniSirGlobal pMac,
 
     }
 
-    /* If beacon/probe resp DS param channel does not match with 
+    /* If beacon/probe resp DS param channel does not match with
      * RX BD channel then don't save the results. It might be a beacon
      * from another channel heard as noise on the current scanning channel
      */
@@ -624,7 +624,7 @@ limCheckAndAddBssDescription(tpAniSirGlobal pMac,
             //while we already send FINISH_SCAN here. This may mess up the gLimHalScanState
             limDeactivateAndChangeTimer(pMac, eLIM_MIN_CHANNEL_TIMER);
             limDeactivateAndChangeTimer(pMac, eLIM_MAX_CHANNEL_TIMER);
-            //Set the resume channel to Any valid channel (invalid). 
+            //Set the resume channel to Any valid channel (invalid).
             //This will instruct HAL to set it to any previous valid channel.
             peSetResumeChannel(pMac, 0, 0);
             limSendHalFinishScanReq( pMac, eLIM_HAL_FINISH_SCAN_WAIT_STATE );

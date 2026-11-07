@@ -34,7 +34,7 @@
  * Date           Modified by    Modification Information
  * --------------------------------------------------------------------
  */
- 
+
 #include "palTypes.h"
 #include "wniCfg.h"
 #include "aniGlobal.h"

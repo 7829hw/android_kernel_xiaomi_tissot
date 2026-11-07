@@ -27,7 +27,7 @@
 
 /**
  *
- * 
+ *
  * phyGlobal.h: Holds all globals for the phy, rf, and asic layers in hal
  * Author:  Mark Nelson
  * Date:    4/9/05

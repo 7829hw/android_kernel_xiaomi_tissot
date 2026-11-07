@@ -360,7 +360,7 @@ typedef enum
 #define MIN_TX_PWR_CAP    8
 #define MAX_TX_PWR_CAP    22
 
-/* Moving the miscellaneous defination required by UMAC are moved here from 
+/* Moving the miscellaneous defination required by UMAC are moved here from
  * volansdefs.h */
 /* --------------------------------------------------------------------
  * Support definitions for taurus
@@ -408,7 +408,7 @@ typedef enum
 #define IS_VSTA_IDX(__x) \
                    (((__x) >= QWLAN_VSTA_MIN_IDX) && ((__x) < HAL_NUM_STA))
 
-                 
+
 // is the STA a General Purpose STA?
 #define IS_GPSTA_IDX(__x) \
     (((__x) >= (HAL_NUM_HW_STA-HAL_NUM_GPSTA)) && \
@@ -448,4 +448,3 @@ typedef enum
 
 
 #endif
-

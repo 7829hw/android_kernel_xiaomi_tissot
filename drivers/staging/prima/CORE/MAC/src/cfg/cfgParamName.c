@@ -373,6 +373,3 @@ unsigned char *gCfgParamName[] = {
     (unsigned char *)"BURST_MODE_BE_TXOP_VALUE",
     (unsigned char *)"EXT_SCAN_CONC_MODE",
 };
-
-
-

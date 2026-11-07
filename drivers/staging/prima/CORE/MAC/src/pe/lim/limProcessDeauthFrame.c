@@ -140,7 +140,7 @@ limProcessDeauthFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tpPESession p
 #endif
 
     // Get reasonCode from Deauthentication frame body
-    reasonCode = sirReadU16(pBody); 
+    reasonCode = sirReadU16(pBody);
 
     PELOGE(limLog(pMac, LOGE,
         FL("Received Deauth frame for Addr: "MAC_ADDRESS_STR" (mlm state = %s,"
@@ -149,7 +149,7 @@ limProcessDeauthFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tpPESession p
         limMlmStateStr(psessionEntry->limMlmState), psessionEntry->limSmeState,
         psessionEntry->limSystemRole, reasonCode,
         MAC_ADDR_ARRAY(pHdr->sa));)
-      
+
     if (limCheckDisassocDeauthAckPending(pMac, (tANI_U8*)pHdr->sa))
     {
         PELOGE(limLog(pMac, LOGE,
@@ -159,7 +159,7 @@ limProcessDeauthFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tpPESession p
         return;
     }
 
-  
+
     if ( (psessionEntry->limSystemRole == eLIM_AP_ROLE )||(psessionEntry->limSystemRole == eLIM_BT_AMP_AP_ROLE) )
     {
         switch (reasonCode)
@@ -216,21 +216,21 @@ limProcessDeauthFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tpPESession p
 
     /** If we are in the middle of ReAssoc, a few things could happen:
      *  - STA is reassociating to current AP, and receives deauth from:
-     *         a) current AP 
+     *         a) current AP
      *         b) other AP
      *  - STA is reassociating to a new AP, and receives deauth from:
      *         c) current AP
      *         d) reassoc AP
      *         e) other AP
      *
-     *  The logic is: 
+     *  The logic is:
      *  1) If rcv deauth from an AP other than the one we're trying to
      *     reassociate with, then drop the deauth frame (case b, c, e)
      *  2) If rcv deauth from the "new" reassoc AP (case d), then restore
      *     context with previous AP and send SME_REASSOC_RSP failure.
      *  3) If rcv deauth from the reassoc AP, which is also the same
      *     AP we're currently associated with (case a), then proceed
-     *     with normal deauth processing. 
+     *     with normal deauth processing.
      */
     if ( psessionEntry->limReAssocbssId!=NULL )
     {
@@ -267,7 +267,7 @@ limProcessDeauthFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tpPESession p
         }
     }
 
-    
+
     /* If received DeAuth from AP other than the one we're trying to join with
      * nor associated with, then ignore deauth and delete Pre-auth entry.
      */
@@ -330,7 +330,7 @@ limProcessDeauthFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tpPESession p
                         psessionEntry->limMlmState = eLIM_MLM_IDLE_STATE;
                         MTRACE(macTrace(pMac, TRACE_CODE_MLM_STATE, psessionEntry->peSessionId, psessionEntry->limMlmState));
 
-                        
+
                         limPostSmeMessage(pMac,
                                           LIM_MLM_DEAUTH_IND,
                                           (tANI_U32 *) &mlmDeauthInd);
@@ -358,7 +358,7 @@ limProcessDeauthFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tpPESession p
 
                         mlmAssocCnf.resultCode = eSIR_SME_DEAUTH_WHILE_JOIN;
                         mlmAssocCnf.protStatusCode = reasonCode;
-                        
+
                         /* PE session Id*/
                         mlmAssocCnf.sessionId = psessionEntry->peSessionId;
 
@@ -375,7 +375,7 @@ limProcessDeauthFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tpPESession p
                             pMac,
                             LIM_MLM_ASSOC_CNF,
                             (tANI_U32 *) &mlmAssocCnf);
-                        
+
                         return;
 
                     case eLIM_MLM_WT_ADD_STA_RSP_STATE:
@@ -458,7 +458,7 @@ limProcessDeauthFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tpPESession p
         } // end switch (pMac->lim.gLimSystemRole)
 
 
-        
+
     /**
      * Extract 'associated' context for STA, if any.
      * This is maintained by DPH and created by LIM.
@@ -485,7 +485,7 @@ limProcessDeauthFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tpPESession p
            pStaDs->isDisassocDeauthInProgress);)
 
         return;
-    } 
+    }
     pStaDs->mlmStaContext.disassocReason = (tSirMacReasonCodes)reasonCode;
     pStaDs->mlmStaContext.cleanupTrigger = eLIM_PEER_ENTITY_DEAUTH;
     pStaDs->sta_deletion_in_progress = true;
@@ -501,9 +501,9 @@ limProcessDeauthFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tpPESession p
     mlmDeauthInd.deauthTrigger = eLIM_PEER_ENTITY_DEAUTH;
 
 
-    /* 
-     * If we're in the middle of ReAssoc and received deauth from 
-     * the ReAssoc AP, then notify SME by sending REASSOC_RSP with 
+    /*
+     * If we're in the middle of ReAssoc and received deauth from
+     * the ReAssoc AP, then notify SME by sending REASSOC_RSP with
      * failure result code. SME will post the disconnect to the
      * supplicant and the latter would start a fresh assoc.
      */
@@ -518,7 +518,7 @@ limProcessDeauthFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tpPESession p
 
         if (psessionEntry->limAssocResponseData) {
             vos_mem_free(psessionEntry->limAssocResponseData);
-            psessionEntry->limAssocResponseData = NULL;                            
+            psessionEntry->limAssocResponseData = NULL;
         }
 
         PELOGE(limLog(pMac, LOGE, FL("Rcv Deauth from ReAssoc AP. "
@@ -542,9 +542,8 @@ limProcessDeauthFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tpPESession p
     /// Deauthentication from peer MAC entity
     limPostSmeMessage(pMac, LIM_MLM_DEAUTH_IND, (tANI_U32 *) &mlmDeauthInd);
 
-    // send eWNI_SME_DEAUTH_IND to SME  
+    // send eWNI_SME_DEAUTH_IND to SME
     limSendSmeDeauthInd(pMac, pStaDs, psessionEntry);
     return;
 
 } /*** end limProcessDeauthFrame() ***/
-

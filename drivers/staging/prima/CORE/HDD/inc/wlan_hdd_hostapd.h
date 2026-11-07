@@ -60,19 +60,19 @@ VOS_STATUS hdd_register_hostapd(hdd_adapter_t *pAdapter, tANI_U8 rtnl_held);
 
 VOS_STATUS hdd_unregister_hostapd(hdd_adapter_t *pAdapter, tANI_U8 rtnl_held);
 
-eCsrAuthType 
+eCsrAuthType
 hdd_TranslateRSNToCsrAuthType( u_int8_t auth_suite[4]);
 
-eCsrEncryptionType 
+eCsrEncryptionType
 hdd_TranslateRSNToCsrEncryptionType(u_int8_t cipher_suite[4]);
 
-eCsrEncryptionType 
+eCsrEncryptionType
 hdd_TranslateRSNToCsrEncryptionType(u_int8_t cipher_suite[4]);
 
-eCsrAuthType 
+eCsrAuthType
 hdd_TranslateWPAToCsrAuthType(u_int8_t auth_suite[4]);
 
-eCsrEncryptionType 
+eCsrEncryptionType
 hdd_TranslateWPAToCsrEncryptionType(u_int8_t cipher_suite[4]);
 
 VOS_STATUS hdd_softap_sta_deauth(hdd_adapter_t*, struct tagCsrDelStaParams*);

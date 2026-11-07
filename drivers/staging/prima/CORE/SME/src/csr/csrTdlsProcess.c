@@ -25,17 +25,17 @@
  * to the Linux Foundation.
  */
 
-/** ------------------------------------------------------------------------- * 
-    ------------------------------------------------------------------------- *  
+/** ------------------------------------------------------------------------- *
+    ------------------------------------------------------------------------- *
 
-  
+
     \file csrTdlsProcess.c
-  
+
     Implementation for the TDLS interface to PE.
-  
+
     Copyright (C) 2010 Qualcomm, Incorporated
-  
- 
+
+
    ========================================================================== */
 
 #ifdef FEATURE_WLAN_TDLS
@@ -70,7 +70,7 @@ eHalStatus csrTdlsRemoveSmeCmd(tpAniSirGlobal pMac, eSmeCommandType cmdType)
         pCommand = GET_BASE_ADDR(pEntry, tSmeCmd, Link);
         if( cmdType == pCommand->command )
         {
-            if( csrLLRemoveEntry( &pMac->sme.smeCmdActiveList, 
+            if( csrLLRemoveEntry( &pMac->sme.smeCmdActiveList,
                                              pEntry, LL_ACCESS_LOCK ) )
             {
                 vos_mem_zero( &pCommand->u.tdlsCmd, sizeof( tTdlsCmd ) );
@@ -82,9 +82,9 @@ eHalStatus csrTdlsRemoveSmeCmd(tpAniSirGlobal pMac, eSmeCommandType cmdType)
     }
     return status ;
 }
-    
+
 /*
- * TDLS request API, called from HDD to send a TDLS frame 
+ * TDLS request API, called from HDD to send a TDLS frame
  * in SME/CSR and send message to PE to trigger TDLS discovery procedure.
  */
 eHalStatus csrTdlsSendMgmtReq(tHalHandle hHal, tANI_U8 sessionId, tCsrTdlsSendMgmt *tdlsSendMgmt)
@@ -94,7 +94,7 @@ eHalStatus csrTdlsSendMgmtReq(tHalHandle hHal, tANI_U8 sessionId, tCsrTdlsSendMg
     eHalStatus status = eHAL_STATUS_FAILURE ;
 
     //If connected and in Infra. Only then allow this
-    if( CSR_IS_SESSION_VALID( pMac, sessionId ) && 
+    if( CSR_IS_SESSION_VALID( pMac, sessionId ) &&
         csrIsConnStateConnectedInfra( pMac, sessionId ) &&
         (NULL != tdlsSendMgmt) )
     {
@@ -102,20 +102,20 @@ eHalStatus csrTdlsSendMgmtReq(tHalHandle hHal, tANI_U8 sessionId, tCsrTdlsSendMg
 
         if(tdlsSendMgmtCmd)
         {
-            tTdlsSendMgmtCmdInfo *tdlsSendMgmtCmdInfo = 
+            tTdlsSendMgmtCmdInfo *tdlsSendMgmtCmdInfo =
                             &tdlsSendMgmtCmd->u.tdlsCmd.u.tdlsSendMgmtCmdInfo ;
 
             vos_mem_zero(&tdlsSendMgmtCmd->u.tdlsCmd, sizeof(tTdlsCmd));
 
             tdlsSendMgmtCmd->sessionId = sessionId;
 
-            tdlsSendMgmtCmdInfo->frameType = tdlsSendMgmt->frameType ;   
-            tdlsSendMgmtCmdInfo->dialog = tdlsSendMgmt->dialog ;   
+            tdlsSendMgmtCmdInfo->frameType = tdlsSendMgmt->frameType ;
+            tdlsSendMgmtCmdInfo->dialog = tdlsSendMgmt->dialog ;
             tdlsSendMgmtCmdInfo->statusCode = tdlsSendMgmt->statusCode ;
             tdlsSendMgmtCmdInfo->responder = tdlsSendMgmt->responder;
             tdlsSendMgmtCmdInfo->peerCapability = tdlsSendMgmt->peerCapability;
             vos_mem_copy(tdlsSendMgmtCmdInfo->peerMac,
-                                   tdlsSendMgmt->peerMac, sizeof(tSirMacAddr)) ; 
+                                   tdlsSendMgmt->peerMac, sizeof(tSirMacAddr)) ;
 
             if( (0 != tdlsSendMgmt->len) && (NULL != tdlsSendMgmt->buf) )
             {
@@ -309,9 +309,9 @@ eHalStatus csrTdlsAddPeerSta(tHalHandle hHal, tANI_U8 sessionId,
     tpAniSirGlobal pMac = PMAC_STRUCT( hHal );
     tSmeCmd *tdlsAddStaCmd ;
     eHalStatus status = eHAL_STATUS_FAILURE ;
- 
+
     //If connected and in Infra. Only then allow this
-    if( CSR_IS_SESSION_VALID( pMac, sessionId ) && 
+    if( CSR_IS_SESSION_VALID( pMac, sessionId ) &&
         csrIsConnStateConnectedInfra( pMac, sessionId ) &&
         (NULL != peerMac) )
     {
@@ -319,7 +319,7 @@ eHalStatus csrTdlsAddPeerSta(tHalHandle hHal, tANI_U8 sessionId,
 
         if(tdlsAddStaCmd)
         {
-            tTdlsAddStaCmdInfo *tdlsAddStaCmdInfo = 
+            tTdlsAddStaCmdInfo *tdlsAddStaCmdInfo =
                 &tdlsAddStaCmd->u.tdlsCmd.u.tdlsAddStaCmdInfo ;
 
             vos_mem_zero(&tdlsAddStaCmd->u.tdlsCmd, sizeof(tTdlsCmd));
@@ -328,7 +328,7 @@ eHalStatus csrTdlsAddPeerSta(tHalHandle hHal, tANI_U8 sessionId,
             tdlsAddStaCmdInfo->tdlsAddOper = TDLS_OPER_ADD;
 
             vos_mem_copy( tdlsAddStaCmdInfo->peerMac,
-                    peerMac, sizeof(tSirMacAddr)) ; 
+                    peerMac, sizeof(tSirMacAddr)) ;
 
             tdlsAddStaCmd->command = eSmeCommandTdlsAddPeer ;
             tdlsAddStaCmd->u.tdlsCmd.size = sizeof(tTdlsAddStaCmdInfo) ;
@@ -356,9 +356,9 @@ eHalStatus csrTdlsDelPeerSta(tHalHandle hHal, tANI_U8 sessionId,
     tpAniSirGlobal pMac = PMAC_STRUCT( hHal );
     tSmeCmd *tdlsDelStaCmd ;
     eHalStatus status = eHAL_STATUS_FAILURE ;
- 
+
     //If connected and in Infra. Only then allow this
-    if( CSR_IS_SESSION_VALID( pMac, sessionId ) && 
+    if( CSR_IS_SESSION_VALID( pMac, sessionId ) &&
         csrIsConnStateConnectedInfra( pMac, sessionId ) &&
         (NULL != peerMac) )
     {
@@ -366,7 +366,7 @@ eHalStatus csrTdlsDelPeerSta(tHalHandle hHal, tANI_U8 sessionId,
 
         if(tdlsDelStaCmd)
         {
-            tTdlsDelStaCmdInfo *tdlsDelStaCmdInfo = 
+            tTdlsDelStaCmdInfo *tdlsDelStaCmdInfo =
                             &tdlsDelStaCmd->u.tdlsCmd.u.tdlsDelStaCmdInfo ;
 
             vos_mem_zero(&tdlsDelStaCmd->u.tdlsCmd, sizeof(tTdlsCmd));
@@ -374,7 +374,7 @@ eHalStatus csrTdlsDelPeerSta(tHalHandle hHal, tANI_U8 sessionId,
             tdlsDelStaCmd->sessionId = sessionId;
 
             vos_mem_copy(tdlsDelStaCmdInfo->peerMac,
-                                   peerMac, sizeof(tSirMacAddr)) ; 
+                                   peerMac, sizeof(tSirMacAddr)) ;
 
             tdlsDelStaCmd->command = eSmeCommandTdlsDelPeer ;
             tdlsDelStaCmd->u.tdlsCmd.size = sizeof(tTdlsDelStaCmdInfo) ;
@@ -441,7 +441,7 @@ VOS_STATUS csrTdlsSendChanSwitchReq(tHalHandle hHal,
 /*
  * TDLS messages sent to PE .
  */
-eHalStatus tdlsSendMessage(tpAniSirGlobal pMac, tANI_U16 msg_type, 
+eHalStatus tdlsSendMessage(tpAniSirGlobal pMac, tANI_U16 msg_type,
                               void *msg_data, tANI_U32 msg_size)
 {
 
@@ -494,7 +494,7 @@ eHalStatus csrTdlsProcessSendMgmt( tpAniSirGlobal pMac, tSmeCmd *cmd )
     }
     tdlsSendMgmtReq->sessionId = cmd->sessionId;
     //Using dialog as transactionId. This can be used to match response with request
-    tdlsSendMgmtReq->transactionId = tdlsSendMgmtCmdInfo->dialog;  
+    tdlsSendMgmtReq->transactionId = tdlsSendMgmtCmdInfo->dialog;
     tdlsSendMgmtReq->reqType =  tdlsSendMgmtCmdInfo->frameType ;
     tdlsSendMgmtReq->dialog =  tdlsSendMgmtCmdInfo->dialog ;
     tdlsSendMgmtReq->statusCode =  tdlsSendMgmtCmdInfo->statusCode ;
@@ -515,7 +515,7 @@ eHalStatus csrTdlsProcessSendMgmt( tpAniSirGlobal pMac, tSmeCmd *cmd )
     }
     // Send the request to PE.
     smsLog( pMac, LOG1, FL("sending TDLS Mgmt Frame req to PE " ));
-    status = tdlsSendMessage(pMac, eWNI_SME_TDLS_SEND_MGMT_REQ, 
+    status = tdlsSendMessage(pMac, eWNI_SME_TDLS_SEND_MGMT_REQ,
             (void *)tdlsSendMgmtReq , sizeof(tSirTdlsSendMgmtReq)+tdlsSendMgmtCmdInfo->len) ;
     if(!HAL_STATUS_SUCCESS( status ) )
     {
@@ -595,7 +595,7 @@ eHalStatus csrTdlsProcessAddSta( tpAniSirGlobal pMac, tSmeCmd *cmd )
 
     // Send the request to PE.
     smsLog( pMac, LOGE, "sending TDLS Add Sta req to PE " );
-    status = tdlsSendMessage(pMac, eWNI_SME_TDLS_ADD_STA_REQ, 
+    status = tdlsSendMessage(pMac, eWNI_SME_TDLS_ADD_STA_REQ,
             (void *)tdlsAddStaReq , sizeof(tSirTdlsAddStaReq)) ;
     if(!HAL_STATUS_SUCCESS( status ) )
     {
@@ -650,7 +650,7 @@ eHalStatus csrTdlsProcessDelSta( tpAniSirGlobal pMac, tSmeCmd *cmd )
     smsLog( pMac, LOG1,
         "sending TDLS Del Sta "MAC_ADDRESS_STR" req to PE",
          MAC_ADDR_ARRAY(tdlsDelStaCmdInfo->peerMac));
-    status = tdlsSendMessage(pMac, eWNI_SME_TDLS_DEL_STA_REQ, 
+    status = tdlsSendMessage(pMac, eWNI_SME_TDLS_DEL_STA_REQ,
             (void *)tdlsDelStaReq , sizeof(tSirTdlsDelStaReq)) ;
     if(!HAL_STATUS_SUCCESS( status ) )
     {
@@ -673,7 +673,7 @@ eHalStatus csrTdlsProcessCmd(tpAniSirGlobal pMac, tSmeCmd *cmd)
         case eSmeCommandTdlsAddPeer:
             status = csrTdlsProcessAddSta(pMac, cmd);
         break;
-        case eSmeCommandTdlsDelPeer: 
+        case eSmeCommandTdlsDelPeer:
             status = csrTdlsProcessDelSta(pMac, cmd);
         break;
         case eSmeCommandTdlsLinkEstablish:
@@ -685,10 +685,10 @@ eHalStatus csrTdlsProcessCmd(tpAniSirGlobal pMac, tSmeCmd *cmd)
         break;
        default:
            status = eHAL_STATUS_FAILURE;
-            /* TODO: Add defualt handling */  
+            /* TODO: Add defualt handling */
            break ;
     }
-    return status ; 
+    return status ;
 }
 
 eHalStatus csrTdlsProcessLinkEstablish( tpAniSirGlobal pMac, tSmeCmd *cmd )
@@ -839,7 +839,7 @@ eHalStatus tdlsMsgProcessor(tpAniSirGlobal pMac,  v_U16_t msgType,
                 roamResult = eCSR_ROAM_RESULT_ADD_TDLS_PEER;
             else /* addStaRsp->tdlsAddOper must be TDLS_OPER_UPDATE */
                 roamResult = eCSR_ROAM_RESULT_UPDATE_TDLS_PEER;
-            csrRoamCallCallback(pMac, addStaRsp->sessionId, &roamInfo, 0, 
+            csrRoamCallCallback(pMac, addStaRsp->sessionId, &roamInfo, 0,
                                 eCSR_ROAM_TDLS_STATUS_UPDATE,
                                 roamResult);
 
@@ -860,8 +860,8 @@ eHalStatus tdlsMsgProcessor(tpAniSirGlobal pMac,  v_U16_t msgType,
              * register peer with TL, we have to go through HDD as this is
              * the only way to register any STA with TL.
              */
-            csrRoamCallCallback(pMac, delStaRsp->sessionId, &roamInfo, 0, 
-                         eCSR_ROAM_TDLS_STATUS_UPDATE, 
+            csrRoamCallCallback(pMac, delStaRsp->sessionId, &roamInfo, 0,
+                         eCSR_ROAM_TDLS_STATUS_UPDATE,
                                eCSR_ROAM_RESULT_DELETE_TDLS_PEER);
 
             csrTdlsRemoveSmeCmd(pMac, eSmeCommandTdlsDelPeer) ;
@@ -961,7 +961,7 @@ eHalStatus tdlsMsgProcessor(tpAniSirGlobal pMac,  v_U16_t msgType,
             break ;
         }
     }
-    
+
     return eHAL_STATUS_SUCCESS ;
 }
 #endif

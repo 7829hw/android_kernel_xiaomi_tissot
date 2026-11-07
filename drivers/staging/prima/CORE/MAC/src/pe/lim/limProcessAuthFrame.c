@@ -264,7 +264,7 @@ limProcessAuthFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tpPESession pse
     tANI_U16                auth_alg = 0;
     /* Added For BT -AMP support */
     // Get pointer to Authentication frame header and body
- 
+
 
     pHdr = WDA_GET_RX_MAC_HEADER(pRxPacketInfo);
     frameLen = WDA_GET_RX_PAYLOAD_LEN(pRxPacketInfo);
@@ -340,7 +340,7 @@ limProcessAuthFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tpPESession pse
     vos_mem_set(authFrame, sizeof(tSirMacAuthFrameBody), 0);
     vos_mem_set(plainBody, LIM_ENCR_AUTH_BODY_LEN, 0);
     vos_mem_set(challengeTextArray, SIR_MAC_SAP_AUTH_CHALLENGE_LENGTH, 0);
-   
+
     /// Determine if WEP bit is set in the FC or received MAC header
     if (pHdr->fc.wep)
     {
@@ -403,9 +403,9 @@ limProcessAuthFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tpPESession pse
         }
         if(psessionEntry->limSystemRole == eLIM_AP_ROLE)
         {
-            val = psessionEntry->privacy; 
-        } 
-        else 
+            val = psessionEntry->privacy;
+        }
+        else
         // Accept Authentication frame only if Privacy is implemented
         if (wlan_cfgGetInt(pMac, WNI_CFG_PRIVACY_ENABLED,
                       &val) != eSIR_SUCCESS)
@@ -584,13 +584,13 @@ limProcessAuthFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tpPESession pse
                 val = SIR_MAC_KEY_LENGTH;
 
                 if(psessionEntry->limSystemRole == eLIM_AP_ROLE)
-                {   
+                {
                     tpSirKeys pKey;
-                    pKey =  &psessionEntry->WEPKeyMaterial[keyId].key[0];              
+                    pKey =  &psessionEntry->WEPKeyMaterial[keyId].key[0];
                     vos_mem_copy(defaultKey, pKey->key, pKey->keyLength);
                     val = pKey->keyLength;
-                }                   
-                else                              
+                }
+                else
                 if (wlan_cfgGetStr(pMac, (tANI_U16) (WNI_CFG_WEP_DEFAULT_KEY_1 + keyId),
                               defaultKey, &val) != eSIR_SUCCESS)
                 {
@@ -738,7 +738,7 @@ limProcessAuthFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tpPESession pse
     {
         case SIR_MAC_AUTH_FRAME_1:
             // AuthFrame 1
-            
+
             pStaDs = dphLookupHashEntry(pMac, pHdr->sa,
                     &assocId, &psessionEntry->dph.dphHashTable);
             if (pStaDs)
@@ -835,11 +835,11 @@ limProcessAuthFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tpPESession pse
                     limDeletePreAuthNode(pMac,
                                          pHdr->sa);
                     /**
-                     *  SAP Mode:Disassociate the station and 
-                     *  delete its entry if we have its entry 
-                     *  already and received "auth" from the 
+                     *  SAP Mode:Disassociate the station and
+                     *  delete its entry if we have its entry
+                     *  already and received "auth" from the
                      *  same station.
-                     */  
+                     */
 
                     for (assocId = 0; assocId < psessionEntry->dph.dphHashTable.size; assocId++)// Softap dphHashTable.size = 8
                     {
@@ -875,9 +875,9 @@ limProcessAuthFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tpPESession pse
                 }
                 else
                 {
-                    /* 
+                    /*
                      * This can happen when first authentication frame is received
-                     * but ACK lost at STA side, in this case 2nd auth frame is already 
+                     * but ACK lost at STA side, in this case 2nd auth frame is already
                      * in transmission queue
                      * */
                     PELOGE(limLog(pMac, LOGE, FL("STA is initiating "
@@ -996,7 +996,7 @@ limProcessAuthFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tpPESession pse
                         {
                             val = psessionEntry->privacy;
                         }
-                        else   
+                        else
                         if (wlan_cfgGetInt(pMac, WNI_CFG_PRIVACY_ENABLED,
                                       &val) != eSIR_SUCCESS)
                         {
@@ -1117,7 +1117,7 @@ limProcessAuthFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tpPESession pse
                                "preparation failed in limProcessAuthFrame"));
                                goto free;
                             }
-                            
+
                             pChallenge = pAuthNode->challengeText;
 
                             vos_mem_copy(pChallenge,
@@ -1254,7 +1254,7 @@ limProcessAuthFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tpPESession pse
             {
                 /**
                  * Interoperability workaround: Linksys WAP4400N is returning
-                 * wrong authType in OpenAuth response in case of 
+                 * wrong authType in OpenAuth response in case of
                  * SharedKey AP configuration. Pretend we don't see that,
                  * so upper layer can fallback to SharedKey authType,
                  * and successfully connect to the AP.
@@ -1340,7 +1340,7 @@ limProcessAuthFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tpPESession pse
                     {
                         val = psessionEntry->privacy;
                     }
-                    else   
+                    else
                     if (wlan_cfgGetInt(pMac, WNI_CFG_PRIVACY_ENABLED,
                                   &val) != eSIR_SUCCESS)
                     {
@@ -1574,7 +1574,7 @@ limProcessAuthFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tpPESession pse
                 // Log error
                 PELOGE(limLog(pMac, LOGE,
                        FL("received Auth frame from peer with failure code %d "
-                       MAC_ADDRESS_STR), pRxAuthFrameBody->authStatusCode, 
+                       MAC_ADDRESS_STR), pRxAuthFrameBody->authStatusCode,
                        MAC_ADDR_ARRAY(pHdr->sa));)
 
                 limRestoreFromAuthState(pMac, eSIR_SME_AUTH_REFUSED,
@@ -1717,7 +1717,7 @@ limProcessAuthFrame(tpAniSirGlobal pMac, tANI_U8 *pRxPacketInfo, tpPESession pse
                     // Log error
                     PELOGE(limLog(pMac, LOGE,
                            FL("received Auth frame3 from peer with status code %d "
-                           MAC_ADDRESS_STR), pRxAuthFrameBody->authStatusCode, 
+                           MAC_ADDRESS_STR), pRxAuthFrameBody->authStatusCode,
                            MAC_ADDR_ARRAY(pHdr->sa));)
 
                     goto free;
@@ -2000,7 +2000,7 @@ tSirRetStatus limProcessAuthFrameNoSession(tpAniSirGlobal pMac, tANI_U8 *pBd, vo
     (uint)abs((tANI_S8)WDA_GET_RX_RSSI_DB(pBd)));
     // Check for the operating channel and see what needs to be done next.
     psessionEntry = pMac->ft.ftPEContext.psavedsessionEntry;
-    if (psessionEntry == NULL) 
+    if (psessionEntry == NULL)
     {
         limLog(pMac, LOGE, FL("Error: Unable to find session id while in "
         "pre-auth phase for FT"));
@@ -2014,7 +2014,7 @@ tSirRetStatus limProcessAuthFrameNoSession(tpAniSirGlobal pMac, tANI_U8 *pBd, vo
         return eSIR_FAILURE;
     }
 
-    if (frameLen == 0) 
+    if (frameLen == 0)
     {
         limLog(pMac, LOGE, FL("Error: Frame len = 0"));
         return eSIR_FAILURE;
@@ -2023,7 +2023,7 @@ tSirRetStatus limProcessAuthFrameNoSession(tpAniSirGlobal pMac, tANI_U8 *pBd, vo
     limPrintMacAddr(pMac, pHdr->bssId, LOG2);
     limPrintMacAddr(pMac, pMac->ft.ftPEContext.pFTPreAuthReq->preAuthbssId, LOG2);
     limLog(pMac,LOG2,FL("seqControl 0x%X"),
-            ((pHdr->seqControl.seqNumHi << 8) | 
+            ((pHdr->seqControl.seqNumHi << 8) |
             (pHdr->seqControl.seqNumLo << 4) |
             (pHdr->seqControl.fragNum)));
 #endif
@@ -2033,7 +2033,7 @@ tSirRetStatus limProcessAuthFrameNoSession(tpAniSirGlobal pMac, tANI_U8 *pBd, vo
                          pHdr->bssId, sizeof( tSirMacAddr )))
     {
         limLog(pMac, LOGE, FL("Error: NOT same bssid as preauth BSSID"));
-        // In this case SME if indeed has triggered a 
+        // In this case SME if indeed has triggered a
         // pre auth it will time out.
         return eSIR_FAILURE;
     }
@@ -2044,7 +2044,7 @@ tSirRetStatus limProcessAuthFrameNoSession(tpAniSirGlobal pMac, tANI_U8 *pBd, vo
         /*
          * This is likely a duplicate for the same pre-auth request.
          * PE/LIM already posted a response to SME. Hence, drop it.
-         * TBD: 
+         * TBD:
          * 1) How did we even receive multiple auth responses?
          * 2) Do we need to delete pre-auth session? Suppose we
          * previously received an auth resp with failure which
@@ -2055,7 +2055,7 @@ tSirRetStatus limProcessAuthFrameNoSession(tpAniSirGlobal pMac, tANI_U8 *pBd, vo
          * very unlikely to receive auth responses from the same
          * AP with different reason codes.
          * NOTE: return eSIR_SUCCESS so that the packet is dropped
-         * as this was indeed a response from the BSSID we tried to 
+         * as this was indeed a response from the BSSID we tried to
          * pre-auth.
          */
         PELOGE(limLog(pMac,LOG1,"Auth rsp already posted to SME"
@@ -2128,7 +2128,7 @@ tSirRetStatus limProcessAuthFrameNoSession(tpAniSirGlobal pMac, tANI_U8 *pBd, vo
                 if (eSIR_MAC_MAX_ASSOC_STA_REACHED_STATUS == pRxAuthFrameBody->authStatusCode)
                     ret_status = eSIR_LIM_MAX_STA_REACHED_ERROR;
             }
-            else 
+            else
             {
                 ret_status = eSIR_SUCCESS;
             }
@@ -2156,4 +2156,3 @@ tSirRetStatus limProcessAuthFrameNoSession(tpAniSirGlobal pMac, tANI_U8 *pBd, vo
 }
 
 #endif /* WLAN_FEATURE_VOWIFI_11R */
-

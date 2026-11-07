@@ -174,6 +174,3 @@ extern v_BOOL_t  tx_timer_running(TX_TIMER*);
 
 
 #endif
-
-
-

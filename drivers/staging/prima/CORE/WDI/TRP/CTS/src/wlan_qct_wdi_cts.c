@@ -99,7 +99,7 @@
 #include <linux/wcnss_wlan.h>
 #endif
 
-/* Global context for CTS handle, it is required to keep this 
+/* Global context for CTS handle, it is required to keep this
  * transport open during SSR shutdown */
 static WCTS_HandleType gwctsHandle;
 /*----------------------------------------------------------------------------
@@ -449,7 +449,7 @@ WCTS_PALDataCallback
 } /*WCTS_PALDataCallback*/
 
 /**
- @brief    This helper function is used to clean up the pending 
+ @brief    This helper function is used to clean up the pending
            messages in the transport queue
 
  @param wctsHandlehandle:  transport handle

@@ -78,10 +78,10 @@ when        who          what, where, why
 #define WDA_HI_FLOW_MASK 0xF0
 #define WDA_LO_FLOW_MASK 0x0F
 
-static v_VOID_t 
+static v_VOID_t
 WDA_DS_TxCompleteCB
 (
- v_PVOID_t pvosGCtx, 
+ v_PVOID_t pvosGCtx,
  v_PVOID_t pFrameDataBuff
 );
 
@@ -90,38 +90,38 @@ WDA_DS_TxCompleteCB
 /*==========================================================================
   FUNCTION    WDA_TLI_FastHwFwdDataFrame
 
-  DESCRIPTION 
+  DESCRIPTION
     For NON integrated SOC, this function is called by TL.
 
-    Fast path function to quickly forward a data frame if HAL determines BD 
-    signature computed here matches the signature inside current VOSS packet. 
-    If there is a match, HAL and TL fills in the swapped packet length into 
-    BD header and DxE header, respectively. Otherwise, packet goes back to 
+    Fast path function to quickly forward a data frame if HAL determines BD
+    signature computed here matches the signature inside current VOSS packet.
+    If there is a match, HAL and TL fills in the swapped packet length into
+    BD header and DxE header, respectively. Otherwise, packet goes back to
     normal (slow) path and a new BD signature would be tagged into BD in this
     VOSS packet later by the WLANHAL_FillTxBd() function.
 
-  TODO  For integrated SOC, this function does nothing yet. Pima SLM/HAL 
+  TODO  For integrated SOC, this function does nothing yet. Pima SLM/HAL
         should provide the equivelant functionality.
 
-  DEPENDENCIES 
-     
-  PARAMETERS 
+  DEPENDENCIES
+
+  PARAMETERS
 
    IN
         pvosGCtx    VOS context
         vosDataBuff Ptr to VOSS packet
         pMetaInfo   For getting frame's TID
         pStaInfo    For checking STA type
-    
+
    OUT
         pvosStatus  returned status
         puFastFwdOK Flag to indicate whether frame could be fast forwarded
-   
-  RETURN VALUE
-    No return.   
 
-  SIDE EFFECTS 
-  
+  RETURN VALUE
+    No return.
+
+  SIDE EFFECTS
+
 ============================================================================*/
 void WDA_TLI_FastHwFwdDataFrame
 (
@@ -156,7 +156,7 @@ void WDA_DS_RxLogCallback(v_U8_t logType)
 /*==========================================================================
   FUNCTION    WDA_DS_Register
 
-  DESCRIPTION 
+  DESCRIPTION
     Register TL client to WDA. This function registers TL RX/TX functions
     to WDI by calling WDI_DS_Register.
 
@@ -164,14 +164,14 @@ void WDA_DS_RxLogCallback(v_U8_t logType)
     For NON integrated SOC, this function calls WLANBAL_RegTlCbFunctions
     to register TL's RX/TX functions to BAL
 
-  TODO 
+  TODO
     For Prima, pfnResourceCB gets called in WDTS_OOResourceNotification.
     The uCount parameter is AC mask. It should be redefined to use the
     same resource callback function.
 
-  DEPENDENCIES 
-     
-  PARAMETERS 
+  DEPENDENCIES
+
+  PARAMETERS
 
    IN
         pvosGCtx    VOS context
@@ -183,21 +183,21 @@ void WDA_DS_RxLogCallback(v_U8_t logType)
         pCallbackContext            WDI calls callback function with it
                                     VOS global context pointer
    OUT
-        uAvailableTxBuf       available TX PDU numbder. 
+        uAvailableTxBuf       available TX PDU numbder.
                               BAL returns it for NON integrated SOC
-   
+
   RETURN VALUE
-    VOS_STATUS_E_FAULT:  pointer is NULL and other errors 
+    VOS_STATUS_E_FAULT:  pointer is NULL and other errors
     VOS_STATUS_SUCCESS:  Everything is good :)
 
-  SIDE EFFECTS 
-  
+  SIDE EFFECTS
+
 ============================================================================*/
-VOS_STATUS WDA_DS_Register 
-( 
-  v_PVOID_t                 pvosGCtx, 
+VOS_STATUS WDA_DS_Register
+(
+  v_PVOID_t                 pvosGCtx,
   WDA_DS_TxCompleteCallback pfnTxCompleteCallback,
-  WDA_DS_RxPacketCallback   pfnRxPacketCallback, 
+  WDA_DS_RxPacketCallback   pfnRxPacketCallback,
   WDA_DS_TxPacketCallback   pfnTxPacketCallback,
   WDA_DS_ResourceCB         pfnResourceCB,
   v_U32_t                   uResTheshold,
@@ -258,10 +258,10 @@ VOS_STATUS WDA_DS_Register
                "WLAN TL:TL failed to register with DAL, Err: %d", wdiStatus );
     return VOS_STATUS_E_FAILURE;
   }
-   
-  /* TODO Out-of-resource condition if PDU size is less than WLANTL_MIN_RES_MF 
+
+  /* TODO Out-of-resource condition if PDU size is less than WLANTL_MIN_RES_MF
      Put hardcoded value not to put TL into OOR. Revisit it */
-  *uAvailableTxBuf = WDA_DS_DXE_RES_COUNT; 
+  *uAvailableTxBuf = WDA_DS_DXE_RES_COUNT;
 
   return VOS_STATUS_SUCCESS;
 }
@@ -269,27 +269,27 @@ VOS_STATUS WDA_DS_Register
 /*==========================================================================
   FUNCTION    WDA_DS_StartXmit
 
-  DESCRIPTION 
-    Serialize TX transmit reques to TX thread. 
+  DESCRIPTION
+    Serialize TX transmit reques to TX thread.
 
   TODO This sends TX transmit request to TL. It should send to WDI for
          abstraction.
 
     For NON integrated SOC, this function calls WLANBAL_StartXmit
 
-  DEPENDENCIES 
-     
-  PARAMETERS 
+  DEPENDENCIES
+
+  PARAMETERS
 
    IN
         pvosGCtx    VOS context
-   
+
   RETURN VALUE
-    VOS_STATUS_E_FAULT:  pointer is NULL and other errors 
+    VOS_STATUS_E_FAULT:  pointer is NULL and other errors
     VOS_STATUS_SUCCESS:  Everything is good :)
 
-  SIDE EFFECTS 
-  
+  SIDE EFFECTS
+
 ============================================================================*/
 VOS_STATUS
 WDA_DS_StartXmit
@@ -309,7 +309,7 @@ WDA_DS_StartXmit
   }
 
   if(WDA_TL_IS_TX_XMIT_PENDING( pvosGCtx ))
-  {  
+  {
     /*Already WDA_DS_TX_START_XMIT msg is pending in TL msg queue */
     return VOS_STATUS_SUCCESS;
   }
@@ -339,22 +339,22 @@ WDA_DS_StartXmit
 /*==========================================================================
   FUNCTION    WDA_DS_FinishULA
 
-  DESCRIPTION 
-    Serialize Finish Upper Level Authentication reques to TX thread. 
+  DESCRIPTION
+    Serialize Finish Upper Level Authentication reques to TX thread.
 
-  DEPENDENCIES 
-     
-  PARAMETERS 
+  DEPENDENCIES
+
+  PARAMETERS
 
    IN
         callbackRoutine    routine to be called in TX thread
-        callbackContext    user data for the above routine 
-   
+        callbackContext    user data for the above routine
+
   RETURN VALUE
     please see vos_tx_mq_serialize
 
-  SIDE EFFECTS 
-  
+  SIDE EFFECTS
+
 ============================================================================*/
 VOS_STATUS
 WDA_DS_FinishULA
@@ -384,10 +384,10 @@ WDA_DS_FinishULA
 
   DESCRIPTION
     Build TX meta info for integrated SOC.
-    
+
     Same function calls HAL for reserve BD header space into VOS packet and
     HAL function to fill it.
-    
+
   DEPENDENCIES
 
   PARAMETERS
@@ -413,7 +413,7 @@ WDA_DS_FinishULA
     *pusPktLen       Packet length
 
   RETURN VALUE
-    VOS_STATUS_E_FAULT:  pointer is NULL and other errors 
+    VOS_STATUS_E_FAULT:  pointer is NULL and other errors
     VOS_STATUS_SUCCESS:  Everything is good :)
 
   SIDE EFFECTS
@@ -606,7 +606,7 @@ WDA_DS_BuildTxPacketInfo
   DESCRIPTION
     Trim/Remove RX BD header for NON integrated SOC.
     It does nothing for integrated SOC.
-    
+
   DEPENDENCIES
 
   PARAMETERS
@@ -615,7 +615,7 @@ WDA_DS_BuildTxPacketInfo
     vosDataBuff      vos data buffer
 
   RETURN VALUE
-    VOS_STATUS_E_FAULT:  pointer is NULL and other errors 
+    VOS_STATUS_E_FAULT:  pointer is NULL and other errors
     VOS_STATUS_SUCCESS:  Everything is good :)
 
   SIDE EFFECTS
@@ -623,7 +623,7 @@ WDA_DS_BuildTxPacketInfo
 ============================================================================*/
 VOS_STATUS
 WDA_DS_TrimRxPacketInfo
-( 
+(
   vos_pkt_t *vosDataBuff
 )
 {
@@ -640,9 +640,9 @@ WDA_DS_TrimRxPacketInfo
 
   DESCRIPTION
     Return RX metainfo pointer for for integrated SOC.
-    
+
     Same function will return BD header pointer.
-    
+
   DEPENDENCIES
 
   PARAMETERS
@@ -657,7 +657,7 @@ WDA_DS_TrimRxPacketInfo
     *ppRxHeader      RX metainfo pointer
 
   RETURN VALUE
-    VOS_STATUS_E_FAULT:  pointer is NULL and other errors 
+    VOS_STATUS_E_FAULT:  pointer is NULL and other errors
     VOS_STATUS_SUCCESS:  Everything is good :)
 
   SIDE EFFECTS
@@ -689,7 +689,7 @@ WDA_DS_PeekRxPacketInfo
                "WDA:Failed to get RX meta data from WDI" );
      return VOS_STATUS_E_FAILURE;
   }
-     
+
   return VOS_STATUS_SUCCESS;
 }
 
@@ -704,7 +704,7 @@ WDA_DS_PeekRxPacketInfo
     back to BD header. So for NON integrated SOC, this function does
     the same.
 
-    For integrated SOC, WDI does the same, not TL. 
+    For integrated SOC, WDI does the same, not TL.
     It does return typeSubtype from RX meta info for integrated SOC.
 
   DEPENDENCIES
@@ -720,7 +720,7 @@ WDA_DS_PeekRxPacketInfo
     ucTypeSubtype    typeSubtype
 
   RETURN VALUE
-    VOS_STATUS_E_FAULT:  pointer is NULL and other errors 
+    VOS_STATUS_E_FAULT:  pointer is NULL and other errors
     VOS_STATUS_SUCCESS:  Everything is good :)
 
   SIDE EFFECTS
@@ -771,7 +771,7 @@ WDA_DS_GetFrameTypeSubType
    OUT
 
   RETURN VALUE
-    VOS_STATUS_E_FAULT:  pointer is NULL and other errors 
+    VOS_STATUS_E_FAULT:  pointer is NULL and other errors
     VOS_STATUS_SUCCESS:  Everything is good :)
 
   SIDE EFFECTS
@@ -792,7 +792,7 @@ WDA_DS_RxAmsduBdFix
    FUNCTION    WDA_DS_GetRssi
 
   DESCRIPTION
-    Get RSSI 
+    Get RSSI
 
   TODO It returns hardcoded value in the meantime since WDA/WDI does nothing
        support it yet for Prima.
@@ -808,7 +808,7 @@ WDA_DS_RxAmsduBdFix
     puRssi           RSSI
 
   RETURN VALUE
-    VOS_STATUS_E_FAULT:  pointer is NULL and other errors 
+    VOS_STATUS_E_FAULT:  pointer is NULL and other errors
     VOS_STATUS_SUCCESS:  Everything is good :)
 
   SIDE EFFECTS
@@ -837,19 +837,19 @@ WDA_DS_GetRssi
     Returning 0 will put TL in out-of-resource condition for TX.
 
     Return current PDU resources from BAL for NON integrated SOC.
-    
+
   DEPENDENCIES
 
   PARAMETERS
 
    IN
     vosDataBuff      vos data buffer
-   
+
    OUT
     puResCount        available PDU number for TX
 
   RETURN VALUE
-    VOS_STATUS_E_FAULT:  pointer is NULL and other errors 
+    VOS_STATUS_E_FAULT:  pointer is NULL and other errors
     VOS_STATUS_SUCCESS:  Everything is good :)
 
   SIDE EFFECTS
@@ -857,7 +857,7 @@ WDA_DS_GetRssi
 ============================================================================*/
 VOS_STATUS
 WDA_DS_GetTxResources
-( 
+(
   v_PVOID_t pvosGCtx,
   v_U32_t*  puResCount
 )
@@ -922,7 +922,7 @@ WDA_DS_GetReplayCounter
    OUT
 
   RETURN VALUE
-    VOS_STATUS_E_FAULT:  pointer is NULL and other errors 
+    VOS_STATUS_E_FAULT:  pointer is NULL and other errors
     VOS_STATUS_SUCCESS:  Everything is good :)
 
   SIDE EFFECTS
@@ -931,8 +931,8 @@ WDA_DS_GetReplayCounter
 
 VOS_STATUS
 WDA_DS_TxFrames
-( 
-  v_PVOID_t pvosGCtx 
+(
+  v_PVOID_t pvosGCtx
 )
 {
   VOS_STATUS vosStatus;
@@ -958,15 +958,15 @@ WDA_DS_TxFrames
 
   /*-------------------------------------------------------------------------
      Need to fetch separatelly for Mgmt and Data frames because TL is not
-     aware of separate resource management at the lower levels 
+     aware of separate resource management at the lower levels
   -------------------------------------------------------------------------*/
   /*Mgmt tx*/
-  uMgmtAvailRes = WDI_GetAvailableResCount(wdaContext->pWdiContext, 
+  uMgmtAvailRes = WDI_GetAvailableResCount(wdaContext->pWdiContext,
                                            WDI_MGMT_POOL_ID);
-  
-  ucTxResReq = WLANTL_GetFrames( pvosGCtx, 
-                              &pTxMgmtChain, 
-                               uMgmtAvailRes, 
+
+  ucTxResReq = WLANTL_GetFrames( pvosGCtx,
+                              &pTxMgmtChain,
+                               uMgmtAvailRes,
                               (wdaContext->uTxFlowMask & WDA_HI_FLOW_MASK),
                               &bUrgent );
 
@@ -975,7 +975,7 @@ WDA_DS_TxFrames
   // available, and that is considered success.  If we enter the loop,
   // vosStatus will be set appropriately inside the loop
   vosStatus = VOS_STATUS_SUCCESS;
-      
+
   while ( NULL != pTxMgmtChain )
   {
     /* Walk the chain and unchain the packet */
@@ -997,8 +997,8 @@ WDA_DS_TxFrames
        vosStatus = VOS_STATUS_SUCCESS;
     }
 
-    wdiStatus = WDI_DS_TxPacket( wdaContext->pWdiContext, 
-                                 (wpt_packet*)pTxPacket, 
+    wdiStatus = WDI_DS_TxPacket( wdaContext->pWdiContext,
+                                 (wpt_packet*)pTxPacket,
                                  0 /* more */ );
     if ( WDI_STATUS_SUCCESS != wdiStatus )
     {
@@ -1027,12 +1027,12 @@ WDA_DS_TxFrames
   }
 
   /*Data tx*/
-  uDataAvailRes = WDI_GetAvailableResCount(wdaContext->pWdiContext, 
+  uDataAvailRes = WDI_GetAvailableResCount(wdaContext->pWdiContext,
                                            WDI_DATA_POOL_ID);
 
-  ucTxResReq = WLANTL_GetFrames( pvosGCtx, 
-                              &pTxDataChain, 
-                              /*WDA_DS_DXE_RES_COUNT*/ uDataAvailRes, 
+  ucTxResReq = WLANTL_GetFrames( pvosGCtx,
+                              &pTxDataChain,
+                              /*WDA_DS_DXE_RES_COUNT*/ uDataAvailRes,
                               (wdaContext->uTxFlowMask & WDA_LO_FLOW_MASK),
                               &bUrgent );
 
@@ -1063,8 +1063,8 @@ WDA_DS_TxFrames
        vosStatus = VOS_STATUS_SUCCESS;
     }
 
-    wdiStatus = WDI_DS_TxPacket( wdaContext->pWdiContext, 
-                                 (wpt_packet*)pTxPacket, 
+    wdiStatus = WDI_DS_TxPacket( wdaContext->pWdiContext,
+                                 (wpt_packet*)pTxPacket,
                                  0 /* more */ );
     if ( WDI_STATUS_SUCCESS != wdiStatus )
     {
@@ -1149,27 +1149,27 @@ WDA_DS_TxFlowControlCallback
    }
 
    /* two physical DXE channels
-      1) data packets(all four AC) and BAP for the low priority channel(lower 4 bits) 
+      1) data packets(all four AC) and BAP for the low priority channel(lower 4 bits)
       2) management packets for high priority channel(5th bit)
    */
 
 
    /*Save and reset */
-   ucOldFlowMask           = wdaContext->uTxFlowMask; 
+   ucOldFlowMask           = wdaContext->uTxFlowMask;
    wdaContext->uTxFlowMask = ucFlowMask;
 
-   /*If the AC is being enabled - resume data xfer 
-    
-    Assume previous value of wdaContext->uTxFlowMask: 
-    
+   /*If the AC is being enabled - resume data xfer
+
+    Assume previous value of wdaContext->uTxFlowMask:
+
     DATA\MGM |  ON  | OFF
     ----------------------
         ON   | 1F   | 0F *
     ----------------------
         OFF  |  10 *| 00 *
-    
+
         * - states in which a channel can be enabled
-    
+
       ucFlowMask will tell which channel must be enabled
       to enable a channel a new bit must be turned on =>
       ucFlowMask > wdaContext->uTxFlowMask when enable happens
@@ -1200,7 +1200,7 @@ WDA_DS_TxFlowControlCallback
                      Defined in WDA_TXFlowEnumType
 
   RETURN VALUE
-    VOS_STATUS_E_INVAL:  pointer is NULL and other errors 
+    VOS_STATUS_E_INVAL:  pointer is NULL and other errors
     VOS_STATUS_SUCCESS:  Everything is good :)
 
   SIDE EFFECTS
@@ -1239,10 +1239,10 @@ WDA_DS_GetTxFlowMask
    return VOS_STATUS_SUCCESS;
 }
 
-v_VOID_t 
+v_VOID_t
 WDA_DS_TxCompleteCB
 (
- v_PVOID_t pvosGCtx, 
+ v_PVOID_t pvosGCtx,
  v_PVOID_t pFrameDataBuff
 )
 {
@@ -1272,10 +1272,10 @@ WDA_DS_TxCompleteCB
 
   // extract metadata from PAL packet
   pTxMetadata = WDI_DS_ExtractTxMetaData( (wpt_packet*)pFrameDataBuff );
-  
+
   if ( eWLAN_PAL_STATUS_SUCCESS == pTxMetadata->txCompleteStatus )
     vosStatus = VOS_STATUS_SUCCESS;
-  else 
+  else
     vosStatus = VOS_STATUS_E_FAILURE;
 
   wdaContext->pfnTxCompleteCallback( pvosGCtx, pFrameDataBuff, vosStatus );

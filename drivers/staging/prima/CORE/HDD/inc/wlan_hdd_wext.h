@@ -151,7 +151,7 @@ typedef enum
    // TSPEC revoked by AP, async
    HDD_WLAN_WMM_STATUS_LOST = 18,
    // some internal failure like memory allocation failure, etc, sync
-   HDD_WLAN_WMM_STATUS_INTERNAL_FAILURE = 19, 
+   HDD_WLAN_WMM_STATUS_INTERNAL_FAILURE = 19,
 
    // U-APSD failed during setup but OTA setup (whether TSPEC exchnage or
    // re-assoc) was done so app should release this QoS, async
@@ -190,27 +190,27 @@ typedef enum
 /** Disable 11d */
 #define DISABLE_11D 0
 
-/* 
+/*
    refer wpa.h in wpa supplicant code for REASON_MICHAEL_MIC_FAILURE
 
-   supplicant sets REASON_MICHAEL_MIC_FAILURE as the reason code when it sends the MLME deauth IOCTL 
+   supplicant sets REASON_MICHAEL_MIC_FAILURE as the reason code when it sends the MLME deauth IOCTL
    for TKIP counter measures
 */
 #define HDD_REASON_MICHAEL_MIC_FAILURE 14
 
-/* 
+/*
   * These are for TLV fields in WPS IE
   */
-#define HDD_WPS_UUID_LEN                    16 
-#define HDD_WPS_ELEM_VERSION                0x104a 
-#define HDD_WPS_ELEM_REQUEST_TYPE           0x103a 
-#define HDD_WPS_ELEM_CONFIG_METHODS         0x1008 
-#define HDD_WPS_ELEM_UUID_E                 0x1047 
-#define HDD_WPS_ELEM_PRIMARY_DEVICE_TYPE    0x1054 
-#define HDD_WPS_ELEM_RF_BANDS               0x103c 
-#define HDD_WPS_ELEM_ASSOCIATION_STATE      0x1002 
+#define HDD_WPS_UUID_LEN                    16
+#define HDD_WPS_ELEM_VERSION                0x104a
+#define HDD_WPS_ELEM_REQUEST_TYPE           0x103a
+#define HDD_WPS_ELEM_CONFIG_METHODS         0x1008
+#define HDD_WPS_ELEM_UUID_E                 0x1047
+#define HDD_WPS_ELEM_PRIMARY_DEVICE_TYPE    0x1054
+#define HDD_WPS_ELEM_RF_BANDS               0x103c
+#define HDD_WPS_ELEM_ASSOCIATION_STATE      0x1002
 #define HDD_WPS_ELEM_CONFIGURATION_ERROR    0x1009
-#define HDD_WPS_ELEM_DEVICE_PASSWORD_ID     0x1012 
+#define HDD_WPS_ELEM_DEVICE_PASSWORD_ID     0x1012
 
 #define HDD_WPA_ELEM_VENDOR_EXTENSION       0x1049
 
@@ -223,12 +223,12 @@ typedef enum
 
 #define HDD_WPS_ELEM_WPS_STATE              0x1044
 #define HDD_WPS_ELEM_APSETUPLOCK            0x1057
-#define HDD_WPS_ELEM_SELECTEDREGISTRA       0x1041  
+#define HDD_WPS_ELEM_SELECTEDREGISTRA       0x1041
 #define HDD_WPS_ELEM_RSP_TYPE               0x103B
 #define HDD_WPS_ELEM_MANUFACTURER           0x1021
 #define HDD_WPS_ELEM_MODEL_NAME             0x1023
 #define HDD_WPS_ELEM_MODEL_NUM              0x1024
-#define HDD_WPS_ELEM_SERIAL_NUM             0x1042 
+#define HDD_WPS_ELEM_SERIAL_NUM             0x1042
 #define HDD_WPS_ELEM_DEVICE_NAME            0x1011
 #define HDD_WPS_ELEM_REGISTRA_CONF_METHODS  0x1053
 
@@ -281,35 +281,35 @@ enum
    WLAN_HDD_GET_FRAME_LOG_CMD_BMU_TRACING    = 1<<2,
 };
 
-/* 
- * This structure contains the interface level (granularity) 
- * configuration information in support of wireless extensions. 
+/*
+ * This structure contains the interface level (granularity)
+ * configuration information in support of wireless extensions.
  */
-typedef struct hdd_wext_state_s 
+typedef struct hdd_wext_state_s
 {
    /** The CSR "desired" Profile */
-   tCsrRoamProfile roamProfile; 
+   tCsrRoamProfile roamProfile;
 
    /** BSSID to which connect request is received */
    tCsrBssid req_bssId;
 
-   /** The association status code */ 
+   /** The association status code */
    v_U32_t statusCode;
 
    /** wpa version WPA/WPA2/None*/
-   v_S31_t wpaVersion; 
-   
+   v_S31_t wpaVersion;
+
    /**WPA or RSN IE*/
-   u_int8_t WPARSNIE[MAX_WPA_RSN_IE_LEN]; 
+   u_int8_t WPARSNIE[MAX_WPA_RSN_IE_LEN];
 
    /**gen IE */
    tSirAddie genIE;
 
    /**Additional IE for assoc */
-   tSirAddie assocAddIE; 
-   
+   tSirAddie assocAddIE;
+
    /**auth key mgmt */
-   v_S31_t authKeyMgmt; 
+   v_S31_t authKeyMgmt;
 
     /**vos event */
    vos_event_t  vosevent;
@@ -317,7 +317,7 @@ typedef struct hdd_wext_state_s
    vos_event_t  scanevent;
 
    /**Counter measure state, Started/Stopped*/
-   v_BOOL_t mTKIPCounterMeasures;  
+   v_BOOL_t mTKIPCounterMeasures;
 
    /**Completion Variable*/
    struct completion completion_var;
@@ -369,7 +369,7 @@ extern int hdd_wlan_get_frag_threshold(hdd_adapter_t *pAdapter,
 extern void hdd_wlan_get_version(hdd_adapter_t *pAdapter,
                                  union iwreq_data *wrqu, char *extra);
 
-extern int iw_get_scan(struct net_device *dev, 
+extern int iw_get_scan(struct net_device *dev,
                        struct iw_request_info *info,
                        union iwreq_data *wrqu, char *extra);
 
@@ -379,11 +379,11 @@ extern int iw_set_scan(struct net_device *dev, struct iw_request_info *info,
 extern int iw_set_cscan(struct net_device *dev, struct iw_request_info *info,
                         union iwreq_data *wrqu, char *extra);
 
-extern int iw_set_essid(struct net_device *dev, 
+extern int iw_set_essid(struct net_device *dev,
                         struct iw_request_info *info,
                         union iwreq_data *wrqu, char *extra);
 
-extern int iw_get_essid(struct net_device *dev, 
+extern int iw_get_essid(struct net_device *dev,
                        struct iw_request_info *info,
                        struct iw_point *dwrq, char *extra);
 
@@ -426,7 +426,7 @@ void hdd_get_class_a_statistics_cb(void *stats, void *context);
 
 VOS_STATUS wlan_hdd_check_ula_done(hdd_adapter_t *pAdapter);
 
-v_U8_t* wlan_hdd_get_vendor_oui_ie_ptr(v_U8_t *oui, v_U8_t oui_size, 
+v_U8_t* wlan_hdd_get_vendor_oui_ie_ptr(v_U8_t *oui, v_U8_t oui_size,
                        v_U8_t *ie, int ie_len);
 
 VOS_STATUS wlan_hdd_enter_bmps(hdd_adapter_t *pAdapter, int mode);
@@ -466,4 +466,3 @@ int hdd_setBand_helper(struct net_device *dev, const char *command);
 VOS_STATUS wlan_hdd_get_frame_logs(hdd_adapter_t *pAdapter, v_U8_t flag);
 int wlan_hdd_set_proximity(int set_value, tHalHandle hal);
 #endif // __WEXT_IW_H__
-
