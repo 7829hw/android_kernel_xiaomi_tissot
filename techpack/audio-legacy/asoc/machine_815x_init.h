@@ -9,4 +9,3 @@ int sm8150_init(void);
 
 void sm8150_exit(void);
 #endif
-

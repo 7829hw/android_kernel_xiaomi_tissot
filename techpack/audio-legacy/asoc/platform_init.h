@@ -56,4 +56,3 @@ static inline void msm_dai_slim_exit(void)
 };
 #endif
 #endif
-

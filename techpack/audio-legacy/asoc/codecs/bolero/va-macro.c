@@ -314,7 +314,6 @@ static int va_macro_event_handler(struct snd_soc_component *component,
 						VA_CORE_CLK, false);
 		break;
 	case BOLERO_MACRO_EVT_SSR_UP:
-		trace_printk("%s, enter SSR up\n", __func__);
 		/* reset swr after ssr/pdr */
 		va_priv->reset_swr = true;
 		if (va_priv->swr_ctrl_data)
@@ -1160,8 +1159,8 @@ static int va_macro_enable_dec(struct snd_soc_dapm_widget *w,
 			snd_soc_component_update_bits(component,
 				hpf_gate_reg, 0x01, 0x00);
 			/*
-		 	 * Minimum 1 clk cycle delay is required as per HW spec
-		 	 */
+			 * Minimum 1 clk cycle delay is required as per HW spec
+			 */
 			usleep_range(1000, 1010);
 		}
 		hpf_cut_off_freq = (snd_soc_component_read32(

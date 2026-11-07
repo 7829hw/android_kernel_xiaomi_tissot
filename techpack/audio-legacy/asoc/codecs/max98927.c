@@ -2607,4 +2607,3 @@ module_i2c_driver(max98927_i2c_driver)
 MODULE_DESCRIPTION("ALSA SoC MAX98927 driver");
 MODULE_AUTHOR("Maxim Integrated Inc.");
 MODULE_LICENSE("GPL");
-

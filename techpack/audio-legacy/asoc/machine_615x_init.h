@@ -18,4 +18,3 @@ int sm6150_init(void);
 
 void sm6150_exit(void);
 #endif
-

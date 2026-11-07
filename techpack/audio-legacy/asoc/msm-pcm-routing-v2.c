@@ -1196,7 +1196,7 @@ static struct cal_block_data *msm_routing_find_topology_by_path(int path,
 		if (cal_utils_is_cal_stale(cal_block))
 			continue;
 		cal_info = (struct audio_cal_info_adm_top *)
-                      	 	 cal_block->cal_info;
+				 cal_block->cal_info;
 		if ((cal_info->path == path)  &&
 			(cal_info->app_type == app_type) &&
 			(cal_info->acdb_id == acdb_id)) {

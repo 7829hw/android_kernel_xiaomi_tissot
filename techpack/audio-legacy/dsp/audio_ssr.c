@@ -49,4 +49,3 @@ int audio_ssr_deregister(void *handle, struct notifier_block *nb)
 	return subsys_notif_unregister_notifier(handle, nb);
 }
 EXPORT_SYMBOL(audio_ssr_deregister);
-

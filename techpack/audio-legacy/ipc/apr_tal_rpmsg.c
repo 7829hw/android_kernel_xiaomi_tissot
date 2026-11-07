@@ -314,4 +314,3 @@ void apr_tal_exit(void)
 	unregister_rpmsg_driver(&apr_tal_rpmsg_driver);
 }
 EXPORT_SYMBOL(apr_tal_exit);
-

@@ -5657,7 +5657,7 @@ static int msm_int_audrx_init(struct snd_soc_pcm_runtime *rtd)
 				card_aux_list) {
 			if (aux_comp->name != NULL && (
 				!strcmp(aux_comp->name, WSA8810_NAME_1) ||
-		    		!strcmp(aux_comp->name, WSA8810_NAME_2))) {
+				!strcmp(aux_comp->name, WSA8810_NAME_2))) {
 				wsa_macro_set_spkr_mode(component,
 						WSA_MACRO_SPKR_MODE_1);
 				wsa_macro_set_spkr_gain_offset(component,

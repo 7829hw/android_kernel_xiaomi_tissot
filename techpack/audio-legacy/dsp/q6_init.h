@@ -95,4 +95,3 @@ static inline void digital_cdc_rsc_mgr_exit(void)
 #endif /* CONFIG_DIGITAL_CDC_RSC_MGR */
 
 #endif
-

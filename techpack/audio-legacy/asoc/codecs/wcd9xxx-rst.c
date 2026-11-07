@@ -432,4 +432,3 @@ codec_type_fn wcd9xxx_get_codec_info_fn(int type)
 
 	return cdc_type_fn;
 }
-

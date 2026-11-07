@@ -760,7 +760,7 @@ static int slim_get_port_idx(struct snd_kcontrol *kcontrol)
 					   "SLIM_6_RX", sizeof("SLIM_6_RX"))) {
 		port_id = SLIM_RX_6;
 	} else if (strnstr(kcontrol->id.name,
-	 				   "SLIM_0_TX", sizeof("SLIM_0_TX"))) {
+					   "SLIM_0_TX", sizeof("SLIM_0_TX"))) {
 		port_id = SLIM_TX_0;
 	} else if (strnstr(kcontrol->id.name,
 					   "SLIM_1_TX", sizeof("SLIM_1_TX"))) {

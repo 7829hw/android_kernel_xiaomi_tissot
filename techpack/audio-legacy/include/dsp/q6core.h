@@ -432,6 +432,7 @@ int q6core_get_avcs_avs_build_version_info(
 	uint32_t *build_major_version, uint32_t *build_minor_version,
 					uint32_t *build_branch_version);
 
+#ifdef CONFIG_MACH_XIAOMI_MIDO
 #define AVCS_GET_VERSIONS	0x00012905
 struct avcs_cmd_get_version_result {
 	struct apr_hdr hdr;
@@ -451,4 +452,6 @@ enum q6_subsys_image {
 };
 enum q6_subsys_image q6core_get_avs_version(void);
 int core_get_adsp_ver(void);
+#endif
+
 #endif /* __Q6CORE_H__ */

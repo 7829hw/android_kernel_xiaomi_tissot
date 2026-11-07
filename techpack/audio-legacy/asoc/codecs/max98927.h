@@ -1254,4 +1254,3 @@ struct max98927_priv {
 #define MAX98927_BDE_AMP_SHIFT 1
 #define MAX98927_BST_ILIM_SHIFT 1
 #endif /* __MAX98927_REGISTERDEFS_H */
-

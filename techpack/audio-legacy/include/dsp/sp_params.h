@@ -16,4 +16,3 @@ static inline int afe_get_sp_xt_logging_data(u16 port_id)
 #endif
 
 #endif /* __SP_PARAMS_H__ */
-

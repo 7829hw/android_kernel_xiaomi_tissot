@@ -386,4 +386,3 @@ void audio_g711mlaw_exit(void)
 	mutex_destroy(&audio_g711_ws_mgr.ws_lock);
 	misc_deregister(&audio_g711mlaw_misc);
 }
-

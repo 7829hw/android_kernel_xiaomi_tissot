@@ -75,8 +75,12 @@ struct q6core_str {
 	u32 avcs_module_resp_received;
 	enum cmd_flags {
 		FLAG_NONE,
+#ifdef CONFIG_MACH_XIAOMI_MIDO
 		FLAG_CMDRSP_LICENSE_RESULT,
-		FLAG_AVCS_GET_VERSIONS_RESULT
+		FLAG_AVCS_GET_VERSIONS_RESULT,
+#else
+		FLAG_CMDRSP_LICENSE_RESULT
+#endif
 	} cmd_resp_received_flag;
 	u32 avcs_fwk_ver_resp_received;
 	struct mutex cmd_lock;
@@ -93,7 +97,9 @@ struct q6core_str {
 	int32_t adsp_status;
 	int32_t avs_state;
 	struct q6core_avcs_ver_info q6core_avcs_ver_info;
+#ifdef CONFIG_MACH_XIAOMI_MIDO
 	u32 q6_core_avs_version;
+#endif
 };
 
 static struct q6core_str q6core_lcl;
@@ -448,6 +454,7 @@ static int32_t aprv2_core_fn_q(struct apr_client_data *data, void *priv)
 		q6core_lcl.bus_bw_resp_received = 1;
 		wake_up(&q6core_lcl.bus_bw_req_wait);
 		break;
+#ifdef CONFIG_MACH_XIAOMI_MIDO
 	case AVCS_GET_VERSIONS_RSP:
 		if (data->payload_size < 4 * sizeof(uint32_t)) {
 			pr_err("%s: payload has invalid size %d\n",
@@ -478,6 +485,7 @@ static int32_t aprv2_core_fn_q(struct apr_client_data *data, void *priv)
 		}
 		wake_up(&q6core_lcl.cmd_req_wait);
 		break;
+#endif
 	case AVCS_CMDRSP_GET_LICENSE_VALIDATION_RESULT:
 		if (data->payload_size < sizeof(uint32_t)) {
 			pr_err("%s: payload has invalid size %d\n",
@@ -923,6 +931,7 @@ cmd_unlock:
 }
 EXPORT_SYMBOL(core_set_license);
 
+#ifdef CONFIG_MACH_XIAOMI_MIDO
 int core_get_adsp_ver(void)
 {
 	struct avcs_cmd_get_version_result get_aver_cmd;
@@ -981,6 +990,7 @@ enum q6_subsys_image q6core_get_avs_version(void)
 		core_get_adsp_ver();
 	return q6core_lcl.q6_core_avs_version;
 }
+#endif
 
 /**
  * core_get_license_status -
