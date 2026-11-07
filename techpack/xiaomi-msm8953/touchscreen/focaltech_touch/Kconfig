@@ -4,6 +4,8 @@
 
 config TOUCHSCREEN_FTS_MI8953
 	tristate "Focaltech Touchscreen"
+	depends on I2C && MACH_XIAOMI_MSM8953
+	select TOUCHSCREEN_SYSCTL_MI8953
 	help
 	  Say Y here if you have Focaltech touch panel.
 	  If unsure, say N.
@@ -11,11 +13,11 @@ config TOUCHSCREEN_FTS_MI8953
 config TOUCHSCREEN_FTS_MI8953_DIRECTORY
 	string "Focaltech ts directory name"
 	default "focaltech_touch"
-	depends on TOUCHSCREEN_FTS
+	depends on TOUCHSCREEN_FTS_MI8953
 
 config FTS_TRUSTED_TOUCH_MI8953
 	bool "Focaltech Trusted Touch"
-	depends on TOUCHSCREEN_FTS
+	depends on TOUCHSCREEN_FTS_MI8953
 	help
 	  Say Y here to enable Focaltech Trusted Touch.
 	  If unsure, say N.

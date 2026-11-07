@@ -461,4 +461,3 @@ int fts_esdcheck_exit(struct fts_ts_data *ts_data)
 }
 
 #endif /* FTS_ESDCHECK_EN */
-

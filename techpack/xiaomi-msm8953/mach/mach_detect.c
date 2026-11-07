@@ -28,9 +28,9 @@ static const xiaomi_msm8953_mach_info_t xiaomi_msm8953_mach_table[XIAOMI_MSM8953
 
 	[XIAOMI_MSM8953_MACH_TISSOT] = {XIAOMI_MSM8953_MACH_FAMILY_QRD, "xiaomi,tissot", "tissot", "Mi A1"},
 
-	[XIAOMI_MSM8953_MACH_TIFFANY] = {XIAOMI_MSM8953_MACH_FAMILY_QRD, "xiaomi,tiffany", "tiffany", "Mi 5X"},
+	[XIAOMI_MSM8953_MACH_DAISY] = {XIAOMI_MSM8953_MACH_FAMILY_QRD, "xiaomi,daisy", "daisy", "Mi A2"},
 
-	[XIAOMI_MSM8953_MACH_DAISY] = {XIAOMI_MSM8953_MACH_FAMILY_QRD, "xiaomi,daisy", "daisy", "Mi A1"},
+	[XIAOMI_MSM8953_MACH_SAKURA] = {XIAOMI_MSM8953_MACH_FAMILY_QRD, "xiaomi,sakura", "sakura", "Redmi 6 Pro"},
 
 	[XIAOMI_MSM8953_MACH_MIDO] = {XIAOMI_MSM8953_MACH_FAMILY_QRD, "xiaomi,mido", "mido", "Redmi Note 4 / 4x"},
 
@@ -153,7 +153,7 @@ static int __init xiaomi_msm8953_mach_detect_init(void) {
 			&xiaomi_msm8953_mach_supported_machines_attr.attr);
 	if (rc < 0)
 		pr_err("%s: Failed to create sysfs file supported_machines, rc=%d\n", __func__, rc);
-	
+
 	return 0;
 fail:
 	return rc;

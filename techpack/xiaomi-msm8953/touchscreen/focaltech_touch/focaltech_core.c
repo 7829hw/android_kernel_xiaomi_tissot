@@ -2857,22 +2857,22 @@ out:
 #if IS_ENABLED(CONFIG_TOUCHSCREEN_SYSCTL_MI8953)
 static int fts_mi8953_ops_disable_keys(struct device *dev, bool disable)
 {
- 	struct fts_ts_data *ts_data = fts_data;
- 
- 	if (disable) {
- 		FTS_DEBUG("disable keys");
- 		ts_data->disable_keys = true;
- 	} else {
- 		FTS_DEBUG("enable keys");
- 		ts_data->disable_keys = false;
- 	}
- 
- 	return 0;
+	struct fts_ts_data *ts_data = fts_data;
+
+	if (disable) {
+		FTS_DEBUG("disable keys");
+		ts_data->disable_keys = true;
+	} else {
+		FTS_DEBUG("enable keys");
+		ts_data->disable_keys = false;
+	}
+
+	return 0;
 }
- 
+
 static struct xiaomi_msm8953_touchscreen_operations_t fts_mi8953_ts_ops = {
- 	.enable_dt2w = fts_mi8953_ops_enable_dt2w,
- 	.disable_keys = fts_mi8953_ops_disable_keys,
+	.enable_dt2w = fts_mi8953_ops_enable_dt2w,
+	.disable_keys = fts_mi8953_ops_disable_keys,
 };
 #endif
 
@@ -3127,8 +3127,8 @@ static int fts_ts_probe_entry(struct fts_ts_data *ts_data)
 	fts_irq_enable();
 
 #if IS_ENABLED(CONFIG_TOUCHSCREEN_SYSCTL_MI8953)
- 	fts_mi8953_ts_ops.dev = ts_data->dev;
- 	xiaomi_msm8953_touchscreen_register_operations(&fts_mi8953_ts_ops);
+	fts_mi8953_ts_ops.dev = ts_data->dev;
+	xiaomi_msm8953_touchscreen_register_operations(&fts_mi8953_ts_ops);
 #endif
 
 	FTS_FUNC_EXIT();
@@ -3225,28 +3225,30 @@ static int fts_ts_remove_entry(struct fts_ts_data *ts_data)
 	return 0;
 }
 
+#if defined(CONFIG_TOUCHSCREEN_DOUBLETAP2WAKE) || defined(CONFIG_TOUCHSCREEN_SWEEP2WAKE)
 static bool ev_btn_status = false;
 static bool fts_ts_irq_active = false;
 static void fts_ts_irq_handler(int irq, bool active)
 {
- 	if (active) {
- 		if (!fts_ts_irq_active) {
- 			enable_irq_wake(irq);
- 			fts_ts_irq_active = true;
- 		}
- 	} else {
- 		if (fts_ts_irq_active) {
- 			disable_irq_wake(irq);
- 			fts_ts_irq_active = false;
- 		}
- 	}
+	if (active) {
+		if (!fts_ts_irq_active) {
+			enable_irq_wake(irq);
+			fts_ts_irq_active = true;
+		}
+	} else {
+		if (fts_ts_irq_active) {
+			disable_irq_wake(irq);
+			fts_ts_irq_active = false;
+		}
+	}
 }
+
+#endif
 
 static int fts_ts_suspend(struct device *dev)
 {
 	int ret = 0;
 	struct fts_ts_data *ts_data = fts_data;
-	int i = 0;
 
 	FTS_FUNC_ENTER();
 	if (ts_data->suspended) {
@@ -3259,6 +3261,7 @@ static int fts_ts_suspend(struct device *dev)
 		return 0;
 	}
 
+#if defined(CONFIG_TOUCHSCREEN_DOUBLETAP2WAKE) || defined(CONFIG_TOUCHSCREEN_SWEEP2WAKE)
 #if (defined(CONFIG_TOUCHSCREEN_DOUBLETAP2WAKE) && !defined(CONFIG_TOUCHSCREEN_SWEEP2WAKE))
 	if (dt2w_switch > 0 && !gesture_incall) {
 #elif (defined(CONFIG_TOUCHSCREEN_SWEEP2WAKE) && !defined(CONFIG_TOUCHSCREEN_DOUBLETAP2WAKE))
@@ -3268,6 +3271,7 @@ static int fts_ts_suspend(struct device *dev)
 			!gesture_incall) {
 #endif
 		if (!ev_btn_status) {
+			int i;
 			/* release all touches */
 			for (i = 0; i < ts_data->pdata->max_touch_number; i++) {
 				input_mt_slot(ts_data->input_dev, i);
@@ -3281,6 +3285,7 @@ static int fts_ts_suspend(struct device *dev)
 		fts_ts_irq_handler(ts_data->client->irq, true);
 		return 0;
 	}
+#endif
 
 #ifdef CONFIG_FTS_TRUSTED_TOUCH
 	if (atomic_read(&fts_data->trusted_touch_transition)
@@ -3343,6 +3348,7 @@ static int fts_ts_resume(struct device *dev)
 		return 0;
 	}
 
+#if defined(CONFIG_TOUCHSCREEN_DOUBLETAP2WAKE) || defined(CONFIG_TOUCHSCREEN_SWEEP2WAKE)
 #if (defined(CONFIG_TOUCHSCREEN_DOUBLETAP2WAKE) && !defined(CONFIG_TOUCHSCREEN_SWEEP2WAKE))
 	if (dt2w_switch > 0) {
 #elif (defined(CONFIG_TOUCHSCREEN_SWEEP2WAKE) && !defined(CONFIG_TOUCHSCREEN_DOUBLETAP2WAKE))
@@ -3357,6 +3363,7 @@ static int fts_ts_resume(struct device *dev)
 		}
 		fts_ts_irq_handler(ts_data->client->irq, false);
 	}
+#endif
 
 #ifdef CONFIG_FTS_TRUSTED_TOUCH
 

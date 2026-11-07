@@ -553,4 +553,3 @@ MODULE_DESCRIPTION("Peel IR SPI driver");
 MODULE_LICENSE("GPL");
 MODULE_ALIAS("PEEL_IR");
 MODULE_AUTHOR("Preetam S Reddy <preetam.reddy@peel.com>");
-

@@ -132,4 +132,3 @@ int fts_point_report_check_exit(struct fts_ts_data *ts_data)
 	return 0;
 }
 #endif /* FTS_POINT_REPORT_CHECK_EN */
-
