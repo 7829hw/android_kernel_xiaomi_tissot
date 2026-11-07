@@ -2683,13 +2683,13 @@ static int smbchg_system_temp_level_set(struct smbchg_chip *chip,
                 rc);
     } else {
         int mach = xiaomi_msm8953_mach_get();
-        int is_tiffany_or_vince = (mach == XIAOMI_MSM8953_MACH_TIFFANY || 
+        int is_tissot_or_vince = (mach == XIAOMI_MSM8953_MACH_TISSOT ||
                                    mach == XIAOMI_MSM8953_MACH_VINCE);
 
-        if (is_tiffany_or_vince && 
-            (chip->usb_supply_type == POWER_SUPPLY_TYPE_USB_HVDCP || 
+        if (is_tissot_or_vince &&
+            (chip->usb_supply_type == POWER_SUPPLY_TYPE_USB_HVDCP ||
              chip->usb_supply_type == POWER_SUPPLY_TYPE_USB_HVDCP_3)) {
-            
+
             thermal_icl_ma = (int)hvdcp_thermal_mitigation[chip->therm_lvl_sel];
         } else {
             thermal_icl_ma = (int)chip->thermal_mitigation[chip->therm_lvl_sel];
@@ -4456,7 +4456,7 @@ static int smbchg_restricted_charging(struct smbchg_chip *chip, bool enable)
 	return rc;
 }
 
-#if IS_ENABLED(CONFIG_MACH_XIAOMI_MIDO)
+#if IS_REACHABLE(CONFIG_TOUCHSCREEN_IST3038C)
 extern void ist30xx_set_ta_mode(bool mode);
 int set_usb_charge_mode_par = 0;
 #endif
@@ -4467,7 +4467,7 @@ static void handle_usb_removal(struct smbchg_chip *chip)
 	union power_supply_propval pval = {0, };
 	int rc;
 
-#if IS_ENABLED(CONFIG_MACH_XIAOMI_MIDO)
+#if IS_REACHABLE(CONFIG_TOUCHSCREEN_IST3038C)
 	if (xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_MIDO) {
 		if (set_usb_charge_mode_par == 1)
 			ist30xx_set_ta_mode(0);
@@ -4543,7 +4543,7 @@ static void handle_usb_insertion(struct smbchg_chip *chip)
 	int rc;
 	char *usb_type_name = "null";
 
-#if IS_ENABLED(CONFIG_MACH_XIAOMI_MIDO)
+#if IS_REACHABLE(CONFIG_TOUCHSCREEN_IST3038C)
 	if (xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_MIDO) {
 		if (set_usb_charge_mode_par == 1)
 			ist30xx_set_ta_mode(1);
@@ -4554,7 +4554,7 @@ static void handle_usb_insertion(struct smbchg_chip *chip)
 	/* usb inserted */
 	read_usb_type(chip, &usb_type_name, &usb_supply_type);
 
-#if IS_ENABLED(CONFIG_MACH_XIAOMI_MIDO)
+#if IS_REACHABLE(CONFIG_TOUCHSCREEN_IST3038C)
 	if (xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_MIDO) {
 		if (usb_supply_type == POWER_SUPPLY_TYPE_USB_CDP || usb_supply_type == POWER_SUPPLY_TYPE_USB) {
 			rc = rerun_apsd(chip);
@@ -5690,7 +5690,6 @@ static enum power_supply_property smbchg_battery_properties[] = {
 	POWER_SUPPLY_PROP_CAPACITY,
 	POWER_SUPPLY_PROP_HEALTH,
 	POWER_SUPPLY_PROP_TECHNOLOGY,
-	POWER_SUPPLY_PROP_SYSTEM_TEMP_LEVEL,
 	POWER_SUPPLY_PROP_FLASH_CURRENT_MAX,
 	POWER_SUPPLY_PROP_CONSTANT_CHARGE_CURRENT_MAX,
 	POWER_SUPPLY_PROP_VOLTAGE_MAX,
@@ -5714,6 +5713,8 @@ static enum power_supply_property smbchg_battery_properties[] = {
 	POWER_SUPPLY_PROP_RESTRICTED_CHARGING,
 	POWER_SUPPLY_PROP_ALLOW_HVDCP3,
 	POWER_SUPPLY_PROP_MAX_PULSE_ALLOWED,
+	POWER_SUPPLY_PROP_CHARGE_CONTROL_LIMIT_MAX,
+	POWER_SUPPLY_PROP_CHARGE_CONTROL_LIMIT,
 };
 
 static int smbchg_battery_set_property(struct power_supply *psy,
@@ -5741,7 +5742,7 @@ static int smbchg_battery_set_property(struct power_supply *psy,
 		if (chip->batt_psy)
 			power_supply_changed(chip->batt_psy);
 		break;
-	case POWER_SUPPLY_PROP_SYSTEM_TEMP_LEVEL:
+	case POWER_SUPPLY_PROP_CHARGE_CONTROL_LIMIT:
 		smbchg_system_temp_level_set(chip, val->intval);
 		break;
 	case POWER_SUPPLY_PROP_CONSTANT_CHARGE_CURRENT_MAX:
@@ -5875,8 +5876,11 @@ static int smbchg_battery_get_property(struct power_supply *psy,
 	case POWER_SUPPLY_PROP_CONSTANT_CHARGE_CURRENT_MAX:
 		val->intval = chip->fastchg_current_ma * 1000;
 		break;
-	case POWER_SUPPLY_PROP_SYSTEM_TEMP_LEVEL:
+	case POWER_SUPPLY_PROP_CHARGE_CONTROL_LIMIT:
 		val->intval = chip->therm_lvl_sel;
+		break;
+	case POWER_SUPPLY_PROP_CHARGE_CONTROL_LIMIT_MAX:
+		val->intval = chip->thermal_levels;
 		break;
 	case POWER_SUPPLY_PROP_INPUT_CURRENT_MAX:
 		val->intval = smbchg_get_aicl_level_ma(chip) * 1000;
@@ -6045,8 +6049,9 @@ static irqreturn_t batt_hot_handler(int irq, void *_chip)
 
 	if (xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_MIDO ||
 	    xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_DAISY ||
+		xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_SAKURA ||
 	    xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_VINCE) {
-		
+
 		int rc;
 		/* set the warm float voltage compensation, set the warm float voltage to 4.1V */
 		if (chip->float_voltage_comp != -EINVAL) {
@@ -6077,8 +6082,9 @@ static irqreturn_t batt_cold_handler(int irq, void *_chip)
 
 	if (xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_MIDO ||
 	    xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_DAISY ||
+		xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_SAKURA ||
 	    xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_VINCE) {
-		
+
 		int rc;
 		/* set the cool float voltage compensation, set the cool float voltage to 4.4V */
 		rc = smbchg_float_voltage_comp_set(chip, 0);
@@ -8436,4 +8442,3 @@ module_exit(smbchg_exit);
 MODULE_DESCRIPTION("QPNP SMB Charger");
 MODULE_LICENSE("GPL v2");
 MODULE_ALIAS("platform:qpnp-smbcharger");
-

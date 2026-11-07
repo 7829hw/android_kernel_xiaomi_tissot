@@ -69,7 +69,7 @@ config SMB138X_CHARGER
 	  The driver supports charger enable/disable.
 	  The driver reports the charger status via the power supply framework.
 	  A charger status change triggers an IRQ via the device STAT pin.
-	  
+
 config QPNP_SMBCHARGER
 	tristate "QPNP SMB Charger driver"
 	depends on MFD_SPMI_PMIC

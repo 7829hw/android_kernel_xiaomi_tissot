@@ -4630,16 +4630,16 @@ static int fg_power_get_property(struct power_supply *psy,
             val->intval = 1;
         break;
     case POWER_SUPPLY_PROP_CHARGE_FULL_DESIGN:
-#if IS_ENABLED(CONFIG_MACH_XIAOMI_TIFFANY)
-        if (xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_TIFFANY)
+#if IS_ENABLED(CONFIG_MACH_XIAOMI_TISSOT)
+        if (xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_TISSOT)
             val->intval = 3080000;
         else
 #endif
             val->intval = chip->nom_cap_uah;
         break;
     case POWER_SUPPLY_PROP_CHARGE_FULL:
-#if IS_ENABLED(CONFIG_MACH_XIAOMI_TIFFANY)
-        if (xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_TIFFANY)
+#if IS_ENABLED(CONFIG_MACH_XIAOMI_TISSOT)
+        if (xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_TISSOT)
             val->intval = 3080000;
         else
 #endif
@@ -8042,10 +8042,11 @@ static int fg_common_hw_init(struct fg_chip *chip)
 	rc = fg_mem_masked_write(chip, settings[FG_MEM_DELTA_SOC].address, 0xFF,
 		(xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_MIDO ||
 		 xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_DAISY ||
+		 xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_SAKURA ||
 		 xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_VINCE ||
 		 xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_TISSOT) ? 1 : settings[FG_MEM_DELTA_SOC].value,
 		settings[FG_MEM_DELTA_SOC].offset);
-	
+
 	if (rc) {
 		pr_err("failed to write delta soc rc=%d\n", rc);
 		return rc;
@@ -9207,12 +9208,13 @@ static int __init fg_init(void)
 
 	if (xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_VINCE ||
 	    xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_DAISY ||
+		xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_SAKURA ||
 	    xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_TISSOT) {
-		
+
 		settings[FG_MEM_SOFT_COLD].value = 150;
 		settings[FG_MEM_SOFT_HOT].value = 450;
 		settings[FG_MEM_HARD_COLD].value = 0;
-		
+
 		if (xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_VINCE) {
 			settings[FG_MEM_HARD_HOT].value = 550;
 		} else {
@@ -9222,9 +9224,10 @@ static int __init fg_init(void)
 
 	if (xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_VINCE ||
 	    xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_DAISY ||
+		xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_SAKURA ||
 	    xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_TISSOT ||
 	    xiaomi_msm8953_mach_get() == XIAOMI_MSM8953_MACH_MIDO) {
-		
+
 		settings[FG_MEM_VBAT_EST_DIFF].value = 200;
 	}
 #endif
@@ -9242,4 +9245,3 @@ module_exit(fg_exit);
 MODULE_DESCRIPTION("QPNP Fuel Gauge Driver");
 MODULE_LICENSE("GPL v2");
 MODULE_ALIAS("platform:" QPNP_FG_DEV_NAME);
-
