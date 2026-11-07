@@ -4,7 +4,7 @@ header-y += radio-iris.h
 header-y += radio-iris-commands.h
 header-y += synx.h
 
-ifneq ($(wildcard ../../../techpack/camera-legacy/include/uapi/media/Kbuild),)
+ifneq ($(wildcard $(srctree)/techpack/camera-legacy/include/uapi/media/Kbuild),)
 header-y += msmb_camera-legacy.h
 header-y += msmb_generic_buf_mgr-legacy.h
 header-y += msmb_ispif-legacy.h

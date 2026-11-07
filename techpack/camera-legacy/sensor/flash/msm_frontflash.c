@@ -526,7 +526,7 @@ static int32_t msm_frontflash_gpio_low(
 			num -= 1;
 
 		for (; i < num; i++)  {
-	        	gpio_direction_output(front_pinctrl.en_gpio, 0);
+			gpio_direction_output(front_pinctrl.en_gpio, 0);
 			udelay(1);
 			gpio_direction_output(front_pinctrl.en_gpio, 1);
 			udelay(1);
@@ -1028,13 +1028,13 @@ static int32_t msm_frontflash_get_dt_data(struct device_node *of_node,
                  0, &front_pinctrl.en_gpio_flags);
 
 	if (gpio_is_valid(front_pinctrl.en_gpio)) {
-        	rc = gpio_request(front_pinctrl.en_gpio, "front_flash_en_gpio");
+		rc = gpio_request(front_pinctrl.en_gpio, "front_flash_en_gpio");
 	        if (rc) {
 	            pr_err("[WENDELL]-%s: reset gpio request failed\n", __func__);
-        	} else {
-    			pr_err("[WENDELL]-%s: front_pinctrl.en_gpio=%d\n", __func__, front_pinctrl.en_gpio);
-	        	rc = gpio_direction_output(front_pinctrl.en_gpio, 0);
-	        	if (rc)
+		} else {
+			pr_err("[WENDELL]-%s: front_pinctrl.en_gpio=%d\n", __func__, front_pinctrl.en_gpio);
+			rc = gpio_direction_output(front_pinctrl.en_gpio, 0);
+			if (rc)
 				pr_err("[WENDELL]-%s: set_direction for reset gpio failed\n", __func__);
 		}
 	}

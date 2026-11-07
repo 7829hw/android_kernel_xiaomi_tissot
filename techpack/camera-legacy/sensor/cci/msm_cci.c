@@ -1429,7 +1429,7 @@ static int32_t msm_cci_init(struct v4l2_subdev *sd,
         for (i = 0; i < NUM_QUEUES; i++) {
             reinit_completion(&cci_dev->cci_master_info[MASTER_0].report_q[i]);
         }
-        
+
         reinit_completion(&cci_dev->cci_master_info[MASTER_1].reset_complete);
         for (i = 0; i < NUM_QUEUES; i++) {
             reinit_completion(&cci_dev->cci_master_info[MASTER_1].report_q[i]);

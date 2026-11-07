@@ -36,7 +36,7 @@ static int32_t msm_sensor_driver_platform_probe(struct platform_device *pdev);
 static struct msm_sensor_ctrl_t *g_sctrl[MAX_CAMERAS];
 
 #if IS_ENABLED(CONFIG_MACH_XIAOMI_ROSY)
-static const char *module_info[] = 
+static const char *module_info[] =
 {
 	"Unkonw",
 	"Sunny",

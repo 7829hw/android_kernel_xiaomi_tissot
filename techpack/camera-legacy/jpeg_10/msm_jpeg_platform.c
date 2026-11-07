@@ -511,4 +511,3 @@ int legacy_msm_jpeg_platform_set_dt_config(struct msm_jpeg_device *pgmn_dev)
 	}
 	return rc;
 }
-

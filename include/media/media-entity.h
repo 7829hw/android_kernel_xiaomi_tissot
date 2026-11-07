@@ -342,7 +342,9 @@ struct media_intf_devnode {
  */
 static inline u32 media_entity_id(struct media_entity *entity)
 {
-	return entity->id;
+	if (IS_ENABLED(CONFIG_MSMB_CAMERA_LEGACY))
+		return entity->id;
+	return entity->graph_obj.id;
 }
 
 /**

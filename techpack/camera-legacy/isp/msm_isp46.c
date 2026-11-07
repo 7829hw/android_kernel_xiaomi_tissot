@@ -2030,4 +2030,3 @@ module_init(msm_vfe46_init_module);
 module_exit(msm_vfe46_exit_module);
 MODULE_DESCRIPTION("MSM VFE46 driver");
 MODULE_LICENSE("GPL v2");
-

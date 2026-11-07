@@ -605,4 +605,3 @@ int32_t legacy_msm_camera_qup_i2c_write_conf_tbl(
 	}
 	return rc;
 }
-

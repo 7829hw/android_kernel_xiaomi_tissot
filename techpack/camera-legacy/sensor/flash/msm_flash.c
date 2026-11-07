@@ -201,7 +201,7 @@ static int32_t msm_torch_create_classdev(struct platform_device *pdev,
             torch_trigger = fctrl->torch_trigger[i];
             CDBG("%s:%d legacy_msm_torch_brightness_set for torch %d",
                 __func__, __LINE__, i);
-            
+
             if (is_ysl) {
                 legacy_msm_torch_brightness_set(&msm_torch_led[msm_torch_led_num + i],
                     LED_OFF);
@@ -217,7 +217,7 @@ static int32_t msm_torch_create_classdev(struct platform_device *pdev,
                 rc = led_classdev_register(&pdev->dev,
                     &msm_torch_led[i]);
             }
-            
+
             if (rc) {
                 pr_err("Failed to register %d led dev. rc = %d\n",
                         i, rc);

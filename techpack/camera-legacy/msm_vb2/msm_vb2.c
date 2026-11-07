@@ -569,4 +569,3 @@ int legacy_msm_vb2_request_cb(struct msm_sd_req_vb2_q *req)
 	req->flush_buf = msm_vb2_flush_buf;
 	return 0;
 }
-

@@ -2,6 +2,8 @@ menu "Camera (Legacy)"
 
 config MSMB_CAMERA_LEGACY
 	bool "Qualcomm MSM camera and video capture 2.0 support (Legacy)"
+	depends on ARCH_MSM8953
+	select MSM_AVTIMER
 	select MSMB_CAMERA
 	help
 	---help---
@@ -11,3 +13,8 @@ config MSMB_CAMERA_LEGACY
 	  and postprocessing drivers. (Legacy)
 
 endmenu
+
+config MSM_AVTIMER
+	bool
+	help
+	  Enable the legacy ISP callback interface to the audio AVTimer.
