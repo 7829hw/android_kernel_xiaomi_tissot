@@ -7,6 +7,10 @@
 static int cmdline_proc_show(struct seq_file *m, void *v)
 {
 	seq_puts(m, saved_command_line);
+	if (IS_ENABLED(CONFIG_PROC_CMDLINE_APPEND_ANDROID_FORCE_NORMAL_BOOT) &&
+	    strstr(saved_command_line, "skip_initramfs") &&
+	    !strstr(saved_command_line, "androidboot.force_normal_boot="))
+		seq_puts(m, " androidboot.force_normal_boot=1");
 	seq_putc(m, '\n');
 	return 0;
 }

@@ -103,3 +103,11 @@ config PROC_UID
 	depends on PROC_FS && RT_MUTEXES
 	help
 	Provides aggregated per-uid information under /proc/uid.
+
+config PROC_CMDLINE_APPEND_ANDROID_FORCE_NORMAL_BOOT
+	bool "Expose Android normal boot when skip_initramfs is set"
+	depends on MACH_XIAOMI_TISSOT && INITRAMFS_IGNORE_SKIP_FLAG
+	default n
+	help
+	  Tell Android first-stage init to use the normal boot path on Tissot
+	  when the A/B bootloader passes skip_initramfs.
