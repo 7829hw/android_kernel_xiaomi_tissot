@@ -237,11 +237,15 @@ static inline long clk_get_phase(struct clk *clk)
 	return -ENOTSUPP;
 }
 
-/*static inline int clk_set_duty_cycle(struct clk *clk, unsigned int num,
+#ifdef CONFIG_COMMON_CLK_MSM
+int clk_set_duty_cycle(struct clk *clk, unsigned int num, unsigned int den);
+#else
+static inline int clk_set_duty_cycle(struct clk *clk, unsigned int num,
 				     unsigned int den)
 {
 	return -ENOTSUPP;
-}*/
+}
+#endif
 
 static inline unsigned int clk_get_scaled_duty_cycle(struct clk *clk,
 						     unsigned int scale)

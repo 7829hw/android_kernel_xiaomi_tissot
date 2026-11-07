@@ -127,4 +127,3 @@ int msm_clk_notif_register(struct clk *clk, struct notifier_block *nb);
 int msm_clk_notif_unregister(struct clk *clk, struct notifier_block *nb);
 
 #endif
-

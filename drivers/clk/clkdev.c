@@ -70,10 +70,14 @@ static struct clk *__of_clk_get_by_name(struct device_node *np,
 		if (name)
 			index = of_property_match_string(np, "clock-names", name);
 		clk = __of_clk_get(np, index, dev_id, name);
-		if (!IS_ERR(clk))
+		if (!IS_ERR(clk)) {
 			break;
-		else if (name && index >= 0)
+		} else if (name && index >= 0) {
+			if (PTR_ERR(clk) != -EPROBE_DEFER)
+				pr_err("ERROR: could not get clock %pOF:%s(%i)\n",
+					np, name ? name : "", index);
 			return clk;
+		}
 
 		/*
 		 * No matching clock found on this node.  If the parent node
@@ -183,7 +187,7 @@ struct clk *clk_get_sys(const char *dev_id, const char *con_id)
 out:
 	mutex_unlock(&clocks_mutex);
 
-	return cl ? cl->clk : ERR_PTR(-ENOENT);
+	return cl ? clk : ERR_PTR(-ENOENT);
 }
 EXPORT_SYMBOL(clk_get_sys);
 

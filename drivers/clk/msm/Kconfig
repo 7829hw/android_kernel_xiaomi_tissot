@@ -1,7 +1,10 @@
 config COMMON_CLK_MSM
 	tristate "Support for MSM clock controllers"
 	depends on OF
-	depends on ARCH_QCOM
+	depends on ARCH_MSM8953
+	select CLKDEV_LOOKUP
+	select HAVE_CLK
+	select HAVE_CLK_PREPARE
 	select RATIONAL
 	help
 	  This support clock controller used by MSM devices which support

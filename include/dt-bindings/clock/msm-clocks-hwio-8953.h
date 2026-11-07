@@ -680,4 +680,3 @@ static DEFINE_VDD_REGS_INIT(vdd_gfx, 1);
 #define DIV_CLK2_ID		0xC
 
 #endif
-

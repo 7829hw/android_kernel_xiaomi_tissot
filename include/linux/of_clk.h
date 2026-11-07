@@ -9,16 +9,19 @@
 struct device_node;
 struct of_device_id;
 
-#if defined(CONFIG_COMMON_CLK) && defined(CONFIG_OF)
+#ifdef CONFIG_OF
 
 unsigned int of_clk_get_parent_count(struct device_node *np);
 const char *of_clk_get_parent_name(struct device_node *np, int index);
+#ifdef CONFIG_COMMON_CLK
 void of_clk_init(const struct of_device_id *matches);
+#else
+static inline void of_clk_init(const struct of_device_id *matches) {}
+#endif
 
 #else /* !CONFIG_COMMON_CLK || !CONFIG_OF */
 
-// halibw: Ues clk.c of_clk_get_parent
-/*static inline unsigned int of_clk_get_parent_count(struct device_node *np)
+static inline unsigned int of_clk_get_parent_count(struct device_node *np)
 {
 	return 0;
 }
@@ -26,7 +29,7 @@ static inline const char *of_clk_get_parent_name(struct device_node *np,
 						 int index)
 {
 	return NULL;
-}*/
+}
 static inline void of_clk_init(const struct of_device_id *matches) {}
 
 #endif /* !CONFIG_COMMON_CLK || !CONFIG_OF */

@@ -570,25 +570,16 @@ int cpr3_parse_common_corner_data(struct cpr3_regulator *vreg)
 			return rc;
 		}
 
-	/*
-		 * Sanity check against arbitrarily large value to avoid
-		 * excessive memory allocation.
-		 */
-		if (max_fuse_combos > 100 || max_fuse_combos == 0) {
-			cpr3_err(vreg, "qcom,cpr-fuse-combos is invalid: %u\n",
-				max_fuse_combos);
-			return -EINVAL;
-		}
-
-		if (vreg->fuse_combo >= max_fuse_combos) {
-			cpr3_err(vreg, "device tree config supports fuse combos 0-%u but the hardware has combo %d\n",
-				max_fuse_combos - 1, vreg->fuse_combo);
-			WARN_ON(1);
-			return -EINVAL;
-		}
-
-		vreg->fuse_combos_supported = max_fuse_combos;
 	}
+
+	/* Bound both DT fuse-combo counts and precomputed fuse-combo maps. */
+	if (!max_fuse_combos || max_fuse_combos > 100 ||
+	    vreg->fuse_combo >= max_fuse_combos) {
+		cpr3_err(vreg, "invalid fuse combo %d (count %u)\n",
+			vreg->fuse_combo, max_fuse_combos);
+		return -EINVAL;
+	}
+	vreg->fuse_combos_supported = max_fuse_combos;
 
 	of_property_read_u32(node, "qcom,cpr-speed-bins", &max_speed_bins);
 

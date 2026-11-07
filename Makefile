@@ -636,6 +636,11 @@ endif # KBUILD_EXTMOD
 
 ifeq ($(dot-config),1)
 include include/config/auto.conf
+
+ifeq ($(CONFIG_MACH_XIAOMI_MSM8953),y)
+USERINCLUDE += -I$(srctree)/techpack/xiaomi-msm8953/include/uapi
+LINUXINCLUDE += -I$(srctree)/techpack/xiaomi-msm8953/include
+endif
 endif
 
 # The all: target is the default when no target is given on the

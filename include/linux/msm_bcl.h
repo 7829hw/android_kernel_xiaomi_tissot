@@ -102,4 +102,3 @@ static inline int msm_bcl_read(enum bcl_param param_type, int *vbat_value)
 #endif
 
 #endif /*__MSM_BCL_H*/
-

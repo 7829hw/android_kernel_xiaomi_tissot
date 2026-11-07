@@ -651,4 +651,3 @@ void vco_unprepare(struct clk *c)
 	dsi_pll_res->vco_cached_rate = c->rate;
 	dsi_pll_disable(c);
 }
-
